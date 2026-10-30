@@ -50,3 +50,16 @@ Thanh dùng kiểu nút bo tròn trắng/xanh hoặc navy theo chế độ sáng
 Đã kiểm tra ở 320, 390, 820 và 1360 px, cả cuộn mượt và chế độ giảm chuyển động; kiểm tra lại giỏ hàng, PDF, Chốt đơn, hướng dẫn 5 bước và menu Nhảy tới. Giá, ảnh bìa 3D, mã ưu đãi và công cụ tính điểm giữ nguyên trong bản đầy đủ này.
 
 Các ảnh toc-preview.png, toc-preview-dark.png và mobile-toc-preview.png chụp riêng thanh mục lục. toc-page-preview.png và mobile-toc-page-preview.png minh họa thanh khi cuộn trên máy tính và điện thoại.
+
+
+## Thẻ gọn áp dụng cho toàn bộ 32 môn
+
+Tất cả 32 thẻ trong danh sách đều dùng tên môn căn trái, năm học và giá chung một cụm nét đứt. Giá và năm học cùng hàng khi đủ chỗ, tự xuống dòng ở thẻ nhỏ để không cắt thông tin. Nút chọn gọn màu xanh biển; khi đã chọn chuyển xanh lá và có dấu tích. Nút có chữ đầy đủ trên máy tính, nhãn rút gọn trên điện thoại.
+
+Điện thoại/máy tính bảng vẫn 4 môn mỗi hàng. Ảnh bìa và màu chủ đề từng môn, năm học và lượt đăng ký có sẵn được giữ lại. Không thêm số câu hoặc thông tin đáp án lên thẻ. Màu chữ, đường viền và giá theo chế độ sáng/tối.
+
+Chọn bằng chuột, cảm ứng hoặc Space trên bàn phím. Các thẻ dùng chung giỏ hàng, giá gói và ưu đãi; Solo chọn 5 môn là 75.000đ. Đã kiểm tra chọn đủ 32 môn, giá của cả 32 thẻ khi đổi gói và tổng tiền đồng nhất. Giữ nguyên mục lục 7 mục, Chốt đơn, PDF, giới thiệu bạn bè và công cụ tính điểm.
+
+Đã kiểm tra ở chiều rộng 320, 390, 430, 820, 1024 và 1360 px; ảnh bìa đủ 12 chủ đề, tên không tràn, các bộ lọc, trạng thái đã chọn, thao tác bàn phím và chế độ sáng/tối.
+
+cards-preview.png và cards-preview-dark.png minh họa thẻ trên máy tính. mobile-cards-preview.png và mobile-cards-preview-dark.png minh họa bố cục 4 môn trên điện thoại.
