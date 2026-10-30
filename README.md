@@ -1,20 +1,27 @@
-AZOTA LuzV · Khung tính điểm gọn
+AZOTA LuzV · Túi ôn tập dạng thẻ
 ================================
 
-![Khung tính điểm mới](preview.png)
+Ví dụ giỏ có 3 môn Solo, không nhập mã:
 
-Giữ giao diện xanh trắng và ảnh bìa 3D theo chủ đề.
-Khung điểm dùng hai cột trên màn hình rộng, xếp dọc trên điện thoại;
-kết quả theo từng hàng có huy hiệu. Mặc định hiện D đến C+,
-nút Xem đủ 8 mức mở thêm B đến A+.
+![Túi ôn tập](preview.png)
 
-Điểm tối thiểu làm tròn lên 0,1 để đủ ngưỡng mục tiêu.
-Các ngưỡng quy đổi và ba bộ trọng số giữ nguyên.
-Đã kiểm tra 320/390/820/1360 px, sáng/tối, bàn phím, nhảy nhanh,
-10.584 trường hợp tính điểm và giá Solo 5 môn không dùng mã = 75.000đ.
+Giỏ trống: ![Giỏ trống](preview-empty.png)
 
-Chỉ cần lấy index.html và tải lên website; CSS, JS và ảnh bìa đã nhúng sẵn.
+Giữ tông xanh trắng, ảnh bìa 3D và phần tính điểm gọn.
+Giỏ có bỏ từng mục, Xóa tất cả và danh sách cuộn. PDF, ưu đãi và bộ nhớ có thể thu gọn.
+Ô tài khoản đổi theo gói 1/2/5 người. Nút Chốt đơn khóa khi trống và mở với cả đơn chỉ PDF.
+Solo không tự giảm theo số môn; gói nhóm giảm 10% cho 3–4 môn, 15% từ 5 môn.
+Mã nhập riêng tính sau ưu đãi nhóm; PDF không giảm giá và không được tính vào mốc số môn.
+
+Mục Đóng góp đề:
+
+![Ba yêu cầu đóng góp đề](contribute-preview.png)
+
+Chỉ cần tải index.html lên website. Ảnh bìa, CSS và JS đã nhúng sẵn.
 Nếu dùng QR thanh toán, đặt thêm ảnh thanh-toan.jpeg cùng thư mục.
 
+Đã kiểm tra ở 320/390/820/1360 px, sáng/tối, giỏ điện thoại, lưu và xóa lựa chọn,
+mua PDF riêng, mã ưu đãi, gói nhóm, tổng QR và hướng dẫn 5 bước.
+
 SHA-256 của index.html:
-088ed2a37a63c448c46bdd2f3a76dc5c680a39ed86cb7a921193bd6457d09fa2
+4379d933fe2f7fb56d2da5e0453b9a149919ad97fdc6751dbe3cff57a76c29de
