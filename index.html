@@ -4490,6 +4490,184 @@ html[data-luzv-theme="dark"] .topbar nav a,
 html[data-luzv-theme="dark"] .topbar .sos-nav-trigger { color:#c7e0f1; }
 html[data-luzv-theme="dark"] .topbar nav a:hover { color:#8ed8ff; }
 
+/* Compact GPA: current scores beside a readable grade list. */
+#luzv-gpa-calculator{
+ --gpa-shell:#f6fbff;--gpa-surface:#fff;--gpa-input:#edf5fb;
+ --gpa-ink:#153b59;--gpa-muted:#567186;--gpa-line:#d5e5f1;
+ --gpa-accent:#0b67a3;--gpa-track:#cfdfeb;--gpa-badge:#e2f2ff;
+ margin:0 0 24px;padding:20px;border-radius:22px;
+}
+html[data-luzv-theme] #luzv-gpa-calculator{
+ background:var(--gpa-shell);border-color:var(--gpa-line);
+ color:var(--gpa-ink);box-shadow:0 8px 24px #0b67a30a;
+}
+html[data-luzv-theme="dark"] #luzv-gpa-calculator{
+ --gpa-shell:#0e1c29;--gpa-surface:#132637;--gpa-input:#172d40;
+ --gpa-ink:#e8f5ff;--gpa-muted:#afc7d9;--gpa-line:#2d485e;
+ --gpa-accent:#9cd8ff;--gpa-track:#365268;--gpa-badge:#213f57;
+}
+#luzv-gpa-calculator [hidden]{display:none!important}
+#luzv-gpa-calculator .gpa-header{
+ display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;
+ gap:12px 20px;margin-bottom:15px;
+}
+#luzv-gpa-calculator .gpa-header>div{min-width:0}
+#luzv-gpa-calculator .gpa-badge{
+ margin:0 0 6px;padding:3px 9px;border-radius:20px;
+ background:var(--gpa-badge);color:var(--gpa-accent);
+ font-size:10px;line-height:1.5;letter-spacing:.35px;
+}
+#luzv-gpa-calculator h2{
+ margin:0 0 5px;color:var(--gpa-ink);font-size:clamp(20px,2.1vw,26px);
+ line-height:1.25;letter-spacing:-.45px;
+}
+#luzv-gpa-calculator .gpa-desc{
+ margin:0;max-width:58ch;color:var(--gpa-muted);font-size:12px;line-height:1.5;
+}
+#luzv-gpa-calculator .gpa-weight-field{
+ display:grid;gap:4px;min-width:240px;max-width:100%;margin:0;
+}
+#luzv-gpa-calculator .gpa-weight-field>span{
+ color:var(--gpa-muted);font-size:10px;font-weight:700;
+}
+#luzv-gpa-calculator .gpa-weight-select{
+ display:block;width:100%;min-width:0;margin:0;padding:8px 28px 8px 10px;
+ border:1px solid var(--gpa-line);border-radius:10px;
+ background:var(--gpa-surface);color:var(--gpa-ink);
+ font-size:12px;line-height:1.4;font-weight:650;
+}
+#luzv-gpa-calculator .gpa-grid{
+ display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)!important;
+ gap:15px;align-items:start;
+}
+#luzv-gpa-calculator .gpa-sliders,
+#luzv-gpa-calculator .gpa-results-panel{
+ min-width:0;margin:0;padding:15px;border:1px solid var(--gpa-line);
+ border-radius:16px;box-shadow:none;color:var(--gpa-ink);
+}
+#luzv-gpa-calculator .gpa-sliders{
+ display:flex;flex-direction:column;justify-content:flex-start;gap:10px;
+ background:var(--gpa-input);
+}
+#luzv-gpa-calculator .gpa-results-panel{
+ display:block;background:var(--gpa-surface);
+}
+#luzv-gpa-calculator .gpa-panel-title{
+ margin:0 0 1px;font-size:16px;line-height:1.35;font-weight:800;
+ color:var(--gpa-ink);letter-spacing:-.2px;
+}
+#luzv-gpa-calculator .gpa-results-panel>.gpa-panel-title{margin-bottom:8px}
+#luzv-gpa-calculator .gpa-slider-group{display:grid;gap:2px}
+#luzv-gpa-calculator .gpa-slider-label{
+ display:block;color:var(--gpa-ink);font-size:13px;line-height:1.4;font-weight:500;
+}
+#luzv-gpa-calculator .gpa-slider-control{
+ display:grid;grid-template-columns:minmax(0,1fr) 46px;align-items:center;gap:12px;
+}
+#luzv-gpa-calculator .gpa-slider-control output{
+ color:var(--gpa-ink);font-size:23px;font-weight:800;line-height:1.2;
+ font-variant-numeric:tabular-nums;text-align:right;
+}
+#luzv-gpa-calculator .gpa-range{
+ appearance:none;-webkit-appearance:none;display:block;width:100%;min-width:0;
+ height:30px;padding:0;margin:0;border:0;background:transparent;box-shadow:none;
+ cursor:pointer;touch-action:pan-y;
+}
+#luzv-gpa-calculator .gpa-range::-webkit-slider-runnable-track{
+ height:6px;border-radius:99px;
+ background:linear-gradient(to right,#0b67a3,#1688c3 var(--gpa-fill,0%),var(--gpa-track) var(--gpa-fill,0%));
+}
+#luzv-gpa-calculator .gpa-range::-webkit-slider-thumb{
+ appearance:none;-webkit-appearance:none;width:17px;height:17px;margin-top:-5.5px;
+ border:3px solid var(--gpa-surface);border-radius:50%;background:#0879b9;
+ box-shadow:0 1px 5px #0b67a345;
+}
+#luzv-gpa-calculator .gpa-range::-moz-range-track{
+ height:6px;border-radius:99px;background:var(--gpa-track);
+}
+#luzv-gpa-calculator .gpa-range::-moz-range-progress{
+ height:6px;border-radius:99px;background:#0b78b8;
+}
+#luzv-gpa-calculator .gpa-range::-moz-range-thumb{
+ width:12px;height:12px;border:3px solid var(--gpa-surface);
+ border-radius:50%;background:#0879b9;box-shadow:0 1px 5px #0b67a345;
+}
+#luzv-gpa-calculator .gpa-range:focus-visible{outline:2px solid #68a6d1;outline-offset:2px}
+#luzv-gpa-calculator .gpa-current-box{
+ display:flex;flex-wrap:wrap;gap:3px 12px;margin:1px 0 0;padding:10px 0 0;
+ border:0;border-top:1px solid var(--gpa-line);border-radius:0;background:transparent;
+ color:var(--gpa-muted);font-size:11.5px;line-height:1.5;
+}
+#luzv-gpa-calculator .gpa-current-box strong{color:var(--gpa-ink)}
+#luzv-gpa-calculator .gpa-tiers-grid{
+ display:grid;grid-template-columns:minmax(0,1fr);gap:0;margin:0;
+}
+#luzv-gpa-calculator .gpa-tier-card{
+ display:flex;flex-direction:row;align-items:center;gap:10px;
+ min-width:0;min-height:46px;margin:0;padding:7px 0;
+ border:0;border-bottom:1px solid var(--gpa-line);border-radius:0;
+ background:transparent;color:var(--gpa-ink);opacity:1;transition:none;
+}
+#luzv-gpa-calculator .gpa-letter{
+ display:grid;place-items:center;flex:0 0 32px;width:32px;height:32px;
+ border-radius:50%;background:#0b77b4;color:#fff;font-size:15px;
+ font-weight:850;line-height:1;letter-spacing:-.5px;
+}
+#luzv-gpa-calculator .gpa-grade-info{
+ display:flex;align-items:baseline;flex-wrap:wrap;gap:1px 5px;min-width:0;flex:1;
+}
+#luzv-gpa-calculator .gpa-scale4{
+ padding:0;border:0;border-radius:0;background:transparent;color:var(--gpa-ink);
+ font-size:12px;line-height:1.45;font-weight:650;white-space:nowrap;
+}
+#luzv-gpa-calculator .gpa-range10{
+ color:var(--gpa-muted);font-size:11px;line-height:1.45;white-space:nowrap;
+}
+#luzv-gpa-calculator .gpa-needed{
+ flex:none;min-width:86px;margin:0;padding:4px 9px;border-radius:99px;
+ background:#e3f3ff;color:#075d94;text-align:center;font-size:11.5px;
+ font-weight:800;line-height:1.4;white-space:nowrap;font-variant-numeric:tabular-nums;
+}
+#luzv-gpa-calculator .status-done .gpa-needed{background:#e1f6e9;color:#17663b}
+#luzv-gpa-calculator .status-hard .gpa-needed{background:#fff0cf;color:#865207}
+#luzv-gpa-calculator .status-impossible .gpa-needed{background:#eef2f5;color:#596f81}
+#luzv-gpa-calculator .gpa-result-note{
+ margin:0;color:var(--gpa-muted);font-size:10.5px;line-height:1.45;
+}
+#luzv-gpa-calculator .gpa-results-footer{
+ display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:3px 12px;
+ border:0;padding-top:6px;
+}
+#luzv-gpa-calculator #gpa-show-all,
+#luzv-gpa-calculator .gpa-jump-btn{
+ display:inline-flex;align-items:center;justify-content:center;width:auto;min-height:32px;
+ margin:0;padding:2px 0;border:0;border-radius:5px;background:transparent;box-shadow:none;
+ color:var(--gpa-accent);font-size:11px;font-weight:750;line-height:1.4;text-decoration:none;
+ cursor:pointer;
+}
+#luzv-gpa-calculator #gpa-show-all:hover,
+#luzv-gpa-calculator .gpa-jump-btn:hover{text-decoration:underline;text-underline-offset:3px}
+html[data-luzv-theme="dark"] #luzv-gpa-calculator .gpa-needed{background:#204763;color:#c4eaff}
+html[data-luzv-theme="dark"] #luzv-gpa-calculator .status-done .gpa-needed{background:#1d4938;color:#adf0ca}
+html[data-luzv-theme="dark"] #luzv-gpa-calculator .status-hard .gpa-needed{background:#513f1f;color:#ffe1a1}
+html[data-luzv-theme="dark"] #luzv-gpa-calculator .status-impossible .gpa-needed{background:#2b3b48;color:#c1d0db}
+@media(min-width:1100px){
+ #luzv-gpa-calculator .gpa-tiers-grid.is-expanded{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px}
+}
+@media(max-width:700px){
+ #luzv-gpa-calculator{padding:15px;border-radius:18px;margin-bottom:20px}
+ #luzv-gpa-calculator .gpa-header{grid-template-columns:minmax(0,1fr);gap:10px;margin-bottom:12px}
+ #luzv-gpa-calculator .gpa-weight-field{width:100%;min-width:0;gap:3px}
+ #luzv-gpa-calculator .gpa-grid{grid-template-columns:minmax(0,1fr)!important;gap:12px}
+ #luzv-gpa-calculator .gpa-sliders,
+ #luzv-gpa-calculator .gpa-results-panel{padding:13px;border-radius:13px}
+ #luzv-gpa-calculator h2{font-size:21px}
+ #luzv-gpa-calculator .gpa-panel-title{font-size:15px}
+ #luzv-gpa-calculator .gpa-desc{font-size:11.5px}
+ #luzv-gpa-calculator .gpa-tier-card{gap:8px}
+ #luzv-gpa-calculator .gpa-needed{min-width:80px;padding-left:6px;padding-right:6px}
+}
+
 </style>
 </head>
 
@@ -4555,43 +4733,50 @@ html[data-luzv-theme="dark"] .topbar nav a:hover { color:#8ed8ff; }
     <section id="luzv-gpa-calculator" aria-labelledby="gpa-heading">
       <div class="gpa-header">
         <div>
-          <span class="gpa-badge">📊 CÔNG CỤ TÍNH ĐIỂM QUY ĐỔI HỆ 10 & HỆ 4</span>
-          <h2 id="gpa-heading">Tính điểm thi cuối kỳ cần đạt (Chuẩn thang điểm trường)</h2>
-          <p class="gpa-desc">Kéo thanh trượt nhập điểm Chuyên cần và Giữa kỳ để xem số điểm Cuối kỳ cần đạt cho từng mức từ D (1,0) đến A+ (4,0).</p>
+          <span class="gpa-badge">📊 QUY ĐỔI ĐIỂM · HỆ 10 &amp; HỆ 4</span>
+          <h2 id="gpa-heading">Tính điểm cuối kỳ cần đạt</h2>
+          <p class="gpa-desc">Kéo điểm hiện tại để xem điểm thi cần đạt cho mục tiêu của bạn.</p>
         </div>
-        <select id="gpa-weight" class="gpa-weight-select" aria-label="Chọn tỷ lệ trọng số môn học">
-          <option value="0.1,0.3,0.6">Trọng số: 10% CC - 30% GK - 60% CK</option>
-          <option value="0.2,0.3,0.5">Trọng số: 20% CC - 30% GK - 50% CK</option>
-          <option value="0.1,0.2,0.7">Trọng số: 10% CC - 20% GK - 70% CK</option>
-        </select>
+        <label class="gpa-weight-field" for="gpa-weight">
+          <span>Trọng số môn học</span>
+          <select id="gpa-weight" class="gpa-weight-select">
+            <option value="0.1,0.3,0.6">10% CC · 30% GK · 60% CK</option>
+            <option value="0.2,0.3,0.5">20% CC · 30% GK · 50% CK</option>
+            <option value="0.1,0.2,0.7">10% CC · 20% GK · 70% CK</option>
+          </select>
+        </label>
       </div>
 
       <div class="gpa-grid">
         <div class="gpa-sliders">
+          <h3 class="gpa-panel-title">1. Điểm hiện tại</h3>
           <div class="gpa-slider-group">
-            <div class="gpa-slider-label">
-              <span id="cc-label">Điểm Chuyên Cần (10%):</span>
-              <strong id="cc-val">8.0</strong>
+            <label class="gpa-slider-label" id="cc-label" for="cc-range">Chuyên cần (10%)</label>
+            <div class="gpa-slider-control">
+              <input type="range" id="cc-range" class="gpa-range" min="0" max="10" step="0.5" value="8">
+              <output id="cc-val" for="cc-range">8.0</output>
             </div>
-            <input type="range" id="cc-range" class="gpa-range" min="0" max="10" step="0.5" value="8">
           </div>
 
           <div class="gpa-slider-group">
-            <div class="gpa-slider-label">
-              <span id="gk-label">Điểm Giữa Kỳ (30%):</span>
-              <strong id="gk-val">7.0</strong>
+            <label class="gpa-slider-label" id="gk-label" for="gk-range">Giữa kỳ (30%)</label>
+            <div class="gpa-slider-control">
+              <input type="range" id="gk-range" class="gpa-range" min="0" max="10" step="0.5" value="7">
+              <output id="gk-val" for="gk-range">7.0</output>
             </div>
-            <input type="range" id="gk-range" class="gpa-range" min="0" max="10" step="0.5" value="7">
           </div>
 
-          <div class="gpa-current-box" id="gpa-accumulated"></div>
+          <div class="gpa-current-box" id="gpa-accumulated" role="status"></div>
+          <p class="gpa-result-note">Điểm thi tối thiểu được làm tròn lên 0,1.</p>
         </div>
 
         <div class="gpa-results-panel">
-          <div class="gpa-tiers-grid" id="gpa-tiers-grid"></div>
-          <a href="#mon-hoc" class="gpa-jump-btn">
-            Chọn bộ đề môn bạn đang cần kéo điểm bên dưới ↓
-          </a>
+          <h3 class="gpa-panel-title">2. Điểm cuối kỳ cần đạt</h3>
+          <div class="gpa-tiers-grid" id="gpa-tiers-grid" role="list" aria-label="Điểm thi cần đạt cho từng mức"></div>
+          <div class="gpa-results-footer">
+            <button id="gpa-show-all" type="button" aria-expanded="false" aria-controls="gpa-tiers-grid">Xem đủ 8 mức ↓</button>
+            <a href="#mon-hoc" class="gpa-jump-btn">Chọn môn cần ôn →</a>
+          </div>
         </div>
       </div>
     </section>
@@ -5596,17 +5781,19 @@ function getCourseVisualTheme(course) {
     ];
 
     const tiersGrid = document.getElementById("gpa-tiers-grid");
-    const tierCards = GRADE_TIERS.map(tier => {
+    const tierCards = GRADE_TIERS.map((tier, index) => {
       const card = document.createElement("div");
       card.className = "gpa-tier-card";
-      card.innerHTML = `
-        <div class="gpa-tier-top">
-          <span class="gpa-letter">Điểm ${tier.letter}</span>
-          <span class="gpa-scale4">Hệ 4: ${tier.gpa4}</span>
-        </div>
-        <span class="gpa-range10">Hệ 10: ${tier.rangeText}</span>
-        <span class="gpa-needed"></span>
-      `;
+      card.setAttribute("role", "listitem");
+      card.dataset.grade = tier.letter;
+      card.hidden = index >= 4;
+      card.innerHTML =
+        '<span class="gpa-letter">' + tier.letter + '</span>' +
+        '<div class="gpa-grade-info">' +
+          '<span class="gpa-scale4">Hệ 4: ' + tier.gpa4 + '</span>' +
+          '<span class="gpa-range10">(' + tier.rangeText + ')</span>' +
+        '</div>' +
+        '<span class="gpa-needed"></span>';
       tiersGrid.append(card);
       return { tier, card, neededEl: card.querySelector(".gpa-needed") };
     });
@@ -5619,6 +5806,24 @@ function getCourseVisualTheme(course) {
     const ccLabel = document.getElementById("cc-label");
     const gkLabel = document.getElementById("gk-label");
     const accumulatedBox = document.getElementById("gpa-accumulated");
+    const gpaShowAll = document.getElementById("gpa-show-all");
+
+    gpaShowAll.addEventListener("click", () => {
+      const expanded = gpaShowAll.getAttribute("aria-expanded") !== "true";
+      gpaShowAll.setAttribute("aria-expanded", String(expanded));
+      gpaShowAll.textContent = expanded ? "Thu gọn còn 4 mức ↑" : "Xem đủ 8 mức ↓";
+      tiersGrid.classList.toggle("is-expanded", expanded);
+      tierCards.forEach(({ card }, index) => {
+        card.hidden = index >= 4 && !expanded;
+      });
+    });
+
+    // Round minimum scores upward; tolerate floating-point noise at exact tenths.
+    function requiredFinalScore(target, accumulated, finalWeight) {
+      const needed = (target - accumulated) / finalWeight;
+      if (needed > 10 + 1e-9) return null;
+      return Math.max(0, Math.ceil((needed - 1e-9) * 10) / 10);
+    }
 
     function calculateGPA() {
       const cc = parseFloat(ccRange.value);
@@ -5627,33 +5832,37 @@ function getCourseVisualTheme(course) {
 
       ccVal.textContent = cc.toFixed(1);
       gkVal.textContent = gk.toFixed(1);
-      ccLabel.textContent = `Điểm Chuyên Cần (${Math.round(wCC * 100)}%):`;
-      gkLabel.textContent = `Điểm Giữa Kỳ (${Math.round(wGK * 100)}%):`;
+      ccLabel.textContent = "Chuyên cần (" + Math.round(wCC * 100) + "%)";
+      gkLabel.textContent = "Giữa kỳ (" + Math.round(wGK * 100) + "%)";
+      ccRange.style.setProperty("--gpa-fill", cc * 10 + "%");
+      gkRange.style.setProperty("--gpa-fill", gk * 10 + "%");
+      ccRange.setAttribute("aria-valuetext", cc.toFixed(1) + " điểm");
+      gkRange.setAttribute("aria-valuetext", gk.toFixed(1) + " điểm");
 
       const currentPoints = cc * wCC + gk * wGK;
       const maxPossibleTotal = currentPoints + 10 * wCK;
-
-      accumulatedBox.innerHTML = `
-        Điểm thành phần đã tích lũy: <strong>${currentPoints.toFixed(2)}đ</strong> / ${(wCC + wGK) * 10}đ.<br>
-        Nếu thi Cuối kỳ được 10đ → Tổng kết đạt tối đa: <strong>${maxPossibleTotal.toFixed(1)}đ</strong>
-      `;
+      accumulatedBox.innerHTML =
+        '<span>✨ Đã tích lũy: <strong>' + currentPoints.toFixed(2) +
+        '</strong> / ' + ((wCC + wGK) * 10).toFixed(1) + '</span>' +
+        '<span>Tổng kết tối đa: <strong>' + maxPossibleTotal.toFixed(1) + ' điểm</strong></span>';
 
       tierCards.forEach(({ tier, card, neededEl }) => {
-        const needed = (tier.min10 - currentPoints) / wCK;
+        const needed = requiredFinalScore(tier.min10, currentPoints, wCK);
         card.classList.remove("status-done", "status-possible", "status-hard", "status-impossible");
+        card.dataset.required = needed === null ? "impossible" : needed.toFixed(1);
 
-        if (needed <= 0) {
-          card.classList.add("status-done");
-          neededEl.textContent = "✓ Chắc chắn đạt";
-        } else if (needed > 10) {
+        if (needed === null) {
           card.classList.add("status-impossible");
-          neededEl.textContent = `Quá khả năng (>10đ)`;
-        } else if (needed >= 8.0) {
-          card.classList.add("status-hard");
-          neededEl.textContent = `Cần thi ≥ ${needed.toFixed(1)}đ`;
+          neededEl.textContent = "> 10 điểm";
+          neededEl.setAttribute("aria-label", "Mục tiêu cần hơn 10 điểm cuối kỳ, vượt thang điểm");
+        } else if (needed === 0) {
+          card.classList.add("status-done");
+          neededEl.textContent = "Cần 0 điểm";
+          neededEl.setAttribute("aria-label", "Điểm cuối kỳ tối thiểu: 0 điểm");
         } else {
-          card.classList.add("status-possible");
-          neededEl.textContent = `Cần thi ≥ ${needed.toFixed(1)}đ`;
+          card.classList.add(needed >= 8 ? "status-hard" : "status-possible");
+          neededEl.textContent = "Cần ≥ " + needed.toFixed(1);
+          neededEl.setAttribute("aria-label", "Điểm cuối kỳ tối thiểu: " + needed.toFixed(1) + " điểm");
         }
       });
     }
