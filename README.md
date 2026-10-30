@@ -6,7 +6,7 @@
 
 1. Tải ZIP của nhánh này và giải nén, hoặc mở Raw của `index.html` rồi lưu với tên `index.html`.
 2. Tải `index.html` lên hosting. Đặt ảnh QR thật của bạn tên `thanh-toan.jpeg` cùng thư mục. Ảnh QR là file riêng, chưa có trong bản gốc người dùng cung cấp.
-3. Khách chọn môn/gói, nhập tài khoản Azota rồi bấm “Lấy mã QR”. Đơn chỉ mua PDF không yêu cầu tài khoản Azota.
+3. Khách chọn môn/gói, nhập tài khoản Azota rồi bấm “Chốt đơn”. Đơn chỉ mua PDF không yêu cầu tài khoản Azota.
 4. Khách chuyển khoản và gửi nội dung đơn kèm bill qua Zalo/Facebook. LuzV kiểm tra rồi cấp quyền/gửi PDF.
 
 ## Giao diện mới

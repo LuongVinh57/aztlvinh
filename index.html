@@ -5239,7 +5239,7 @@ html[data-luzv-theme] #luzv-dual-free-section #ref-my-phone[aria-invalid="true"]
           </div>
 
           <button class="studio-checkout" id="studio-checkout" type="button" disabled>
-            Lấy mã QR →
+            Chốt đơn
           </button>
 
           <p class="status" id="status" role="status"></p>
@@ -8150,7 +8150,7 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
     {selectors:['#group-plan-grid'], title:'👥 Chọn gói phù hợp', text:'Chọn gói 1, 2 hoặc 5 người. Giá là giá mỗi môn cho cả gói. Solo không tự giảm theo số môn; tổng tiền luôn cập nhật theo lựa chọn của bạn.'},
     {selectors:['#luzv-coupon','#luzv-tier-promo','#luzv-file-store'], title:'🎟️ Áp mã ưu đãi', text:'Có mã ưu đãi? Nhập mã rồi nhấn Áp dụng: Solo giảm 5%, gói 2 người giảm 3%, gói 5 người giảm 1%. Gói nhóm tính mã sau ưu đãi số môn. Không áp dụng cho PDF.', details:'#luzv-order-benefits'},
     {selectors:['#don-hang .total-row','#order-title'], title:'🛍️ Kiểm tra túi ôn tập', text:'Kiểm tra các môn, gói mua và tổng tiền. Bạn có thể gỡ môn trong túi, bổ sung tài khoản nhận đề trước khi chốt đơn.'},
-    {selectors:['#studio-checkout'], title:'📱 Xem QR và thanh toán', text:'Bấm Lấy mã QR để xem thông tin chuyển khoản, rồi gửi nội dung đơn và bill qua Zalo/Facebook. Đơn có môn Azota cần nhập tài khoản nhận đề. Shop sẽ kiểm tra và cấp đề. Hướng dẫn chỉ giới thiệu thao tác, không tạo đơn hay chuyển tiền.'}
+    {selectors:['#studio-checkout'], title:'📱 Chốt đơn và thanh toán', text:'Bấm Chốt đơn để xem thông tin chuyển khoản, rồi gửi nội dung đơn và bill qua Zalo/Facebook. Đơn có môn Azota cần nhập tài khoản nhận đề. Shop sẽ kiểm tra và cấp đề. Hướng dẫn chỉ giới thiệu thao tác, không tạo đơn hay chuyển tiền.'}
   ];
   let index = 0, target = null, previousFocus = null;
   let run = 0, frame = 0, scrolling = false, ringBox = null, cardBox = null;
@@ -8409,7 +8409,6 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
     benefits.hidden = !!pdf && courses === 0;
 
     const pricing = LuzVPricing.current();
-    checkout.textContent = hasItems ? 'Lấy mã QR · ' + money(pricing.total) + ' →' : 'Lấy mã QR →';
     const shortPlan = activePlan.people === 1 ? 'Solo' : activePlan.people === 2 ? 'Duo' : 'Nhóm 5';
     const pieces = [shortPlan];
     if (pricing.rate) pieces.push('Giảm ' + pricing.percent + '%');
