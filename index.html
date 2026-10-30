@@ -4991,6 +4991,67 @@ html[data-luzv-theme] #luzv-dual-free-section #ref-my-phone[aria-invalid="true"]
  #luzv-dual-free-section :is(.contribute-button,#ref-create-btn,.ref-btn){transition:none;transform:none}
 }
 
+/* Contents for the public sections in this file; stay below the existing header. */
+.luzv-toc-bar{
+ --toc-bg:rgba(255,255,255,.96);--toc-line:#dbeafe;--toc-ink:#173b56;
+ --toc-pill:#f0f9ff;--toc-pill-line:#bae6fd;--toc-accent:#0369a1;
+ position:sticky;top:var(--luzv-toc-top,86px);z-index:18;
+ display:flex;align-items:center;gap:12px;min-width:0;max-width:100%;
+ margin:16px 0 24px;padding:10px 16px;border:1px solid var(--toc-line);border-radius:14px;
+ background:var(--toc-bg);backdrop-filter:blur(8px);color:var(--toc-ink);
+ box-shadow:0 4px 16px #0b6aa214;
+}
+html[data-luzv-theme="dark"] .luzv-toc-bar{
+ --toc-bg:rgba(19,40,58,.97);--toc-line:#31546d;--toc-ink:#e3f3ff;
+ --toc-pill:#1b3a51;--toc-pill-line:#426b87;--toc-accent:#bce5ff;
+ box-shadow:0 4px 16px #0002;
+}
+.luzv-toc-bar[hidden]{display:none}
+.luzv-toc-label{flex:none;font-size:13.5px;line-height:1.5;font-weight:750;white-space:nowrap}
+.luzv-toc-list{
+ display:flex;align-items:center;gap:8px;flex:1;min-width:0;max-width:100%;
+ list-style:none;margin:0;padding:2px 1px;overflow-x:auto;overscroll-behavior-x:contain;
+ scrollbar-width:none;-webkit-overflow-scrolling:touch;
+}
+.luzv-toc-list::-webkit-scrollbar{display:none}
+.luzv-toc-list>li{flex:none;margin:0;padding:0}
+.luzv-toc-item{
+ display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;
+ padding:8px 12px;border:1px solid var(--toc-pill-line);border-radius:999px;
+ background:var(--toc-pill);color:var(--toc-accent);font-size:13px;line-height:1.5;
+ font-weight:650;text-decoration:none;white-space:nowrap;
+ transition:background .2s,color .2s,transform .2s;
+}
+@media(hover:hover){.luzv-toc-item:hover{background:var(--toc-line);transform:translateY(-1px)}}
+.luzv-toc-item.active{
+ background:#0b6aa2;border-color:#0b6aa2;color:#fff;box-shadow:0 2px 8px #0b6aa240;
+}
+.luzv-toc-num{
+ display:inline-flex;align-items:center;justify-content:center;flex:none;
+ width:20px;height:20px;border-radius:50%;background:#0369a11f;
+ font-size:12px;line-height:1;font-weight:750;
+}
+html[data-luzv-theme="dark"] .luzv-toc-num{background:#bce5ff1a}
+.luzv-toc-item.active .luzv-toc-num{background:#fff3;color:#fff}
+.luzv-toc-item:focus-visible{outline:3px solid var(--toc-accent);outline-offset:-3px}
+main.container :is(input,select,textarea,.search-box-wrap){scroll-margin-top:var(--luzv-toc-space,0px)}
+@media(min-width:1100px){
+ .luzv-toc-list{gap:6px}
+ .luzv-toc-item{padding-inline:10px;font-size:12.5px}
+}
+body:has(#lv-tour[open]) .luzv-toc-bar{visibility:hidden;pointer-events:none}
+@media(min-width:821px){
+ #don-hang.order{top:var(--luzv-section-offset,86px);max-height:calc(100vh - var(--luzv-section-offset,86px) - 14px);max-height:calc(100dvh - var(--luzv-section-offset,86px) - 14px)}
+}
+@media(max-width:768px){
+ .luzv-toc-bar{flex-direction:column;align-items:flex-start;gap:8px;padding:10px 12px}
+ .luzv-toc-list{flex:auto;width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ .luzv-toc-item{transition:none;transform:none}
+}
+
 </style>
 </head>
 
@@ -8421,7 +8482,9 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
   function revealPDF() {
     fileStore.open = true;
     const header = document.querySelector('.topbar');
-    fileStore.style.scrollMarginTop = ((header?.getBoundingClientRect().height || 70) + 14) + 'px';
+    const contents = document.getElementById('luzv-toc');
+    fileStore.style.scrollMarginTop = contents ? contents.getBoundingClientRect().height + 8 + 'px'
+      : ((header?.getBoundingClientRect().height || 70) + 14) + 'px';
   }
   document.querySelectorAll('a[href="#luzv-file-store"]').forEach(link => {
     link.addEventListener('click', revealPDF);
@@ -8602,7 +8665,9 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
     const mobileMenu = document.getElementById('luzv-mobile-menu');
     if (mobileMenu?.getAttribute('aria-expanded') === 'true') mobileMenu.click();
     const header = document.querySelector('.topbar');
-    const padding = (header?.getBoundingClientRect().height || 0) + 14;
+    const contents = document.getElementById('luzv-toc');
+    const padding = (header?.getBoundingClientRect().height || 0)
+      + (contents && !contents.hidden ? contents.getBoundingClientRect().height + 8 : 0) + 14;
     const max = Math.max(0, document.documentElement.scrollHeight - innerHeight);
     const from = scrollY;
     const destination = selector === 'top' ? 0 : Math.max(0, Math.min(max, scrollY + target.getBoundingClientRect().top - padding));
@@ -8661,6 +8726,166 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
     if (records.some(record => record.target.tagName === 'DIALOG')) schedule();
   }).observe(document.body, {subtree:true, attributes:true, attributeFilter:['open']});
   update();
+})();
+
+</script>
+<script>
+/* Build the contents from public sections in this file, in their current order. */
+(() => {
+  'use strict';
+  const main = document.querySelector('main.container');
+  const hero = main?.querySelector('.hero');
+  if (!main || !hero || document.getElementById('luzv-toc')) return;
+
+  const labels = {
+    'luzv-exam-countdown-box': 'Chọn nhanh môn',
+    'luzv-gpa-calculator': 'Tính điểm cuối kỳ',
+    'mon-hoc': 'Chọn gói & môn học',
+    'don-hang': 'PDF & Chốt đơn',
+    'luzv-contribute': 'Đóng góp đề',
+    'luzv-referral': 'Giới thiệu bạn bè',
+    'lien-he': 'Liên hệ'
+  };
+  const nav = document.createElement('nav');
+  nav.id = 'luzv-toc';
+  nav.className = 'luzv-toc-bar';
+  nav.setAttribute('aria-label', 'Mục lục trang');
+  const label = document.createElement('span');
+  label.className = 'luzv-toc-label';
+  label.textContent = '🧭 Mục lục nhanh';
+  const list = document.createElement('ol');
+  list.className = 'luzv-toc-list';
+  nav.append(label, list);
+  hero.after(nav);
+
+  const header = document.querySelector('.topbar');
+  let entries = [], current = '', preferred = null, frame = 0, rebuildPending = true, serial = 0;
+  const visible = node => node.isConnected && !node.closest('[hidden],dialog') && node.getClientRects().length > 0;
+
+  function setActive(entry) {
+    if (!entry || current === entry.target.id) return;
+    current = entry.target.id;
+    for (const item of entries) {
+      const active = item === entry;
+      item.link.classList.toggle('active', active);
+      if (active) item.link.setAttribute('aria-current', 'location');
+      else item.link.removeAttribute('aria-current');
+    }
+    // Reveal only inside the horizontal list; never move the page during scroll spying.
+    const a = entry.link.getBoundingClientRect(), b = list.getBoundingClientRect();
+    const delta = a.left < b.left ? a.left - b.left : a.right > b.right ? a.right - b.right : 0;
+    if (delta) list.scrollBy({left: delta, behavior: 'instant'});
+  }
+
+  function refresh() {
+    frame = 0;
+    if (rebuildPending) rebuild();
+    const headerHeight = header?.getBoundingClientRect().height || 0;
+    nav.style.setProperty('--luzv-toc-top', headerHeight + 8 + 'px');
+    const contentsSpace = nav.hidden ? 0 : nav.getBoundingClientRect().height + 8;
+    const padding = headerHeight + contentsSpace + 14;
+    // Keep the sticky links outside the document's padded focus area.
+    document.documentElement.style.scrollPaddingTop = headerHeight + 14 + 'px';
+    document.documentElement.style.setProperty('--luzv-toc-space', contentsSpace + 'px');
+    document.documentElement.style.setProperty('--luzv-section-offset', padding + 'px');
+    for (const entry of entries) entry.target.style.scrollMarginTop = contentsSpace + 'px';
+    const pdf = document.getElementById('luzv-file-store');
+    if (pdf) pdf.style.scrollMarginTop = contentsSpace + 'px';
+    if (!entries.length) return;
+    if (preferred && entries.includes(preferred) && visible(preferred.target)) {
+      setActive(preferred);
+      return;
+    }
+    const cutoff = scrollY + padding + 20;
+    const positions = entries.map(entry => {
+      // The desktop cart sticks beside the catalog; use the row's normal position.
+      const target = getComputedStyle(entry.target).position === 'sticky' ? entry.target.parentElement : entry.target;
+      return {entry, top: target.getBoundingClientRect().top + scrollY};
+    });
+    const passed = positions.filter(item => item.top <= cutoff);
+    const nearest = passed.length ? Math.max(...passed.map(item => item.top)) : positions[0].top;
+    const choices = positions.filter(item => Math.abs(item.top - nearest) < 2);
+    let active = choices.find(item => item.entry.target.id === current)?.entry || choices[0]?.entry || entries[0];
+    const max = document.documentElement.scrollHeight - innerHeight;
+    if (max > 0 && scrollY >= max - 2) active = entries[entries.length - 1];
+    setActive(active);
+  }
+
+  function schedule(rebuildNeeded = false) {
+    if (rebuildNeeded) rebuildPending = true;
+    if (!frame) frame = requestAnimationFrame(refresh);
+  }
+
+  function rebuild() {
+    rebuildPending = false;
+    const sections = [...main.querySelectorAll('section,aside')].flatMap(target => {
+      if (!visible(target) || target === hero) return [];
+      const heading = [...target.querySelectorAll('h2')].find(node => node.closest('section,aside') === target);
+      if (!heading) return [];
+      if (!target.id) {
+        do { target.id = 'luzv-page-section-' + (++serial); } while (document.querySelectorAll('[id="' + target.id + '"]').length > 1);
+      }
+      return [{target, name: target.dataset.tocLabel || labels[target.id] || heading.textContent.trim()}];
+    });
+    nav.hidden = !sections.length;
+    if (sections.length === entries.length && sections.every((item, i) => item.target === entries[i].target && item.name === entries[i].name)) return;
+    const focusedId = entries.find(entry => entry.link === document.activeElement)?.target.id;
+    const preferredId = preferred?.target.id;
+    list.replaceChildren();
+    entries = sections.map((entry, i) => {
+      const item = document.createElement('li');
+      const link = document.createElement('a');
+      link.className = 'luzv-toc-item';
+      link.href = '#' + encodeURIComponent(entry.target.id);
+      const number = document.createElement('span');
+      number.className = 'luzv-toc-num';
+      number.setAttribute('aria-hidden', 'true');
+      number.textContent = String(i + 1);
+      link.append(number, document.createTextNode(entry.name));
+      link.addEventListener('click', event => {
+        if (event.button !== 0 || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
+        const menu = document.getElementById('luzv-mobile-menu');
+        if (menu?.getAttribute('aria-expanded') === 'true') menu.click();
+        preferred = entry;
+        // Keep a native fragment link for keyboard access, history and Back/Forward.
+        if (!entry.target.hasAttribute('tabindex')) {
+          entry.target.setAttribute('tabindex', '-1');
+          entry.target.addEventListener('blur', () => entry.target.removeAttribute('tabindex'), {once: true});
+        }
+        if (entry.target.id === 'don-hang') entry.target.scrollTo({top: 0, behavior: 'instant'});
+        refresh();
+      });
+      entry.link = link;
+      item.append(link);list.append(item);
+      return entry;
+    });
+    current = '';
+    preferred = entries.find(entry => entry.target.id === preferredId) || null;
+    if (focusedId) entries.find(entry => entry.target.id === focusedId)?.link.focus({preventScroll: true});
+  }
+
+  function clearPreference() { preferred = null; schedule(); }
+  window.addEventListener('scroll', () => schedule(), {passive: true});
+  window.addEventListener('resize', () => schedule(true), {passive: true});
+  window.addEventListener('hashchange', () => {
+    preferred = entries.find(entry => entry.link.hash === location.hash) || null;
+    schedule();
+  });
+  document.addEventListener('wheel', clearPreference, {passive: true});
+  document.addEventListener('touchstart', event => { if (!nav.contains(event.target)) clearPreference(); }, {passive: true});
+  document.addEventListener('pointerdown', event => { if (!nav.contains(event.target)) clearPreference(); }, {passive: true});
+  document.addEventListener('keydown', event => {
+    if (['ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' '].includes(event.key)) clearPreference();
+  });
+  const size = new ResizeObserver(() => schedule());
+  size.observe(main);
+  if (header) size.observe(header);
+  new MutationObserver(records => {
+    const relevant = node => node.nodeType === 1 && (node.matches('section,aside,h2') || node.querySelector('section,aside,h2'));
+    if (records.some(record => record.type === 'attributes' ? relevant(record.target)
+      : record.target.closest('h2') || [...record.addedNodes, ...record.removedNodes].some(relevant))) schedule(true);
+  }).observe(main, {subtree: true, childList: true, attributes: true, attributeFilter: ['hidden']});
+  refresh();
 })();
 
 </script>

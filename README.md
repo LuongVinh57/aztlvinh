@@ -29,3 +29,24 @@
 Đã kiểm tra giao diện và tương tác ở 320, 390, 820, 861 và 1360 px; cả sáng/tối, bộ nhớ bị chặn, clipboard thành công/bị từ chối, sửa SĐT khi đang sao chép, điều hướng theo 4 thẻ, kéo chuột, thanh tua, đồng bộ chọn/bỏ môn, giỏ hàng, QR và hướng dẫn 5 bước.
 
 Các ảnh `carousel-preview*.png`, `free-preview*.png`, `mobile-free-preview.png` minh họa hai phần mới. `preview*.png` minh họa giỏ hàng.
+
+
+## Mục lục nhanh theo nội dung trong file
+
+Thanh đặt ngay dưới banner, trước khung chọn nhanh. Thanh tự lấy các khối nội dung chính đang có trong trang, gồm:
+
+1. Chọn nhanh môn.
+2. Tính điểm cuối kỳ.
+3. Chọn gói & môn học.
+4. PDF & Chốt đơn.
+5. Đóng góp đề.
+6. Giới thiệu bạn bè.
+7. Liên hệ.
+
+Số thứ tự theo đúng vị trí hiển thị, tự đổi khi bố cục điện thoại chuyển phần tính điểm xuống dưới phần chọn môn. Các phần thực mới có tiêu đề cũng được thêm vào; phần ẩn và hộp thoại không tạo mục lục trùng.
+
+Thanh dùng kiểu nút bo tròn trắng/xanh hoặc navy theo chế độ sáng/tối, dính dưới thanh đầu trang. Trên điện thoại vuốt ngang để xem đủ mục. Link dùng đúng phần đang có và hỗ trợ bàn phím, Back/Forward; tiêu đề không bị các thanh dính che. Cuộn trang chỉ đổi mục được tô sáng, không tự kéo trang lên đầu. Giỏ hàng bên phải và menu Nhảy tới đã tính khoảng trống cho thanh mới.
+
+Đã kiểm tra ở 320, 390, 820 và 1360 px, cả cuộn mượt và chế độ giảm chuyển động; kiểm tra lại giỏ hàng, PDF, Chốt đơn, hướng dẫn 5 bước và menu Nhảy tới. Giá, ảnh bìa 3D, mã ưu đãi và công cụ tính điểm giữ nguyên trong bản đầy đủ này.
+
+Các ảnh toc-preview.png, toc-preview-dark.png và mobile-toc-preview.png chụp riêng thanh mục lục. toc-page-preview.png và mobile-toc-page-preview.png minh họa thanh khi cuộn trên máy tính và điện thoại.
