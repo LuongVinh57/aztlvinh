@@ -4666,20 +4666,21 @@ html[data-luzv-theme="dark"] #luzv-gpa-calculator .status-impossible .gpa-needed
  #luzv-gpa-calculator .gpa-needed{min-width:80px;padding-left:6px;padding-right:6px}
 }
 
-/* Checkout card: one list, compact native disclosures, shared order state. */
+/* Checkout card: adapted reference spacing and controls; shared order state. */
 #don-hang{
  --cart-surface:#fff;--cart-tint:#f2f9ff;--cart-line:#d1e5f3;
  --cart-ink:#153b59;--cart-muted:#59758a;--cart-accent:#0b67a3;
- --cart-chip:#e6f4ff;--cart-disabled:#dae9f3;
+ --cart-chip:#e6f4ff;--cart-disabled:#dae9f3;--cart-error:#b42318;
 }
 html[data-luzv-theme="dark"] #don-hang{
  --cart-surface:#132637;--cart-tint:#183247;--cart-line:#315269;
  --cart-ink:#e7f5ff;--cart-muted:#b3cadb;--cart-accent:#9bd8ff;
- --cart-chip:#244660;--cart-disabled:#294357;
+ --cart-chip:#244660;--cart-disabled:#294357;--cart-error:#ffb4ab;
 }
 html[data-luzv-theme] #don-hang.order{
+ width:100%;max-width:440px;margin-inline:auto;justify-self:center;box-sizing:border-box;
  background:var(--cart-surface);border:1px solid var(--cart-line);
- border-radius:22px;box-shadow:0 10px 30px #0b67a30c;color:var(--cart-ink);
+ border-radius:18px;box-shadow:0 8px 24px #0b67a30d;color:var(--cart-ink);
 }
 #don-hang [hidden]{display:none!important}
 html[data-luzv-theme] #don-hang .order-header{
@@ -4693,58 +4694,58 @@ html[data-luzv-theme] #don-hang .autosave-pill{
  border-color:var(--cart-line);font-size:10px;box-shadow:none;
 }
 html[data-luzv-theme] #don-hang .order-body{
- padding:17px 18px 18px;background:var(--cart-surface);color:var(--cart-ink);
+ padding:20px;background:var(--cart-surface);color:var(--cart-ink);
 }
 html[data-luzv-theme] #don-hang .luzv-selected-header{
  display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 0 12px;
 }
 html[data-luzv-theme] #don-hang .luzv-selected-header h3{
- flex:1;min-width:0;margin:0;color:var(--cart-ink);font-size:15px;line-height:1.4;font-weight:800;
+ flex:1;min-width:0;margin:0;color:var(--cart-ink);font-size:16px;line-height:1.4;font-weight:800;
 }
 html[data-luzv-theme] #don-hang .luzv-selected-number,
 html[data-luzv-theme] #don-hang .luzv-selected-count{color:var(--cart-accent)}
 html[data-luzv-theme] #don-hang .luzv-clear-selected{
- min-height:36px;padding:6px 9px;border:0;border-radius:99px;flex:none;
- background:var(--cart-chip);color:var(--cart-accent);font-size:11px;font-weight:750;
+ min-height:44px;padding:6px 12px;border:0;border-radius:99px;flex:none;
+ background:var(--cart-chip);color:var(--cart-accent);font-size:12px;font-weight:750;
 }
 html[data-luzv-theme] #don-hang .luzv-empty-box{
- display:flex;flex-direction:column;align-items:center;padding:14px;
- margin:0 0 14px;border:1px dashed var(--cart-line);border-radius:14px;
- background:var(--cart-tint);color:var(--cart-muted);text-align:center;font-size:12px;line-height:1.55;
+ display:flex;flex-direction:column;align-items:center;padding:18px 16px;
+ margin:0 0 16px;border:1px dashed var(--cart-line);border-radius:14px;
+ background:var(--cart-tint);color:var(--cart-muted);text-align:center;font-size:14px;line-height:1.5;
 }
 #don-hang .luzv-empty-box p{margin:0;max-width:100%}
 html[data-luzv-theme] #don-hang .order-list{
- display:flex;flex-direction:column;gap:7px;max-height:220px;margin:0 0 14px;
+ display:flex;flex-direction:column;gap:8px;max-height:220px;margin:0 0 16px;
  padding:0 3px 0 0;overflow-y:auto;overscroll-behavior:contain;
  scrollbar-width:thin;scrollbar-color:var(--cart-line) transparent;
 }
 html[data-luzv-theme] #don-hang .order-item{
- display:flex;align-items:center;gap:8px;padding:9px 10px;
- background:var(--cart-surface);border:1px solid var(--cart-line);
+ display:flex;align-items:center;gap:8px;padding:10px 12px;
+ background:var(--cart-tint);border:1px solid var(--cart-line);
  border-radius:12px;box-shadow:0 2px 8px #0b67a307;
 }
 html[data-luzv-theme] #don-hang .order-item>span:first-child{
  display:flex;align-items:center;gap:8px;flex:1;min-width:0;
 }
 html[data-luzv-theme] #don-hang .order-item>span:first-child>span:first-child{
- min-width:0;flex:1;color:var(--cart-ink);font-size:13px;line-height:1.45;font-weight:650;
+ min-width:0;flex:1;color:var(--cart-ink);font-size:14px;line-height:1.45;font-weight:650;
  overflow-wrap:anywhere;
 }
 html[data-luzv-theme] #don-hang .order-item strong{color:var(--cart-accent);font-size:14px;font-weight:800;white-space:nowrap}
 html[data-luzv-theme] #don-hang .order-item .remove{
- display:grid;place-items:center;flex:0 0 36px;width:36px;height:36px;padding:0;
+ display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;padding:0;
  border:0;border-radius:50%;background:var(--cart-chip);color:var(--cart-accent);
  font-size:21px;line-height:1;
 }
 html[data-luzv-theme] #don-hang .luzv-order-benefits,
 html[data-luzv-theme] #don-hang #luzv-file-store{
  display:block;margin:0 0 12px;padding:0;background:var(--cart-tint);color:var(--cart-ink);
- border:1px solid var(--cart-line);border-radius:12px;box-shadow:none;overflow:hidden;
+ border:1px solid var(--cart-line);border-radius:14px;box-shadow:none;overflow:hidden;
 }
 html[data-luzv-theme] #don-hang .luzv-order-benefits>summary,
 html[data-luzv-theme] #don-hang #luzv-file-store>summary{
- display:flex;align-items:center;gap:7px;min-height:46px;padding:10px 12px;
- color:var(--cart-ink);font-size:12px;line-height:1.45;font-weight:750;list-style:none;cursor:pointer;
+ display:flex;align-items:center;gap:7px;min-height:46px;padding:12px 14px;
+ color:var(--cart-ink);font-size:13px;line-height:1.45;font-weight:750;list-style:none;cursor:pointer;
 }
 #don-hang #luzv-file-store>summary::-webkit-details-marker,
 #don-hang .luzv-order-benefits>summary::-webkit-details-marker{display:none}
@@ -4786,14 +4787,14 @@ html[data-luzv-theme] #don-hang #luzv-coupon{
 }
 html[data-luzv-theme] #don-hang #luzv-coupon>label{color:var(--cart-ink);font-size:12px}
 html[data-luzv-theme] #don-hang #luzv-coupon-input{
- min-width:0;border-color:var(--cart-line);background:var(--cart-surface);color:var(--cart-ink);
+ min-width:0;border-color:var(--cart-line);background:var(--cart-surface);color:var(--cart-ink);font-size:16px;
 }
 html[data-luzv-theme] #don-hang #luzv-coupon .coupon-help{
  margin-top:7px;color:var(--cart-muted);font-size:11px;line-height:1.5;
 }
 html[data-luzv-theme] #don-hang .luzv-file-label{color:var(--cart-ink);font-size:12px}
 html[data-luzv-theme] #don-hang .luzv-file-control{
- background:var(--cart-surface);border-color:var(--cart-line);color:var(--cart-ink);font-size:13px;
+ background:var(--cart-surface);border-color:var(--cart-line);color:var(--cart-ink);font-size:16px;
 }
 html[data-luzv-theme] #don-hang .luzv-file-selected{
  padding:6px 0;border:0;border-radius:0;background:transparent;font-size:11px;color:var(--cart-muted);
@@ -4805,11 +4806,12 @@ html[data-luzv-theme] #don-hang .azota-account-box{
  margin:15px 0;padding:0;background:transparent;border:0;
 }
 html[data-luzv-theme] #don-hang .azota-account-box label{
- display:block;margin:0 0 8px;color:var(--cart-ink);font-size:13px;line-height:1.5;font-weight:750;
+ display:block;margin:0 0 8px;color:var(--cart-ink);font-size:14px;line-height:1.5;font-weight:750;
 }
 html[data-luzv-theme] #don-hang #buyer-accounts{
- height:44px;padding:10px 11px;border:1px solid var(--cart-line);border-radius:11px;
- background:var(--cart-surface);color:var(--cart-ink);box-shadow:none;font-size:13px;
+ width:100%;min-width:0;box-sizing:border-box;height:46px;padding:11px 12px;
+ border:1.5px solid var(--cart-line);border-radius:12px;
+ background:var(--cart-surface);color:var(--cart-ink);box-shadow:none;font-size:16px;
 }
 html[data-luzv-theme] #don-hang #buyer-accounts:focus{
  border-color:var(--cart-accent);outline:2px solid #80c5ed55;outline-offset:1px;
@@ -4819,7 +4821,11 @@ html[data-luzv-theme] #don-hang :is(#buyer-accounts,#luzv-coupon-input)::placeho
 }
 html[data-luzv-theme] #don-hang #buyer-accounts-help{
  margin:7px 0 0;padding:0;border:0;background:transparent;color:var(--cart-muted);
- font-size:11px;font-weight:400;line-height:1.5;
+ font-size:12px;font-weight:400;line-height:1.5;
+}
+html[data-luzv-theme] #don-hang .luzv-field-error{
+ margin:7px 0 0;padding:0;background:transparent;color:var(--cart-error);
+ font-size:13px;font-weight:600;line-height:1.5;
 }
 html[data-luzv-theme] #don-hang .luzv-checkout-heading{margin:15px 0 0}
 html[data-luzv-theme] #don-hang .luzv-checkout-heading h3{margin:0 0 8px;color:var(--cart-ink);font-size:17px}
@@ -4844,8 +4850,11 @@ html[data-luzv-theme] #don-hang .total-row .total{color:var(--cart-accent);font-
 html[data-luzv-theme] #don-hang .studio-checkout{
  width:100%;min-height:48px;padding:12px 16px;border:0;border-radius:13px;
  background:linear-gradient(110deg,#0b67a3,#0879b9);color:#fff;font-size:16px;
- box-shadow:0 7px 18px #0879b925;
+ box-shadow:0 7px 18px #0879b925;line-height:1.4;overflow-wrap:anywhere;
+ transition:filter .2s,transform .1s;
 }
+@media(hover:hover){html[data-luzv-theme] #don-hang .studio-checkout:hover:not(:disabled){filter:brightness(1.06)}}
+html[data-luzv-theme] #don-hang .studio-checkout:active:not(:disabled){transform:translateY(1px)}
 html[data-luzv-theme] #don-hang .studio-checkout:disabled{
  background:var(--cart-disabled);color:var(--cart-muted);box-shadow:none;
  opacity:1;cursor:not-allowed;filter:none;
@@ -4871,14 +4880,18 @@ html[data-luzv-theme] #don-hang .luzv-cart-memory #luzv-memory-control{
 html[data-luzv-theme] #don-hang :is(button,a,input,select,summary):focus-visible{
  outline:2px solid var(--cart-accent);outline-offset:3px;
 }
+html[data-luzv-theme] #don-hang #buyer-accounts[aria-invalid="true"]{
+ border-color:var(--cart-error);outline-color:var(--cart-error);
+}
 @media(max-width:480px){
  html[data-luzv-theme] #don-hang .order-header{padding:14px 15px}
  html[data-luzv-theme] #don-hang .order-body{padding:15px}
+ html[data-luzv-theme] #don-hang .luzv-selected-header h3{font-size:15px}
  html[data-luzv-theme] #don-hang .order-item{padding:8px}
- html[data-luzv-theme] #don-hang .order-item .remove{flex-basis:38px;width:38px;height:38px}
  html[data-luzv-theme] #don-hang .luzv-checkout-steps{justify-content:flex-start;gap:5px 7px}
- html[data-luzv-theme] #don-hang .luzv-clear-selected{min-height:38px}
 }
+@media(max-width:360px){html[data-luzv-theme] #don-hang .studio-checkout{font-size:15px;padding-inline:10px}}
+@media(prefers-reduced-motion:reduce){html[data-luzv-theme] #don-hang .studio-checkout{transition:none;transform:none}}
 /* Contribution requirements belong with the exchange offer. */
 #luzv-contribute .luzv-contribute-checks{
  display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px;
@@ -5120,8 +5133,11 @@ html[data-luzv-theme="dark"] #luzv-contribute .luzv-contribute-checks li>span{co
             <input
               type="text"
               id="buyer-accounts"
-              placeholder="VD: Nguyễn Văn A hoặc SĐT đăng ký Azota"
+              placeholder="Tên Azota hoặc SĐT đăng ký"
+              autocomplete="off"
+              aria-describedby="buyer-accounts-help buyer-accounts-error"
             >
+            <p id="buyer-accounts-error" class="luzv-field-error" role="status" hidden></p>
             <small id="buyer-accounts-help">
               🔒 Sau khi xác nhận thanh toán, LuzV sẽ cấp quyền làm đề vào tài khoản Azota bạn cung cấp.
             </small>
@@ -5141,7 +5157,7 @@ html[data-luzv-theme="dark"] #luzv-contribute .luzv-contribute-checks li>span{co
           </div>
 
           <button class="studio-checkout" id="studio-checkout" type="button" disabled>
-            Chốt đơn →
+            Lấy mã QR →
           </button>
 
           <p class="status" id="status" role="status"></p>
@@ -5497,6 +5513,33 @@ function getCourseVisualTheme(course) {
     const orderList = document.getElementById("order-list");
     const statusElement = document.getElementById("status");
     const buyerInput = document.getElementById("buyer-accounts");
+    const buyerError = document.getElementById("buyer-accounts-error");
+
+    function clearBuyerError() {
+      buyerError.hidden = true;
+      buyerError.textContent = "";
+      buyerInput.removeAttribute("aria-invalid");
+    }
+
+    function validateBuyerAccounts() {
+      clearBuyerError();
+      if (!selected.size || buyerInput.value.trim()) return true;
+      buyerError.textContent = activePlan.people === 1
+        ? "Bạn nhập tên Azota hoặc SĐT đăng ký để LuzV cấp quyền nhé."
+        : "Bạn nhập tài khoản Azota / SĐT của " + activePlan.people + " người, ngăn cách bằng dấu phẩy nhé.";
+      buyerError.hidden = false;
+      buyerInput.setAttribute("aria-invalid", "true");
+      buyerInput.focus();
+      return false;
+    }
+
+    buyerInput.addEventListener("input", clearBuyerError);
+    buyerInput.addEventListener("keydown", event => {
+      if (event.key === "Enter" && !event.isComposing) {
+        event.preventDefault();
+        document.getElementById("studio-checkout").click();
+      }
+    });
 
     function money(value) {
       return value.toLocaleString("vi-VN") + "đ";
@@ -5701,8 +5744,12 @@ function getCourseVisualTheme(course) {
       const accountLabel = document.getElementById("buyer-accounts-label");
       accountLabel.textContent = "👤 Tài khoản Azota / SĐT (" + activePlan.people + " người):";
       buyerInput.placeholder = activePlan.people === 1
-        ? "VD: Nguyễn Văn A hoặc SĐT đăng ký Azota"
-        : "Nhập " + activePlan.people + " tài khoản / SĐT, cách nhau bằng dấu phẩy";
+        ? "Tên Azota hoặc SĐT đăng ký"
+        : "Tài khoản / SĐT của " + activePlan.people + " người";
+      document.getElementById("buyer-accounts-help").textContent = activePlan.people === 1
+        ? "🔒 LuzV cấp quyền vào tài khoản bạn cung cấp sau khi xác nhận thanh toán."
+        : "Nhập " + activePlan.people + " tài khoản / SĐT, ngăn cách bằng dấu phẩy. LuzV cấp quyền sau khi xác nhận thanh toán.";
+      clearBuyerError();
 
       cards.forEach(c => {
         c.priceEl.textContent = money(activePlan.price) + (activePlan.people > 1 ? " / nhóm" : "");
@@ -5751,6 +5798,8 @@ function getCourseVisualTheme(course) {
 
       const quantity = selected.size;
       const total = money(LuzVPricing.current().total);
+      buyerInput.required = quantity > 0;
+      if (!quantity) clearBuyerError();
 
       document.getElementById("empty").hidden = quantity > 0;
       document.getElementById("quantity").textContent = quantity;
@@ -5918,7 +5967,7 @@ function getCourseVisualTheme(course) {
     function buildOrderMessage() {
       const names = COURSE_DATA.filter((_, idx) => selected.has(idx)).map(c => c.name);
       const accounts = buyerInput.value.trim();
-      const accountPart = accounts ? ` Tài khoản/SĐT nhận đề: ${accounts}.` : "";
+      const accountPart = names.length && accounts ? ` Tài khoản/SĐT nhận đề: ${accounts}.` : "";
 
       let refPart = "";
       const myOwnPhone = LuzVStorage.getItem("luzv_my_ref_phone");
@@ -5944,6 +5993,7 @@ function getCourseVisualTheme(course) {
         document.getElementById("mon-hoc").scrollIntoView({ behavior: "smooth" });
         return;
       }
+      if (!validateBuyerAccounts()) return;
 
       document.getElementById("payment-quantity").textContent =
         `${selected.size} môn × ${money(PRICE)} · Gói ${activePlan.name} (${activePlan.people} người)`;
@@ -7981,7 +8031,7 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
     {selectors:['#group-plan-grid'], title:'👥 Chọn gói phù hợp', text:'Chọn gói 1, 2 hoặc 5 người. Giá là giá mỗi môn cho cả gói. Solo không tự giảm theo số môn; tổng tiền luôn cập nhật theo lựa chọn của bạn.'},
     {selectors:['#luzv-coupon','#luzv-tier-promo','#luzv-file-store'], title:'🎟️ Áp mã ưu đãi', text:'Có mã ưu đãi? Nhập mã rồi nhấn Áp dụng: Solo giảm 5%, gói 2 người giảm 3%, gói 5 người giảm 1%. Gói nhóm tính mã sau ưu đãi số môn. Không áp dụng cho PDF.', details:'#luzv-order-benefits'},
     {selectors:['#don-hang .total-row','#order-title'], title:'🛍️ Kiểm tra túi ôn tập', text:'Kiểm tra các môn, gói mua và tổng tiền. Bạn có thể gỡ môn trong túi, bổ sung tài khoản nhận đề trước khi chốt đơn.'},
-    {selectors:['#studio-checkout'], title:'📱 Chốt đơn và xem QR', text:'Bấm Chốt đơn để xem QR, rồi gửi nội dung đơn và bill qua Zalo/Facebook. Shop sẽ kiểm tra và cấp đề. Hướng dẫn chỉ giới thiệu thao tác, không tạo đơn hay chuyển tiền.'}
+    {selectors:['#studio-checkout'], title:'📱 Xem QR và thanh toán', text:'Bấm Lấy mã QR để xem thông tin chuyển khoản, rồi gửi nội dung đơn và bill qua Zalo/Facebook. Đơn có môn Azota cần nhập tài khoản nhận đề. Shop sẽ kiểm tra và cấp đề. Hướng dẫn chỉ giới thiệu thao tác, không tạo đơn hay chuyển tiền.'}
   ];
   let index = 0, target = null, previousFocus = null;
   let run = 0, frame = 0, scrolling = false, ringBox = null, cardBox = null;
@@ -8240,6 +8290,7 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
     benefits.hidden = !!pdf && courses === 0;
 
     const pricing = LuzVPricing.current();
+    checkout.textContent = hasItems ? 'Lấy mã QR · ' + money(pricing.total) + ' →' : 'Lấy mã QR →';
     const shortPlan = activePlan.people === 1 ? 'Solo' : activePlan.people === 2 ? 'Duo' : 'Nhóm 5';
     const pieces = [shortPlan];
     if (pricing.rate) pieces.push('Giảm ' + pricing.percent + '%');

@@ -1,27 +1,31 @@
-AZOTA LuzV · Túi ôn tập dạng thẻ
-================================
+# AZOTA LuzV — Giỏ hàng trắng/xanh
 
-Ví dụ giỏ có 3 môn Solo, không nhập mã:
+`index.html` là bản web đầy đủ, đã nhúng CSS, JavaScript và ảnh bìa 3D. Tải file này để thay bản HTML trên hosting.
 
-![Túi ôn tập](preview.png)
+## Cách dùng
 
-Giỏ trống: ![Giỏ trống](preview-empty.png)
+1. Mở `index.html` trên GitHub, chọn Raw rồi lưu với tên `index.html`; hoặc tải ZIP của nhánh này và giải nén.
+2. Đặt `index.html` lên hosting cùng ảnh QR thật của bạn tên `thanh-toan.jpeg`. Ảnh QR là file riêng, chưa có trong bản gốc người dùng cung cấp.
+3. Mở trang, chọn môn/gói, nhập tài khoản Azota và bấm “Lấy mã QR”. Đơn chỉ mua PDF không yêu cầu tài khoản Azota.
+4. Khách chuyển khoản và gửi nội dung đơn kèm bill qua Zalo/Facebook. LuzV kiểm tra rồi cấp quyền/gửi PDF.
 
-Giữ tông xanh trắng, ảnh bìa 3D và phần tính điểm gọn.
-Giỏ có bỏ từng mục, Xóa tất cả và danh sách cuộn. PDF, ưu đãi và bộ nhớ có thể thu gọn.
-Ô tài khoản đổi theo gói 1/2/5 người. Nút Chốt đơn khóa khi trống và mở với cả đơn chỉ PDF.
-Solo không tự giảm theo số môn; gói nhóm giảm 10% cho 3–4 môn, 15% từ 5 môn.
-Mã nhập riêng tính sau ưu đãi nhóm; PDF không giảm giá và không được tính vào mốc số môn.
+## Giỏ hàng
 
-Mục Đóng góp đề:
+- Thẻ rộng tối đa 440 px, trắng/xanh nhạt/xanh biển ở chế độ sáng và navy ở chế độ tối.
+- Danh sách có số lượng, xóa từng mục, xóa tất cả và cuộn khi dài. PDF và ưu đãi thu gọn, dùng được bằng bàn phím.
+- Nút xóa có vùng bấm 44 px; chữ trong ô nhập 16 px. Nút xem QR hiển thị đúng tổng tiền.
+- Thiếu tài khoản khi mua môn Azota được báo ngay dưới ô nhập; hỗ trợ Enter để xem QR. Tên tài khoản không được lưu vào bộ nhớ giỏ.
+- Chọn môn, bỏ môn, thanh giỏ trên điện thoại, tổng tiền và nội dung đơn dùng chung dữ liệu và cách tính giá.
+- Nếu trình duyệt không cho sao chép, nội dung đơn được bôi đen để sao chép thủ công.
 
-![Ba yêu cầu đóng góp đề](contribute-preview.png)
+## Quy tắc giá
 
-Chỉ cần tải index.html lên website. Ảnh bìa, CSS và JS đã nhúng sẵn.
-Nếu dùng QR thanh toán, đặt thêm ảnh thanh-toan.jpeg cùng thư mục.
+- Solo: 15.000đ/môn, không tự giảm theo số lượng; 5 môn là 75.000đ.
+- Gói 2 người: 25.000đ/môn cho cả nhóm. Gói 5 người: 50.000đ/môn cho cả nhóm.
+- Gói nhóm: 3–4 môn giảm 10%, từ 5 môn giảm 15% tiền môn Azota.
+- Mã hợp lệ giảm thêm theo gói sau ưu đãi số lượng.
+- PDF: 10.000đ/file, không tính vào mốc số môn và không được giảm giá.
 
-Đã kiểm tra ở 320/390/820/1360 px, sáng/tối, giỏ điện thoại, lưu và xóa lựa chọn,
-mua PDF riêng, mã ưu đãi, gói nhóm, tổng QR và hướng dẫn 5 bước.
+Đã kiểm tra ở chiều rộng 320, 390, 820 và 1360 px, cả sáng/tối; giỏ trống, tài khoản bắt buộc, PDF riêng/kèm môn, gói mua, mã ưu đãi, nội dung QR, bàn phím và sao chép khi bị từ chối. Công cụ tính điểm, ảnh bìa từng môn, hướng dẫn và các tính năng hiện có được giữ trong file.
 
-SHA-256 của index.html:
-4379d933fe2f7fb56d2da5e0453b9a149919ad97fdc6751dbe3cff57a76c29de
+`preview.png`, `preview-empty.png`, `preview-dark.png` là ảnh chụp giỏ hàng mới; `contribute-preview.png` minh họa mục đóng góp đề.
