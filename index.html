@@ -3604,7 +3604,7 @@ body.night-owl-mode #don-hang #luzv-file-store {background:linear-gradient(115de
  --rail-price:#576c7d;--rail-track:#cddce9;--rail-selected-ink:#fff;
 }
 html[data-luzv-theme="dark"] body #luzv-exam-countdown-box{
- --rail-bg:#0d141a;--rail-border:#232f39;--rail-heading:#fff;
+ --rail-bg:radial-gradient(circle at 85% 15%,#203e5b 0%,#13283c 65%,#0d1e2d 100%);--rail-border:#31516c;--rail-heading:#fff;
  --rail-muted:#abbac6;--rail-eyebrow:#85b4da;--rail-card:#192733;
  --rail-card-end:#16232d;--rail-card-border:#475a69;
  --rail-selected:#1d2d3a;--rail-selected-end:#1a2731;
@@ -3613,53 +3613,53 @@ html[data-luzv-theme="dark"] body #luzv-exam-countdown-box{
  --rail-price:#a6c0d4;--rail-track:#293945;--rail-selected-ink:#111d28;
 }
 
-#luzv-exam-countdown-box,html[data-luzv-theme="dark"] body #luzv-exam-countdown-box{padding:22px 20px 18px;margin-bottom:22px;background:var(--rail-bg);border:1px solid var(--rail-border);border-radius:22px;box-shadow:0 12px 30px #0c141b18;color:var(--rail-heading);overflow:hidden;position:relative;container-type:inline-size}
+#luzv-exam-countdown-box,html[data-luzv-theme="dark"] body #luzv-exam-countdown-box{padding:28px 26px 24px;margin:0 0 30px;background:var(--rail-bg);border:1px solid var(--rail-border);border-radius:26px;box-shadow:0 18px 42px #0c365214;color:var(--rail-heading);overflow:hidden;position:relative;container-type:inline-size}
 #luzv-exam-countdown-box .luzv-rail-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:20px}
 #luzv-exam-countdown-box .luzv-rail-copy{min-width:0}
 #luzv-exam-countdown-box .luzv-rail-eyebrow{font-size:11px;letter-spacing:1.1px;font-weight:850;color:var(--rail-eyebrow)}
-#luzv-exam-countdown-box h3{margin:8px 0 4px;color:var(--rail-heading);font-size:27px;line-height:1.22;font-weight:850;letter-spacing:-.7px}
+#luzv-exam-countdown-box h2{margin:8px 0 6px;color:var(--rail-heading);font-size:clamp(24px,3vw,32px);line-height:1.2;font-weight:850;letter-spacing:-.6px}
 #luzv-exam-countdown-box .luzv-rail-copy p{margin:0;color:var(--rail-muted);font-size:14px;line-height:1.5}
 #luzv-exam-countdown-box .luzv-rail-controls{display:flex;gap:8px;flex:none;padding-top:8px}
-#luzv-exam-countdown-box .luzv-rail-controls button{height:43px;width:42px;border:1px solid var(--rail-control-border);border-radius:13px;background:var(--rail-control);color:var(--rail-heading);font-size:28px;line-height:1;display:grid;place-items:center;cursor:pointer;transition:background .18s}
+#luzv-exam-countdown-box .luzv-rail-controls button{height:44px;width:44px;border:1px solid var(--rail-control-border);border-radius:13px;background:var(--rail-control);color:var(--rail-heading);font-size:26px;line-height:1;display:grid;place-items:center;cursor:pointer;transition:background .18s}
 #luzv-exam-countdown-box .luzv-rail-controls button:hover:not(:disabled){background:var(--rail-control-hover)}
 #luzv-exam-countdown-box .luzv-rail-controls button:disabled{opacity:.35;cursor:default}
 #luzv-exam-countdown-box .luzv-rail-track{display:flex;gap:14px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding:0 8px;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:10px 8px 16px;margin-right:0;--rail-columns:4;outline-offset:3px;cursor:grab}
 #luzv-exam-countdown-box .luzv-rail-track::-webkit-scrollbar{display:none}
 #luzv-exam-countdown-box .luzv-rail-track.is-dragging{cursor:grabbing;user-select:none;scroll-snap-type:none}
 #luzv-exam-countdown-box .luzv-rail-track.is-scrubbing{scroll-snap-type:none}
-#luzv-exam-countdown-box .luzv-rail-item{--rail-accent:#51d7e4;--rail-cover:#33d5e0;flex:0 0 calc((100% - (var(--rail-columns) - 1)*14px)/var(--rail-columns));scroll-snap-align:start;display:flex;flex-direction:column;min-width:0;min-height:289px;padding:14px;border-radius:19px;background:linear-gradient(145deg,var(--rail-card),var(--rail-card-end));color:var(--rail-heading);box-shadow:inset 0 0 18px #299fff05;border:1px solid var(--rail-card-border);transition:border-color .2s,background .2s,transform .24s,box-shadow .24s}
+#luzv-exam-countdown-box .luzv-rail-item{--rail-accent:#51d7e4;--rail-cover:#33d5e0;flex:0 0 calc((100% - (var(--rail-columns) - 1)*14px)/var(--rail-columns));scroll-snap-align:start;display:flex;flex-direction:column;min-width:0;min-height:300px;padding:16px;border-radius:20px;background:linear-gradient(145deg,var(--rail-card),var(--rail-card-end));color:var(--rail-heading);box-shadow:inset 0 0 18px #299fff05;border:1px solid var(--rail-card-border);transition:border-color .2s,background .2s,transform .24s,box-shadow .24s}
 #luzv-exam-countdown-box .luzv-rail-item[data-group="dien"]{--rail-accent:#ffbe59;--rail-cover:#ffb644}
 #luzv-exam-countdown-box .luzv-rail-item[data-group="chinhtri"]{--rail-accent:#ff918d;--rail-cover:#ff807b}
 #luzv-exam-countdown-box .luzv-rail-item.is-selected{border-color:var(--rail-accent);background:linear-gradient(145deg,var(--rail-selected),var(--rail-selected-end))}
-#luzv-exam-countdown-box .luzv-rail-cover{height:95px;flex:none;border-radius:13px;background:var(--rail-cover);position:relative;display:grid;place-items:center;overflow:hidden;margin-bottom:12px}
+#luzv-exam-countdown-box .luzv-rail-cover{height:118px;flex:none;border-radius:14px;background:var(--rail-cover);position:relative;display:grid;place-items:center;overflow:hidden;margin-bottom:14px}
 #luzv-exam-countdown-box .luzv-rail-decoration{position:absolute;width:100px;height:100px;border:1px solid #ffffff42;border-radius:50%;right:-27px;top:-25px}
 #luzv-exam-countdown-box .luzv-rail-cover:after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,#ffffff0d,transparent 70%);pointer-events:none}
-#luzv-exam-countdown-box .luzv-rail-book{width:79px;height:78px;border-radius:6px 10px 9px 6px;background:linear-gradient(145deg,#1a2d3c,#1e3141);color:var(--rail-cover);transform:rotate(-10deg);transition:transform .32s cubic-bezier(.2,.8,.3,1);box-shadow:7px 6px 0 #192c3c33,8px 10px 13px #1f2a3325;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative}
+#luzv-exam-countdown-box .luzv-rail-book{width:96px;height:82px;border-radius:6px 10px 9px 6px;background:linear-gradient(145deg,#1a2d3c,#1e3141);color:var(--rail-cover);transform:rotate(-10deg);transition:transform .32s cubic-bezier(.2,.8,.3,1);box-shadow:7px 6px 0 #192c3c33,8px 10px 13px #1f2a3325;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative}
 #luzv-exam-countdown-box .luzv-rail-book:before{content:"";position:absolute;left:-6px;top:7px;bottom:6px;width:7px;background:#0e1b26;border-radius:4px 0 0 4px}
 #luzv-exam-countdown-box .luzv-rail-book small{font-size:8px;letter-spacing:.1px;font-weight:800;color:#fff;line-height:1.5}
 #luzv-exam-countdown-box .luzv-rail-book strong{font-size:22px;line-height:1.2;max-width:76px;white-space:nowrap;letter-spacing:-.5px}
-#luzv-exam-countdown-box .luzv-rail-category{color:var(--rail-accent);font-weight:800;font-size:10px;line-height:1.5;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#luzv-exam-countdown-box .luzv-rail-item h4{margin:6px 0 16px;font-size:17px;line-height:1.35;font-weight:750;color:var(--rail-heading);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:46px}
+#luzv-exam-countdown-box .luzv-rail-category{color:var(--rail-accent);font-weight:800;font-size:11px;line-height:1.5;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#luzv-exam-countdown-box .luzv-rail-item h4{margin:6px 0 18px;font-size:18px;line-height:1.3;font-weight:800;color:var(--rail-heading);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:46px}
 #luzv-exam-countdown-box .luzv-rail-buy{display:flex;align-items:center;justify-content:space-between;gap:5px;margin-top:auto}
-#luzv-exam-countdown-box .luzv-rail-price{font-size:12px;color:var(--rail-price);font-weight:500;margin:0;white-space:nowrap;letter-spacing:-.3px}
+#luzv-exam-countdown-box .luzv-rail-price{font-size:14px;color:var(--rail-price);font-weight:500;margin:0;white-space:nowrap;letter-spacing:-.3px}
 #luzv-exam-countdown-box .luzv-rail-price strong{font-weight:750}
-#luzv-exam-countdown-box .luzv-rail-select{border:1px solid var(--rail-accent);border-radius:30px;background:transparent;color:var(--rail-accent);min-height:35px;font-size:11px;font-weight:750;cursor:pointer;padding:6px 10px;white-space:nowrap}
+#luzv-exam-countdown-box .luzv-rail-select{border:1.5px solid var(--rail-accent);border-radius:30px;background:transparent;color:var(--rail-accent);min-height:44px;font-size:12.5px;font-weight:800;cursor:pointer;padding:8px 12px;white-space:nowrap}
 #luzv-exam-countdown-box .luzv-rail-select:hover{background:var(--rail-hover)}
 #luzv-exam-countdown-box .is-selected .luzv-rail-select{background:var(--rail-cover);border-color:var(--rail-cover);color:#111d28}
 #luzv-exam-countdown-box :is(.luzv-rail-select,.luzv-rail-controls button,.luzv-rail-position):focus-visible{outline:3px solid #48adff;outline-offset:4px}
-#luzv-exam-countdown-box .luzv-rail-foot{display:flex;justify-content:space-between;align-items:center;gap:14px;font-size:12px;padding:13px 2px 0;color:var(--rail-muted)}
+#luzv-exam-countdown-box .luzv-rail-foot{display:flex;justify-content:space-between;align-items:center;gap:14px;font-size:13px;padding:13px 2px 0;color:var(--rail-muted)}
 #luzv-exam-countdown-box .luzv-rail-foot a{color:var(--rail-heading);font-weight:750;text-decoration:underline;text-underline-offset:4px;white-space:nowrap;margin-left:auto}
-#luzv-exam-countdown-box .luzv-rail-position{--rail-position:0%;appearance:none;-webkit-appearance:none;flex:0 1 150px;width:150px;min-width:65px;height:6px;padding:0;margin:0;border:0;border-radius:20px;background:linear-gradient(to right,#007add var(--rail-position),var(--rail-track) var(--rail-position));cursor:pointer;touch-action:auto}
-#luzv-exam-countdown-box .luzv-rail-position::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:13px;height:13px;border:2px solid #0c82e3;background:#fff;border-radius:50%;box-shadow:0 0 8px #0083ee70}
+#luzv-exam-countdown-box .luzv-rail-position{--rail-position:0%;appearance:none;-webkit-appearance:none;flex:0 1 170px;width:170px;min-width:65px;height:28px;padding:0;margin:0;border:0;border-radius:20px;background:linear-gradient(to right,#007add var(--rail-position),var(--rail-track) var(--rail-position)) center / 100% 6px no-repeat;cursor:pointer;touch-action:auto}
+#luzv-exam-countdown-box .luzv-rail-position::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:16px;height:16px;border:3px solid #0c82e3;background:#fff;border-radius:50%;box-shadow:0 0 8px #0083ee70}
 #luzv-exam-countdown-box .luzv-rail-position::-moz-range-thumb{width:10px;height:10px;border:2px solid #0c82e3;background:#fff;border-radius:50%}
 @media(max-width:560px){
  #luzv-exam-countdown-box,html[data-luzv-theme="dark"] body #luzv-exam-countdown-box{padding:18px 14px 16px;border-radius:18px}
  #luzv-exam-countdown-box .luzv-rail-head{gap:8px;margin-bottom:17px}
  #luzv-exam-countdown-box .luzv-rail-eyebrow{font-size:9px;letter-spacing:.7px}
- #luzv-exam-countdown-box h3{font-size:22px;max-width:240px}
+ #luzv-exam-countdown-box h2{font-size:22px;max-width:240px}
  #luzv-exam-countdown-box .luzv-rail-copy p{font-size:12px}
  #luzv-exam-countdown-box .luzv-rail-controls{gap:5px}
- #luzv-exam-countdown-box .luzv-rail-controls button{width:31px;height:36px;border-radius:10px}
+ #luzv-exam-countdown-box .luzv-rail-controls button{width:44px;height:44px;border-radius:11px}
  #luzv-exam-countdown-box .luzv-rail-track{margin-right:0;padding-right:8px;gap:14px}
  #luzv-exam-countdown-box .luzv-rail-item{min-height:278px;padding:13px}
  #luzv-exam-countdown-box .luzv-rail-item h4{font-size:16px}
@@ -3679,7 +3679,7 @@ html[data-luzv-theme="dark"] body #luzv-exam-countdown-box{
  #luzv-exam-countdown-box .luzv-rail-item h4{font-size:15px}
  #luzv-exam-countdown-box .luzv-rail-buy{flex-direction:column;align-items:stretch;gap:8px}
  #luzv-exam-countdown-box .luzv-rail-price{text-align:center;font-size:12px}
- #luzv-exam-countdown-box .luzv-rail-select{width:100%;min-height:36px}
+ #luzv-exam-countdown-box .luzv-rail-select{width:100%;min-height:44px}
 }
 @container (max-width:650px){
  #luzv-exam-countdown-box .luzv-rail-track{gap:10px}
@@ -3703,7 +3703,7 @@ html[data-luzv-theme="dark"] body #luzv-exam-countdown-box{
  #luzv-exam-countdown-box .luzv-rail-category{font-size:7px}
  #luzv-exam-countdown-box .luzv-rail-item h4{font-size:11px;min-height:31px;margin-bottom:8px}
  #luzv-exam-countdown-box .luzv-rail-price{font-size:9px;white-space:normal}
- #luzv-exam-countdown-box .luzv-rail-select{font-size:9px;white-space:normal;min-height:36px}
+ #luzv-exam-countdown-box .luzv-rail-select{font-size:9px;white-space:normal;min-height:44px}
 }
 #luzv-exam-countdown-box .luzv-rail-item.is-selected{
  border-color:var(--rail-cover);
@@ -4458,7 +4458,7 @@ html[data-luzv-theme="light"] #don-hang .autosave-pill {
   background:#fff9;color:#225d83;border-color:#b9dff5;
 }
 html[data-luzv-theme="light"] #luzv-exam-countdown-box {
-  --rail-bg:#f5fbff;--rail-border:#c7e7fa;--rail-card:#fff;
+  --rail-bg:radial-gradient(circle at 85% 15%,#e4f3ff 0%,#f7fcff 65%,#eef8ff 100%);--rail-border:#c7e7fa;--rail-card:#fff;
   --rail-card-end:#f1faff;--rail-heading:#153b59;
 }
 html[data-luzv-theme="light"] #luzv-group-plans .group-plan-grid {
@@ -4892,22 +4892,104 @@ html[data-luzv-theme] #don-hang #buyer-accounts[aria-invalid="true"]{
 }
 @media(max-width:360px){html[data-luzv-theme] #don-hang .studio-checkout{font-size:15px;padding-inline:10px}}
 @media(prefers-reduced-motion:reduce){html[data-luzv-theme] #don-hang .studio-checkout{transition:none;transform:none}}
-/* Contribution requirements belong with the exchange offer. */
-#luzv-contribute .luzv-contribute-checks{
- display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px;
- list-style:none;margin:14px 0 0;padding:0;
+/* Two ways to receive a free subject, using the existing contribution/referral controls. */
+#luzv-dual-free-section{
+ --free-bg:#eef6ff;--free-card:#fff;--free-line:#d8e8fa;--free-ink:#173b56;
+ --free-muted:#526b7e;--free-step:#e6f2ff;--free-accent:#0b67a3;
+ --free-success:#14703c;--free-error:#b42318;
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;
+ margin:36px 0;padding:26px;border:1px solid var(--free-line);border-radius:26px;
+ background:var(--free-bg);color:var(--free-ink);
 }
-#luzv-contribute .luzv-contribute-checks li{
- display:inline-flex;align-items:center;gap:7px;margin:0;padding:5px 12px;
- border:1px solid #cce2f0;border-radius:99px;background:#fff;color:#254a62;
- font-size:12px;line-height:1.5;box-shadow:0 2px 6px #0b67a313;
+html[data-luzv-theme="dark"] #luzv-dual-free-section{
+ --free-bg:#102335;--free-card:#152d41;--free-line:#31546f;--free-ink:#e7f5ff;
+ --free-muted:#b6cedf;--free-step:#203e56;--free-accent:#9bd8ff;
+ --free-success:#83dfac;--free-error:#ffb4ab;
 }
-#luzv-contribute .luzv-contribute-checks li>span{color:#0b67a3;font-size:14px;font-weight:800}
-html[data-luzv-theme="dark"] #luzv-contribute .luzv-contribute-checks li{
- background:#183548;border-color:#376178;color:#d3eaff;box-shadow:0 2px 6px #0002;
+#luzv-dual-free-section [hidden]{display:none!important}
+#luzv-dual-free-section .luzv-free-col{display:flex;flex-direction:column;min-width:0}
+#luzv-dual-free-section .luzv-free-eyebrow{
+ display:flex;align-items:flex-end;gap:7px;min-height:36px;margin:0 4px 12px;
+ color:var(--free-ink);font-size:12px;line-height:1.5;font-weight:800;letter-spacing:.4px;
 }
-html[data-luzv-theme="dark"] #luzv-contribute .luzv-contribute-checks li>span{color:#9bd8ff}
-@media(max-width:600px){#luzv-contribute .luzv-contribute-checks{flex-direction:column;gap:7px}}
+html[data-luzv-theme] #luzv-dual-free-section .luzv-free-card{
+ display:flex;flex-direction:column;align-items:stretch;flex-wrap:nowrap;flex:1;
+ min-width:0;gap:0;margin:0;padding:28px 26px;border:1px solid var(--free-line);
+ border-radius:20px;background:var(--free-card);color:var(--free-ink);box-shadow:0 8px 24px #183b720d;
+}
+#luzv-dual-free-section #luzv-contribute .contribute-content{flex:initial;min-width:0;margin-bottom:28px}
+html[data-luzv-theme] #luzv-dual-free-section .luzv-free-card h2{
+ margin:0 0 12px;color:var(--free-ink);font-size:24px;line-height:1.3;
+ font-weight:800;letter-spacing:-.4px;
+}
+html[data-luzv-theme] #luzv-dual-free-section .luzv-free-card p{
+ margin:0;color:var(--free-muted);font-size:14.5px;line-height:1.6;
+}
+#luzv-dual-free-section #luzv-contribute details{margin-top:16px;color:var(--free-muted);font-size:13px;line-height:1.6}
+#luzv-dual-free-section #luzv-contribute summary{min-height:36px;line-height:1.5;padding:8px 0;cursor:pointer}
+#luzv-dual-free-section #luzv-contribute details li+li{margin-top:7px}
+html[data-luzv-theme] #luzv-dual-free-section #luzv-contribute .contribute-button,
+html[data-luzv-theme] #luzv-dual-free-section #ref-create-btn{
+ display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:46px;
+ padding:13px 24px;border:0;border-radius:12px;background:#0b67a3;color:#fff;
+ font-size:15px;line-height:1.4;font-weight:750;text-decoration:none;cursor:pointer;
+ box-shadow:0 4px 14px #0b67a32a;transition:filter .15s,transform .15s;
+}
+#luzv-dual-free-section #luzv-contribute .contribute-button{align-self:center;margin-top:auto}
+#luzv-dual-free-section :is(.contribute-button,#ref-create-btn):hover{filter:brightness(1.06)}
+#luzv-dual-free-section :is(.contribute-button,#ref-create-btn):active{transform:translateY(1px)}
+#luzv-dual-free-section .ref-top{display:block;min-width:0}
+#luzv-dual-free-section .ref-info{min-width:0}
+#luzv-dual-free-section .ref-milestones{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:18px 0 16px}
+html[data-luzv-theme] #luzv-dual-free-section .ref-step{
+ display:block;min-width:0;padding:12px;border:0;border-radius:12px;
+ background:var(--free-step);color:var(--free-ink);font-size:13px;line-height:1.45;font-weight:400;
+}
+html[data-luzv-theme] #luzv-dual-free-section .ref-generator{
+ min-width:0;padding:0;border:0;border-radius:0;background:transparent;
+}
+#luzv-dual-free-section .ref-input-row{display:flex;flex-direction:column;gap:12px;align-items:stretch;min-width:0}
+#luzv-dual-free-section .ref-phone-label{display:block;margin:0 0 8px;color:var(--free-ink);font-size:14px;font-weight:700}
+html[data-luzv-theme] #luzv-dual-free-section :is(.ref-phone-input,.ref-link-preview,#ref-copy-fallback){
+ box-sizing:border-box;width:100%;min-width:0;flex:initial;margin:0;padding:12px 14px;
+ border:1.5px solid var(--free-line);border-radius:11px;background:var(--free-card);
+ color:var(--free-ink);font-family:inherit;font-size:16px;line-height:1.5;
+}
+#luzv-dual-free-section #ref-create-btn{width:100%}
+html[data-luzv-theme] #luzv-dual-free-section :is(input,textarea)::placeholder{color:var(--free-muted);opacity:1}
+html[data-luzv-theme] #luzv-dual-free-section .luzv-free-card .ref-phone-help{margin:8px 0 0;font-size:12px;line-height:1.5}
+html[data-luzv-theme] #luzv-dual-free-section .luzv-free-card .ref-phone-error{margin:0;color:var(--free-error);font-size:13px;line-height:1.5;font-weight:600}
+#luzv-dual-free-section .ref-result-box{margin-top:16px;padding-top:14px;border-top:1px dashed var(--free-line)}
+html[data-luzv-theme] #luzv-dual-free-section .ref-link-preview{margin-bottom:10px;background:var(--free-bg);font-size:14px}
+#luzv-dual-free-section .ref-actions{display:flex;flex-wrap:wrap;gap:8px}
+html[data-luzv-theme] #luzv-dual-free-section .ref-actions .ref-btn{
+ flex:1 1 140px;min-height:44px;padding:9px 12px;border:1px solid var(--free-line);
+ border-radius:10px;background:var(--free-step);color:var(--free-accent);font-size:13px;line-height:1.5;
+}
+#luzv-dual-free-section .ref-manual-copy{margin-top:12px}
+#luzv-dual-free-section .ref-manual-copy label{display:block;margin-bottom:7px;color:var(--free-ink);font-size:12px;font-weight:650}
+#luzv-dual-free-section #ref-copy-fallback{resize:vertical}
+html[data-luzv-theme] #luzv-dual-free-section .luzv-free-card .ref-status{margin-top:10px;color:var(--free-accent);font-size:12.5px;font-weight:650}
+html[data-luzv-theme] #luzv-dual-free-section .luzv-free-card .ref-status[data-tone="success"]{color:var(--free-success)}
+#luzv-dual-free-section :is(a,button,input,textarea,summary):focus-visible{outline:2px solid var(--free-accent);outline-offset:3px}
+html[data-luzv-theme] #luzv-dual-free-section #ref-my-phone[aria-invalid="true"]{border-color:var(--free-error);outline-color:var(--free-error)}
+@media(max-width:860px){
+ #luzv-dual-free-section{grid-template-columns:1fr;padding:18px;gap:24px}
+ #luzv-dual-free-section .luzv-free-eyebrow{min-height:0}
+ html[data-luzv-theme] #luzv-dual-free-section .luzv-free-card{padding:24px 22px}
+}
+@media(max-width:520px){
+ #luzv-dual-free-section .ref-milestones{grid-template-columns:1fr;gap:8px}
+ html[data-luzv-theme] #luzv-dual-free-section .ref-step{align-items:center;padding:10px 12px;font-size:13px}
+ html[data-luzv-theme] #luzv-dual-free-section .luzv-free-card h2{font-size:22px}
+}
+@media(max-width:380px){
+ #luzv-dual-free-section{padding:12px;border-radius:20px}
+ html[data-luzv-theme] #luzv-dual-free-section .luzv-free-card{padding:20px 16px;border-radius:16px}
+}
+@media(prefers-reduced-motion:reduce){
+ #luzv-dual-free-section :is(.contribute-button,#ref-create-btn,.ref-btn){transition:none;transform:none}
+}
 
 </style>
 </head>
@@ -5173,98 +5255,106 @@ html[data-luzv-theme="dark"] #luzv-contribute .luzv-contribute-checks li>span{co
       </aside>
     </div>
 
-    <!-- MỤC ĐÓNG GÓP ĐỀ MỚI -->
-    <section id="luzv-contribute" aria-labelledby="contribute-heading">
-      <div class="contribute-content">
-        <span class="contribute-label">CÙNG NHAU XÂY KHO ĐỀ</span>
-        <h2 id="contribute-heading">Đóng góp đề mới — Nhận miễn phí 1 môn</h2>
-        <p>
-          Bạn vừa thi xong? Gửi đề thi mới cho LuzV nhé! Với đóng góp hợp lệ được shop duyệt, bạn sẽ được chọn
-          <strong>miễn phí 1 môn bất kỳ trong kho ở học kỳ sau.</strong>
-        </p>
+    <!-- HAI CÁCH NHẬN ĐỀ MIỄN PHÍ -->
+    <section id="luzv-dual-free-section" aria-label="Đóng góp đề và giới thiệu bạn bè nhận đề miễn phí">
+      <div class="luzv-free-col">
+        <span class="luzv-free-eyebrow">📝 CÙNG NHAU XÂY KHO ĐỀ</span>
+        <section id="luzv-contribute" class="luzv-free-card" aria-labelledby="contribute-heading">
+          <div class="contribute-content">
+            <h2 id="contribute-heading">Đóng góp đề mới — Nhận miễn phí 1 môn</h2>
+            <p>
+              Bạn vừa thi xong? Gửi đề thi mới cho LuzV nhé! Khi đề được duyệt, bạn được chọn
+              <strong>miễn phí 1 môn bất kỳ trong kho ở kỳ này hoặc bảo lưu sang kỳ sau.</strong>
+            </p>
 
-        <ul class="luzv-contribute-checks" aria-label="Yêu cầu đề đóng góp">
-          <li><span aria-hidden="true">✓</span> Ảnh/file rõ nét, đủ câu</li>
-          <li><span aria-hidden="true">✓</span> Đề mới chưa có trong kho</li>
-          <li><span aria-hidden="true">✓</span> Che tên &amp; MSSV</li>
-        </ul>
+            <details>
+              <summary>Cách gửi đề và nhận quà</summary>
+              <ul>
+                <li>Gửi ảnh hoặc file đề rõ nét, đủ trang; kèm tên môn, trường và học kỳ hoặc ngày thi.</li>
+                <li>Chỉ gửi đề được phép chia sẻ sau kỳ thi; che tên, mã sinh viên và thông tin cá nhân trên ảnh.</li>
+                <li>Đề cần là đề mới, chưa có trong kho. Shop sẽ kiểm tra và xác nhận quà tặng qua Zalo.</li>
+                <li>Khi được duyệt, giữ tin nhắn xác nhận để đổi 1 môn miễn phí ở kỳ này hoặc bảo lưu sang kỳ sau.</li>
+              </ul>
+            </details>
+          </div>
 
-        <details>
-          <summary>Cách gửi đề và nhận quà</summary>
-          <ul>
-            <li>Gửi ảnh hoặc file đề rõ nét, đủ trang; kèm tên môn, trường và học kỳ hoặc ngày thi.</li>
-            <li>Chỉ gửi đề được phép chia sẻ sau kỳ thi; che tên, mã sinh viên và thông tin cá nhân trên ảnh.</li>
-            <li>Đề cần là đề mới, chưa có trong kho. Shop sẽ kiểm tra và xác nhận quà tặng qua Zalo.</li>
-            <li>Khi được duyệt, bạn giữ lại tin nhắn xác nhận để đổi 1 môn miễn phí vào học kỳ sau.</li>
-          </ul>
-        </details>
+          <a
+            class="contribute-button"
+            href="https://zalo.me/0377300076"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Gửi đề qua Zalo
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>
+          </a>
+        </section>
       </div>
-
-      <a
-        class="contribute-button"
-        href="https://zalo.me/0377300076"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Gửi đề qua Zalo ↗
-      </a>
-    </section>
 
     <!-- MỤC GIỚI THIỆU BẠN BÈ - NHẬN ĐỀ 0Đ -->
-    <section id="luzv-referral" aria-labelledby="ref-heading">
-      <div class="ref-top">
-        <div class="ref-info">
-          <span class="ref-badge">🎁 CHIA SẺ NHÓM LỚP · NHẬN ĐỀ MIỄN PHÍ</span>
-          <h2 id="ref-heading">Giới thiệu bạn bè — Nhận đề 0đ</h2>
-          <p>
-            Tạo link giới thiệu bằng SĐT Zalo của bạn rồi gửi vào nhóm lớp hoặc nhóm trọ.
-            Hễ có <strong>3 người bạn đăng ký bộ đề thành công qua link</strong>, LuzV tặng bạn
-            <strong>miễn phí 1 môn bất kỳ</strong>!
-          </p>
-        </div>
-      </div>
-
-      <div class="ref-milestones">
-        <div class="ref-step">
-          <span class="ref-step-icon">1</span>
-          <span>Bạn thứ 1 đăng ký bộ đề qua link của bạn</span>
-        </div>
-        <div class="ref-step">
-          <span class="ref-step-icon">2</span>
-          <span>Bạn thứ 2 đăng ký bộ đề qua link của bạn</span>
-        </div>
-        <div class="ref-step ref-step-gift">
-          <span class="ref-step-icon">🎁</span>
-          <span>Đủ 3 bạn = Tặng ngay 1 môn 0đ bất kỳ!</span>
-        </div>
-      </div>
-
-      <div class="ref-generator">
-        <div class="ref-input-row">
-          <input
-            type="tel"
-            id="ref-my-phone"
-            class="ref-phone-input"
-            placeholder="Nhập SĐT Zalo của bạn để lấy link (VD: 0987654321)..."
-            maxlength="15"
-          >
-          <button type="button" class="ref-btn ref-btn-primary" id="ref-create-btn">
-            Tạo link giới thiệu ✨
-          </button>
-        </div>
-
-        <div class="ref-result-box" id="ref-result-box" hidden>
-          <input type="text" id="ref-link-output" class="ref-link-preview" readonly>
-          <div class="ref-actions">
-            <button type="button" class="ref-btn ref-btn-primary" id="ref-copy-link">
-              🔗 Sao chép Link
-            </button>
-            <button type="button" class="ref-btn ref-btn-pink" id="ref-copy-message">
-              💬 Sao chép Lời mời + Link (Gửi nhóm Zalo/FB)
-            </button>
+      <div class="luzv-free-col">
+        <span class="luzv-free-eyebrow">🎁 CHIA SẺ NHÓM LỚP · NHẬN ĐỀ MIỄN PHÍ</span>
+        <section id="luzv-referral" class="luzv-free-card" aria-labelledby="ref-heading">
+          <div class="ref-top">
+            <div class="ref-info">
+              <h2 id="ref-heading">Giới thiệu bạn bè — Nhận đề 0đ</h2>
+              <p>
+                Tạo link giới thiệu bằng SĐT Zalo của bạn rồi gửi vào nhóm lớp hoặc nhóm trọ.
+                Hễ có <strong>3 người bạn đăng ký bộ đề thành công qua link</strong>, LuzV tặng bạn
+                <strong>miễn phí 1 môn bất kỳ</strong>!
+              </p>
+            </div>
           </div>
-          <p class="ref-status" id="ref-status" role="status"></p>
-        </div>
+
+          <div class="ref-milestones" aria-label="Ba bước nhận đề miễn phí">
+            <div class="ref-step">
+              <span><strong>1. Tạo link</strong><br>gắn SĐT Zalo</span>
+            </div>
+            <div class="ref-step">
+              <span><strong>2. Gửi vào</strong><br>nhóm lớp / trọ</span>
+            </div>
+            <div class="ref-step ref-step-gift">
+              <span><strong>🎁 Đủ 3 bạn đăng ký</strong><br>Nhận 1 môn 0đ!</span>
+            </div>
+          </div>
+
+          <div class="ref-generator">
+            <label class="ref-phone-label" for="ref-my-phone">SĐT Zalo của bạn</label>
+            <div class="ref-input-row">
+              <input
+                type="tel"
+                id="ref-my-phone"
+                class="ref-phone-input"
+                placeholder="VD: 0987654321"
+                inputmode="tel"
+                autocomplete="tel"
+                aria-describedby="ref-phone-help ref-phone-error"
+                maxlength="15"
+              >
+              <p id="ref-phone-error" class="ref-phone-error" role="status" hidden></p>
+              <button type="button" class="ref-btn ref-btn-primary" id="ref-create-btn">
+                Tạo link giới thiệu ✨
+              </button>
+            </div>
+            <p class="ref-phone-help" id="ref-phone-help">Link gắn SĐT Zalo để LuzV ghi nhận người giới thiệu.</p>
+
+            <div class="ref-result-box" id="ref-result-box" hidden>
+              <input type="text" id="ref-link-output" class="ref-link-preview" aria-label="Link giới thiệu của bạn" readonly>
+              <div class="ref-actions">
+                <button type="button" class="ref-btn ref-btn-primary" id="ref-copy-link">
+                  🔗 Sao chép Link
+                </button>
+                <button type="button" class="ref-btn ref-btn-pink" id="ref-copy-message">
+                  💬 Sao chép lời mời + link
+                </button>
+              </div>
+              <div class="ref-manual-copy" id="ref-manual-copy" hidden>
+                <label for="ref-copy-fallback">Nội dung để sao chép thủ công</label>
+                <textarea id="ref-copy-fallback" rows="3" readonly></textarea>
+              </div>
+              <p class="ref-status" id="ref-status" role="status"></p>
+            </div>
+          </div>
+        </section>
       </div>
     </section>
     <!-- Phần góp ý chuyển vào cửa sổ SOS Gấp -->
@@ -5889,6 +5979,11 @@ function getCourseVisualTheme(course) {
     const resultBox = document.getElementById("ref-result-box");
     const linkOutput = document.getElementById("ref-link-output");
     const refStatus = document.getElementById("ref-status");
+    const phoneError = document.getElementById("ref-phone-error");
+    const manualCopy = document.getElementById("ref-manual-copy");
+    const copyFallback = document.getElementById("ref-copy-fallback");
+    let generatedRefUrl = "";
+    let refCopyRevision = 0;
 
     const savedMyPhone = LuzVStorage.getItem("luzv_my_ref_phone");
     if (savedMyPhone) {
@@ -5900,57 +5995,82 @@ function getCourseVisualTheme(course) {
       return `${baseUrl}?ref=${encodeURIComponent(phone)}`;
     }
 
-    document.getElementById("ref-create-btn").addEventListener("click", () => {
+    function resetRefResult() {
+      refCopyRevision++;
+      generatedRefUrl = "";
+      resultBox.hidden = true;
+      linkOutput.value = "";
+      manualCopy.hidden = true;
+      copyFallback.value = "";
+      refStatus.textContent = "";
+      refStatus.dataset.tone = "info";
+      phoneError.hidden = true;
+      phoneError.textContent = "";
+      phoneInput.removeAttribute("aria-invalid");
+    }
+
+    function createReferralLink() {
       const cleanPhone = phoneInput.value.replace(/[^0-9]/g, "").trim();
+      resetRefResult();
 
       if (cleanPhone.length < 9 || cleanPhone.length > 11) {
-        refStatus.style.color = "#dc2626";
-        refStatus.textContent = "⚠️ Bạn vui lòng nhập đúng Số điện thoại Zalo (9 - 11 số) nhé!";
-        resultBox.hidden = false;
-        linkOutput.value = "";
+        phoneError.textContent = "Bạn nhập SĐT Zalo hợp lệ, từ 9 đến 11 chữ số nhé.";
+        phoneError.hidden = false;
+        phoneInput.setAttribute("aria-invalid", "true");
         phoneInput.focus();
         return;
       }
 
       LuzVStorage.setItem("luzv_my_ref_phone", cleanPhone);
-      const myUrl = generateRefUrl(cleanPhone);
-
-      linkOutput.value = myUrl;
+      generatedRefUrl = generateRefUrl(cleanPhone);
+      linkOutput.value = generatedRefUrl;
       resultBox.hidden = false;
-      refStatus.style.color = "#15803d";
+      refStatus.dataset.tone = "success";
       refStatus.textContent = "✓ Đã tạo link! Hãy sao chép và gửi cho bạn bè cùng lớp nhé.";
+    }
+
+    document.getElementById("ref-create-btn").addEventListener("click", createReferralLink);
+    phoneInput.addEventListener("input", resetRefResult);
+    phoneInput.addEventListener("keydown", event => {
+      if (event.key === "Enter" && !event.isComposing) {
+        event.preventDefault();
+        createReferralLink();
+      }
     });
 
     async function copyRefText(text, successMsg) {
+      if (!generatedRefUrl) return;
+      const revision = ++refCopyRevision;
       try {
         if (!navigator.clipboard || !window.isSecureContext) {
           throw new Error("Manual");
         }
         await navigator.clipboard.writeText(text);
-        refStatus.style.color = "#15803d";
+        if (revision !== refCopyRevision) return;
+        manualCopy.hidden = true;
+        refStatus.dataset.tone = "success";
         refStatus.textContent = successMsg;
       } catch {
-        linkOutput.value = text;
-        linkOutput.focus();
-        linkOutput.select();
-        refStatus.style.color = "#0b67a3";
-        refStatus.textContent = "Đã bôi đen nội dung ở ô trên! Bạn nhấn Ctrl + C (hoặc chạm giữ chọn Sao chép) nhé.";
+        if (revision !== refCopyRevision) return;
+        manualCopy.hidden = false;
+        copyFallback.value = text;
+        copyFallback.focus();
+        copyFallback.select();
+        refStatus.dataset.tone = "info";
+        refStatus.textContent = "Đã bôi đen nội dung bên trên. Nhấn Ctrl + C hoặc chạm giữ và chọn Sao chép nhé.";
       }
     }
 
     document.getElementById("ref-copy-link").addEventListener("click", () => {
-      if (!linkOutput.value) return;
       copyRefText(
-        linkOutput.value,
+        generatedRefUrl,
         "✓ Đã sao chép đường link giới thiệu! Dán gửi cho bạn bè ngay nhé."
       );
     });
 
     document.getElementById("ref-copy-message").addEventListener("click", () => {
-      const cleanPhone = phoneInput.value.replace(/[^0-9]/g, "").trim();
-      const myUrl = generateRefUrl(cleanPhone);
       const inviteText =
-        `Anh em nào đang tìm đề ôn thi trên Azota (Máy điện, Giải tích, Mạch điện, Tư tưởng HCM...) thì vào kho đề của LuzV ở link này nhé, có gói ôn tập nhóm từ 10k/người/môn: ${myUrl}`;
+        `Anh em nào đang tìm đề ôn thi trên Azota (Máy điện, Giải tích, Mạch điện, Tư tưởng HCM...) thì vào kho đề của LuzV ở link này nhé, có gói ôn tập nhóm từ 10k/người/môn: ${generatedRefUrl}`;
 
       copyRefText(
         inviteText,
@@ -6461,7 +6581,7 @@ function getCourseVisualTheme(course) {
       <div class="luzv-rail-head">
         <div class="luzv-rail-copy">
           <span class="luzv-rail-eyebrow">✦ KHO BỘ ĐỀ AZOTA · 32 MÔN</span>
-          <h3>Chọn nhanh môn bạn cần</h3>
+          <h2>Chọn nhanh môn bạn cần</h2>
           <p>Vuốt ngang để khám phá bộ đề. Chọn một môn là thêm ngay vào túi ôn tập.</p>
         </div>
         <div class="luzv-rail-controls">
@@ -6475,7 +6595,9 @@ function getCourseVisualTheme(course) {
         <a href="#subjects">Xem toàn bộ 32 môn ↓</a>
         <input class="luzv-rail-position" id="luzv-rail-position" type="range" min="0" max="1000" value="0" aria-label="Vị trí cuộn danh sách môn học">
       </div>`;
-    (document.getElementById('luzv-group-plans') || searchWrap).insertAdjacentElement('beforebegin', carouselBox);
+    const hero = document.querySelector('main.container > .hero');
+    if (hero) hero.after(carouselBox);
+    else (document.getElementById('luzv-group-plans') || searchWrap).insertAdjacentElement('beforebegin', carouselBox);
     const track = carouselBox.querySelector('#luzv-rail-track');
     const status = carouselBox.querySelector('#luzv-rail-count');
     const btnPrev = carouselBox.querySelector('#luzv-rail-prev');
@@ -6490,6 +6612,7 @@ function getCourseVisualTheme(course) {
       const item = document.createElement('article');
       item.className = 'luzv-rail-item';
       item.dataset.group = course.cat;
+      item.dataset.courseIndex = String(idx);
       const cover = document.createElement('div');
       cover.className = 'luzv-rail-cover';
       cover.setAttribute('aria-hidden', 'true');
@@ -6664,12 +6787,8 @@ function getCourseVisualTheme(course) {
     track.addEventListener('scroll', refreshArrows, { passive: true });
     window.addEventListener('resize', refreshArrows, { passive: true });
     new ResizeObserver(refreshArrows).observe(track);
-    // Other existing features can select/remove subjects without pressing a rail card.
-    // Observe the original cart DOM and plan-price badge so the rail always stays in sync.
-    const orderList = document.getElementById('order-list');
-    const priceBadge = document.getElementById('unit-price-badge');
-    if (orderList) new MutationObserver(syncRail).observe(orderList, { childList: true, subtree: true, characterData: true });
-    if (priceBadge) new MutationObserver(syncRail).observe(priceBadge, { childList: true, subtree: true, characterData: true });
+    // Every selection surface and plan change publishes through the shared cart.
+    LuzVOrder.subscribe('quick-carousel', syncRail);
     syncRail();
     requestAnimationFrame(refreshArrows);
   }

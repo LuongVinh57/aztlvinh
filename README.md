@@ -1,31 +1,31 @@
-# AZOTA LuzV — Giỏ hàng trắng/xanh
+# AZOTA LuzV — Chọn nhanh và nhận đề miễn phí
 
-`index.html` là bản web đầy đủ, đã nhúng CSS, JavaScript và ảnh bìa 3D. Tải file này để thay bản HTML trên hosting.
+`index.html` là bản web đầy đủ đã nhúng CSS, JavaScript và ảnh bìa 3D. Tải file này để thay bản HTML trên hosting.
 
-## Cách dùng
+## Tải lên web
 
-1. Mở `index.html` trên GitHub, chọn Raw rồi lưu với tên `index.html`; hoặc tải ZIP của nhánh này và giải nén.
-2. Đặt `index.html` lên hosting cùng ảnh QR thật của bạn tên `thanh-toan.jpeg`. Ảnh QR là file riêng, chưa có trong bản gốc người dùng cung cấp.
-3. Mở trang, chọn môn/gói, nhập tài khoản Azota và bấm “Lấy mã QR”. Đơn chỉ mua PDF không yêu cầu tài khoản Azota.
+1. Tải ZIP của nhánh này và giải nén, hoặc mở Raw của `index.html` rồi lưu với tên `index.html`.
+2. Tải `index.html` lên hosting. Đặt ảnh QR thật của bạn tên `thanh-toan.jpeg` cùng thư mục. Ảnh QR là file riêng, chưa có trong bản gốc người dùng cung cấp.
+3. Khách chọn môn/gói, nhập tài khoản Azota rồi bấm “Lấy mã QR”. Đơn chỉ mua PDF không yêu cầu tài khoản Azota.
 4. Khách chuyển khoản và gửi nội dung đơn kèm bill qua Zalo/Facebook. LuzV kiểm tra rồi cấp quyền/gửi PDF.
 
-## Giỏ hàng
+## Giao diện mới
 
-- Thẻ rộng tối đa 440 px, trắng/xanh nhạt/xanh biển ở chế độ sáng và navy ở chế độ tối.
-- Danh sách có số lượng, xóa từng mục, xóa tất cả và cuộn khi dài. PDF và ưu đãi thu gọn, dùng được bằng bàn phím.
-- Nút xóa có vùng bấm 44 px; chữ trong ô nhập 16 px. Nút xem QR hiển thị đúng tổng tiền.
-- Thiếu tài khoản khi mua môn Azota được báo ngay dưới ô nhập; hỗ trợ Enter để xem QR. Tên tài khoản không được lưu vào bộ nhớ giỏ.
-- Chọn môn, bỏ môn, thanh giỏ trên điện thoại, tổng tiền và nội dung đơn dùng chung dữ liệu và cách tính giá.
-- Nếu trình duyệt không cho sao chép, nội dung đơn được bôi đen để sao chép thủ công.
+- Khung chọn nhanh 32 môn nằm ngay dưới banner, hiển thị 4 thẻ trọn vẹn mỗi lượt. Giữ nút chuyển theo 4 môn, bắt dính thẻ, kéo chuột, vuốt, thanh tua hai chiều, nghiêng sổ và hiệu ứng thêm môn.
+- Nền trắng/xanh ở chế độ sáng, navy ở chế độ tối. Màu bìa theo nhóm môn.
+- “Đóng góp đề mới” và “Giới thiệu bạn bè” nằm trong một khung hai cột từ 861 px, xếp dọc ở màn hình nhỏ hơn.
+- Ba nhãn điều kiện ngoài thẻ đã bỏ. Cách gửi và điều kiện duyệt nằm trong phần mở rộng. Đề được duyệt có thể đổi một môn ở kỳ này hoặc bảo lưu sang kỳ sau.
+- Giới thiệu gồm ba bước ngắn, ô SĐT có nhãn, tạo link bằng nút hoặc Enter. Sửa SĐT sẽ ẩn kết quả cũ; dữ liệu vẫn hoạt động khi localStorage bị chặn.
+- Sao chép lời mời không ghi đè URL. Khi trình duyệt từ chối clipboard, ô riêng hiện nội dung để sao chép thủ công.
 
-## Quy tắc giá
+## Giá và giỏ hàng
 
-- Solo: 15.000đ/môn, không tự giảm theo số lượng; 5 môn là 75.000đ.
-- Gói 2 người: 25.000đ/môn cho cả nhóm. Gói 5 người: 50.000đ/môn cho cả nhóm.
-- Gói nhóm: 3–4 môn giảm 10%, từ 5 môn giảm 15% tiền môn Azota.
-- Mã hợp lệ giảm thêm theo gói sau ưu đãi số lượng.
-- PDF: 10.000đ/file, không tính vào mốc số môn và không được giảm giá.
+- Solo 15.000đ/môn, không tự giảm theo số lượng; 5 môn là 75.000đ.
+- Gói 2 người 25.000đ/môn cho cả nhóm; gói 5 người 50.000đ/môn cho cả nhóm.
+- Gói nhóm giảm 10% cho 3–4 môn, 15% từ 5 môn. Mã hợp lệ tính sau ưu đãi nhóm.
+- PDF 10.000đ/file, không được giảm và không tính vào mốc số môn.
+- Thẻ môn, chọn nhanh, giỏ trên điện thoại, tổng tiền và nội dung thanh toán dùng chung dữ liệu.
 
-Đã kiểm tra ở chiều rộng 320, 390, 820 và 1360 px, cả sáng/tối; giỏ trống, tài khoản bắt buộc, PDF riêng/kèm môn, gói mua, mã ưu đãi, nội dung QR, bàn phím và sao chép khi bị từ chối. Công cụ tính điểm, ảnh bìa từng môn, hướng dẫn và các tính năng hiện có được giữ trong file.
+Đã kiểm tra giao diện và tương tác ở 320, 390, 820, 861 và 1360 px; cả sáng/tối, bộ nhớ bị chặn, clipboard thành công/bị từ chối, sửa SĐT khi đang sao chép, điều hướng theo 4 thẻ, kéo chuột, thanh tua, đồng bộ chọn/bỏ môn, giỏ hàng, QR và hướng dẫn 5 bước.
 
-`preview.png`, `preview-empty.png`, `preview-dark.png` là ảnh chụp giỏ hàng mới; `contribute-preview.png` minh họa mục đóng góp đề.
+Các ảnh `carousel-preview*.png`, `free-preview*.png`, `mobile-free-preview.png` minh họa hai phần mới. `preview*.png` minh họa giỏ hàng.
