@@ -5200,13 +5200,19 @@ html[data-luzv-theme] #payment-dialog .payment-close{
 }
 #payment-dialog .payment-content{display:block;padding:22px;min-width:0}
 #payment-dialog .payment-registration{
- padding:16px;border:2px solid #55b5ed;border-radius:16px;background:var(--pay-tint);
+ padding:12px 0 14px;border:0;border-top:1px solid var(--pay-line);background:transparent;
 }
-#payment-dialog .payment-registration-heading{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:10px}
-#payment-dialog .payment-registration-heading h3{margin:0;color:var(--pay-ink);font-size:17px;line-height:1.4;font-weight:850}
+#payment-dialog .payment-registration-heading{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+#payment-dialog .payment-registration-heading h3{margin:0;color:var(--pay-ink);font-size:13.5px;line-height:1.4;font-weight:800}
 #payment-dialog #payment-registration-count{padding:4px 8px;border-radius:99px;background:var(--pay-bg);color:var(--pay-accent);font-size:12px;font-weight:800}
+#payment-dialog .payment-registration-row{display:flex;align-items:stretch;gap:8px;min-width:0}
+#payment-dialog #payment-course-preview{
+ flex:1;min-width:0;width:100%;height:44px;box-sizing:border-box;padding:10px 9px;
+ border:1px solid var(--pay-line);border-radius:9px;background:var(--pay-bg);color:var(--pay-ink);
+ font:inherit;font-size:16px;font-weight:650;text-overflow:ellipsis;
+}
 #payment-dialog #payment-course-list{
- display:flex;flex-wrap:wrap;align-content:flex-start;gap:6px;max-height:136px;margin:12px 0 0;padding:0;
+ display:flex;flex-wrap:wrap;align-content:flex-start;gap:6px;max-height:136px;margin:6px 0 10px;padding:0;
  list-style:none;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;
 }
 #payment-dialog #payment-course-list:empty{display:none}
@@ -5215,13 +5221,16 @@ html[data-luzv-theme] #payment-dialog .payment-close{
  background:var(--pay-bg);color:var(--pay-ink);font-size:12.5px;line-height:1.4;font-weight:700;overflow-wrap:anywhere;
 }
 #payment-dialog .payment-registration #payment-copy{
- display:flex;align-items:center;justify-content:center;width:100%;min-height:50px;padding:12px 14px;
+ display:flex;align-items:center;justify-content:center;flex:none;width:auto;min-height:44px;padding:8px 11px;
  border:0;border-radius:11px;background:linear-gradient(110deg,#0578bc,#075ca0);color:#fff;
- font:inherit;font-size:15px;line-height:1.4;font-weight:850;box-shadow:0 5px 14px #0879b930;cursor:pointer;
+ font:inherit;font-size:13px;line-height:1.4;font-weight:800;box-shadow:none;cursor:pointer;
 }
 #payment-dialog .payment-registration #payment-copy:disabled{opacity:.5;cursor:default}
-#payment-dialog #payment-copy-help{margin:9px 0 0;color:var(--pay-muted);font-size:12px;line-height:1.5;font-weight:650}
-#payment-dialog .payment-guide{margin:18px 0}
+#payment-dialog #payment-copy-help{margin:8px 0 0;color:var(--pay-muted);font-size:12px;line-height:1.55;font-weight:650}
+#payment-dialog #payment-copy-help strong{color:var(--pay-ink);font-weight:800}
+#payment-dialog .payment-registration .payment-order-details{margin-top:8px;padding-top:6px}
+#payment-dialog .payment-registration .payment-order-details>summary{min-height:32px;padding:5px 0;font-size:12.5px}
+#payment-dialog .payment-guide{margin:0 0 18px}
 #payment-dialog .payment-guide h3{margin:0 0 9px;color:var(--pay-ink);font-size:14px;font-weight:850}
 #payment-dialog .payment-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;list-style:none;padding:0;margin:0}
 #payment-dialog .payment-steps li{display:grid;grid-template-columns:24px minmax(0,1fr);align-content:start;align-items:center;gap:4px 7px;padding:11px 10px;border:1px solid var(--pay-line);border-radius:12px;background:var(--pay-tint)}
@@ -5315,10 +5324,6 @@ html[data-luzv-theme] #payment-dialog .payment-image-help{
 #payment-dialog :is(#payment-copy-status,#payment-memo-status,#payment-account-status):empty{display:none}
 #payment-dialog #payment-account-status:not(:empty){margin:0 0 10px}
 #payment-dialog .payment-footer{display:flex;flex-direction:column;align-items:stretch;gap:10px;margin-top:18px}
-html[data-luzv-theme] #payment-dialog .payment-qr-tip{
- margin:0;padding:12px 14px;border:1px solid var(--pay-line);border-radius:12px;
- background:var(--pay-tint);color:var(--pay-muted);font-size:13px;line-height:1.6;font-weight:600;
-}
 #payment-dialog .payment-footer #luzv-payment-zalo{
  min-height:48px;padding:12px 16px;border:0;border-radius:12px;
  background:linear-gradient(110deg,#0b67a3,#0879b9);color:#fff;font-size:14px;line-height:1.5;font-weight:800;
@@ -5353,9 +5358,6 @@ html[data-luzv-theme] #payment-dialog .payment-qr-tip{
  html[data-luzv-theme] #payment-dialog .payment-header h2{font-size:20px}
  #payment-dialog .payment-qr-badge{font-size:10px;padding:3px 7px}
  #payment-dialog .payment-content{padding:15px}
- #payment-dialog .payment-registration{padding:12px}
- #payment-dialog .payment-registration-heading h3{font-size:15px}
- #payment-dialog .payment-registration #payment-copy{font-size:14px}
  #payment-dialog #payment-course-list li{padding:5px 7px;font-size:12px}
  #payment-dialog .payment-steps li{grid-template-columns:1fr;padding:9px 7px;gap:6px}
  #payment-dialog .payment-steps strong{font-size:12px}
@@ -5805,23 +5807,6 @@ html[data-luzv-theme] #payment-dialog .payment-qr-tip{
     </div>
 
     <div class="payment-content">
-      <section class="payment-registration" aria-labelledby="payment-registration-title">
-        <div class="payment-registration-heading">
-          <h3 id="payment-registration-title">Môn học đã chọn</h3>
-          <span id="payment-registration-count"></span>
-        </div>
-        <button type="button" id="payment-copy" aria-describedby="payment-copy-help payment-copy-status">📋 Sao chép môn học &amp; thông tin đăng ký</button>
-        <p id="payment-copy-help">Sao chép rồi dán vào Zalo và gửi kèm ảnh xác nhận chuyển khoản cho LuzV.</p>
-        <p id="payment-copy-status" role="status"></p>
-        <ul id="payment-course-list" aria-label="Danh sách môn và tài liệu sẽ gửi" tabindex="0"></ul>
-        <details class="payment-order-details" id="payment-order-details">
-          <summary>Xem đầy đủ nội dung sẽ gửi</summary>
-          <label class="payment-copy-label" for="payment-subjects">Nội dung đăng ký đã soạn sẵn để gửi LuzV</label>
-          <textarea id="payment-subjects" rows="4" readonly></textarea>
-          <p id="payment-plan-note"></p>
-        </details>
-      </section>
-
       <div class="payment-guide">
         <h3>Hướng dẫn 3 bước</h3>
         <ol class="payment-steps" id="payment-steps" aria-label="Ba bước hoàn tất đăng ký">
@@ -5868,11 +5853,29 @@ html[data-luzv-theme] #payment-dialog .payment-qr-tip{
             </div>
             <p id="payment-memo-status" role="status"></p>
           </div>
+          <section class="payment-registration" aria-labelledby="payment-registration-title">
+            <div class="payment-registration-heading">
+              <h3 id="payment-registration-title">Môn học đã chọn</h3>
+              <span id="payment-registration-count"></span>
+            </div>
+            <div class="payment-registration-row">
+              <input type="text" id="payment-course-preview" aria-labelledby="payment-registration-title" aria-describedby="payment-copy-help" readonly>
+              <button type="button" id="payment-copy" aria-label="Sao chép môn học và thông tin đăng ký" aria-describedby="payment-copy-help payment-copy-status">Sao chép</button>
+            </div>
+            <p id="payment-copy-help"><strong>Nhắc bạn:</strong> Sau khi chuyển khoản, sao chép thông tin này rồi gửi kèm ảnh xác nhận qua Zalo cho LuzV.</p>
+            <p id="payment-copy-status" role="status"></p>
+            <details class="payment-order-details" id="payment-order-details">
+              <summary>Xem đầy đủ môn học &amp; thông tin</summary>
+              <ul id="payment-course-list" aria-label="Danh sách môn và tài liệu sẽ gửi" tabindex="0"></ul>
+              <label class="payment-copy-label" for="payment-subjects">Nội dung đăng ký đã soạn sẵn để gửi LuzV</label>
+              <textarea id="payment-subjects" rows="4" readonly></textarea>
+              <p id="payment-plan-note"></p>
+            </details>
+          </section>
         </div>
       </div>
 
       <div class="payment-footer">
-        <p class="payment-qr-tip">📸 <strong>Bước cuối:</strong> Sau khi chuyển khoản, gửi nội dung đăng ký kèm ảnh xác nhận qua Zalo để LuzV kiểm tra và cấp đề / gửi PDF.</p>
         <a class="btn btn-blue" id="luzv-payment-zalo" href="https://zalo.me/0377300076" target="_blank" rel="noopener noreferrer">💬 Sao chép &amp; mở Zalo gửi thông tin + ảnh xác nhận</a>
         <div class="payment-other-actions">
           <a href="https://www.facebook.com/share/1DwExJATqS/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Mở Facebook</a>
@@ -11618,18 +11621,19 @@ var qrcode = function() {
     if (info.saved) parts.push('Đã tính mã ' + LuzVPricing.coupon);
     $('payment-title').textContent = 'Hoàn tất đăng ký';
     $('payment-quantity').textContent = parts.join(' · ');
-    $('payment-registration-title').textContent = selected.size
-      ? (pdf ? 'Môn học & tài liệu đã chọn' : 'Môn học đã chọn') : 'Tài liệu đã chọn';
+    $('payment-registration-title').textContent = selected.size ? 'Môn học đã chọn' : 'Tài liệu đã chọn';
     $('payment-registration-count').textContent = [selected.size ? selected.size + ' môn' : '', pdf ? '1 PDF' : ''].filter(Boolean).join(' + ');
-    const courses = document.createDocumentFragment();
+    const courses = document.createDocumentFragment(), names = [];
     function addCourse(name) {
       const item = document.createElement('li');item.textContent = name;courses.append(item);
+      names.push(name);
     }
     COURSE_DATA.forEach((course, index) => { if (selected.has(index)) addCourse(course.name); });
     if (pdf) addCourse('PDF · ' + pdf.name);
     $('payment-course-list').replaceChildren(courses);
+    $('payment-course-preview').value = names.join(' · ');
     $('payment-copy').disabled = !state;
-    $('payment-copy').textContent = '📋 Sao chép ' + (selected.size ? 'môn học' : 'tài liệu') + ' & thông tin đăng ký';
+    $('payment-copy').setAttribute('aria-label', 'Sao chép ' + (selected.size ? 'môn học' : 'tài liệu') + ' và thông tin đăng ký');
     $('payment-plan-note').textContent = selected.size
       ? 'Sau khi chuyển khoản, gửi nội dung đăng ký kèm ảnh xác nhận và thông tin tài khoản Azota của ' + activePlan.people + ' người cho LuzV. Không gửi mật khẩu tài khoản.'
       : 'Sau khi chuyển khoản, gửi nội dung đăng ký kèm ảnh xác nhận qua Zalo/Facebook để LuzV kiểm tra và gửi PDF.';

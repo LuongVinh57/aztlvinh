@@ -1,52 +1,40 @@
-# AZOTA LuzV — Sao chép đăng ký nổi bật và hướng dẫn 3 bước
+# AZOTA LuzV — Ô sao chép gọn dưới nội dung chuyển khoản
 
-index.html là bản web đầy đủ, đã nhúng CSS, JavaScript, thư viện QR và ảnh bìa 3D của 32 môn.
+index.html là bản web đầy đủ, đã nhúng CSS, JavaScript, QR và ảnh bìa 3D của 32 môn.
 
 ## Tải lên web
 
-1. Tải ZIP, giải nén và lấy index.html thay file hiện tại trên hosting.
-2. Chỉ cần index.html để hiển thị trang và tạo QR. Ảnh QR được tạo ngay trong trình duyệt.
-3. Người đăng ký chọn môn/gói, nhập tài khoản Azota và bấm Chốt đơn. Nếu chỉ chọn PDF thì không cần tài khoản Azota.
-4. Quét mã hoặc tải PNG rồi chọn quét từ ảnh trong ứng dụng ngân hàng. QR điền sẵn số tiền và nội dung chuyển khoản.
-5. Sau khi chuyển khoản, bấm sao chép đăng ký và mở Zalo, dán nội dung rồi gửi kèm ảnh xác nhận. LuzV kiểm tra rồi cấp quyền hoặc gửi PDF.
+Tải ZIP, giải nén và lấy index.html thay file hiện tại trên hosting. Chỉ cần index.html để hiển thị trang và tạo QR.
 
-## Thông tin nhận tiền đã cấu hình
+Người đăng ký chọn môn/gói, nhập tài khoản Azota và bấm Chốt đơn. Nếu chỉ chọn PDF thì không cần tài khoản Azota. QR điền sẵn số tiền và nội dung chuyển khoản. Có thể tải PNG rồi quét từ ảnh trong ứng dụng ngân hàng.
 
-- Ngân hàng: MB Bank (BIN 970422).
+## Ô sao chép đã thu gọn
+
+Ô Môn học đã chọn đặt ngay dưới nội dung chuyển khoản trong khung thông tin ngân hàng. Tên môn và nút Sao chép cùng một hàng. Lời nhắc ngay dưới ô: Sau khi chuyển khoản, sao chép thông tin này rồi gửi kèm ảnh xác nhận qua Zalo cho LuzV.
+
+Nút sao chép lấy đầy đủ danh sách, gói, tài khoản Azota, tổng tiền và mã chuyển khoản, kể cả khi chọn 32 môn. Phần Xem đầy đủ môn học & thông tin thu gọn mặc định. Khi trình duyệt chặn clipboard, phần này tự mở và bôi đen tin nhắn để sao chép thủ công.
+
+Hướng dẫn 3 bước phía trên QR và trong Túi ôn tập vẫn có: Lấy mã QR → Chuyển khoản → Gửi qua Zalo. Sau khi chuyển khoản, người đăng ký dán thông tin đã sao chép và gửi ảnh xác nhận. LuzV kiểm tra rồi cấp quyền hoặc gửi PDF.
+
+## QR và thông tin nhận tiền
+
+- MB Bank, BIN 970422.
 - Số tài khoản: 0377300076.
 - Chủ tài khoản: TRAN LUONG VINH.
 - Zalo: https://zalo.me/0377300076.
 
-QR dùng chuẩn chuyển khoản NAPAS/VietQR, tiền VND, số tiền nguyên và CRC16. Mã tham chiếu bắt đầu bằng LUZV, dùng chung cho ảnh QR, nút tải và nội dung đăng ký sao chép. Đổi lựa chọn sẽ cập nhật QR; đóng rồi mở lại cùng lựa chọn giữ nguyên mã. Tên Azota và thông tin người đăng ký không nằm trong QR. Không gọi dịch vụ tạo ảnh QR bên ngoài.
+QR có viền góc xanh và vệt sáng quét lên xuống, dừng khi đóng popup và giữ khung tĩnh khi bật giảm chuyển động. PNG tải xuống là ảnh QR gốc. Nút Sao chép số tài khoản giữ nguyên số 0 đầu.
 
-Nút sao chép nội dung chuyển khoản và nút chỉ sao chép đăng ký đều có cách chọn văn bản thủ công nếu trình duyệt chặn clipboard. Đây là quy trình xác nhận chuyển khoản thủ công qua LuzV.
-
-## Sao chép môn học và hướng dẫn thanh toán
-
-Ngay đầu popup thanh toán là khung Môn học đã chọn: tên môn/PDF hiện sẵn, có số lượng và nút xanh lớn Sao chép môn học & thông tin đăng ký. Nút chép đầy đủ danh sách, gói, tài khoản Azota, tổng tiền và mã chuyển khoản. Người đăng ký dán nội dung này vào Zalo và gửi kèm ảnh xác nhận chuyển khoản cho LuzV. Trường hợp chỉ chọn PDF dùng nhãn Sao chép tài liệu.
-
-Danh sách dài cuộn trong khung; nút vẫn sao chép đủ cả 32 môn. Có thể mở Xem đầy đủ nội dung sẽ gửi để xem tin nhắn. Khi trình duyệt chặn clipboard, phần này tự mở và bôi đen tin nhắn để sao chép thủ công.
-
-Hướng dẫn 3 bước luôn có phía trên QR: Lấy mã QR → Chuyển khoản → Gửi qua Zalo. Bước cuối nhắc dán thông tin đã sao chép và gửi ảnh xác nhận. Hướng dẫn 3 bước trong Túi ôn tập cũng được giữ lại. Nút cuối popup sao chép lại đăng ký rồi mở Zalo theo thao tác của người dùng.
-
-## Hiệu ứng QR và sao chép số tài khoản
-
-Khung QR có bốn góc xanh và vệt sáng quét từ trên xuống, rồi đi ngược lên liên tục. Hiệu ứng chỉ hiện khi ảnh sẵn sàng, dừng khi đóng hộp thoại, ẩn khi lỗi hoặc túi trống. Khi thiết bị bật giảm chuyển động, khung giữ bốn góc tĩnh. Ảnh PNG tải xuống vẫn là QR gốc.
-
-Nút Sao chép cạnh số tài khoản chép đúng 0377300076, giữ số 0 đầu. Nếu trình duyệt chặn clipboard, một ô số tài khoản xuất hiện và được bôi đen để sao chép thủ công. Số tài khoản và nút tự xếp lại trên điện thoại nhỏ.
+Ảnh QR được tạo tại trình duyệt theo chuẩn NAPAS/VietQR; không gọi máy chủ tạo ảnh bên ngoài. QR, ảnh tải và nội dung đăng ký dùng cùng số tiền và mã tham chiếu. Đóng/mở cùng lựa chọn giữ mã; thay lựa chọn sẽ cập nhật mã. Tên Azota và thông tin người đăng ký không nằm trong QR.
 
 ## Giá và giao diện
 
-- Solo: 15.000đ/môn, không tự giảm theo số môn; 5 môn là 75.000đ khi chưa nhập mã.
-- Gói 2 người: 25.000đ/môn cho cả nhóm. Gói 5 người: 50.000đ/môn cho cả nhóm.
-- Hai gói nhóm giảm 10% khi chọn 3–4 môn, giảm 15% từ 5 môn.
-- Mã ưu đãi hợp lệ giảm thêm theo gói, tính sau ưu đãi nhóm.
-- PDF 10.000đ, không tính vào số môn nhận ưu đãi và không giảm giá.
+Solo 15.000đ/môn, không tự giảm theo số môn: 5 môn là 75.000đ khi chưa nhập mã. Gói 2 người 25.000đ/môn và gói 5 người 50.000đ/môn cho cả nhóm. Hai gói nhóm giảm 10% cho 3–4 môn, giảm 15% từ 5 môn. Mã hợp lệ tính sau ưu đãi nhóm. PDF 10.000đ không nhận giảm giá hoặc tính vào số môn ưu đãi.
 
-Giữ bố cục 4 môn mỗi hàng trên điện thoại, mục lục theo nội dung thật, hướng dẫn, GPA, hỗ trợ, bộ nhớ túi ôn tập và ảnh 3D theo chủ đề. Giao diện trắng/xanh nhạt/xanh biển, chế độ tối navy, chữ đậm rõ. Các nhãn dùng cách gọi ôn tập và đăng ký; nút chính là Chốt đơn.
+Giữ 32 môn và ảnh bìa theo chủ đề, 4 môn mỗi hàng trên điện thoại, mục lục theo nội dung thực, hướng dẫn, GPA, hỗ trợ, bộ nhớ túi ôn tập và nút Chốt đơn. Giao diện trắng/xanh nhạt/xanh biển, chế độ tối navy, chữ đậm rõ.
 
-## Kiểm tra
+## Kiểm tra và giấy phép
 
-Đã kiểm tra trên Chromium ở 320, 390, 820 và 1360 px, cả sáng/tối: nút sao chép hiện ngay khi mở popup, danh sách được đồng bộ, chép đủ 32 môn, hướng dẫn đủ 3 bước, giỏ trống, Solo/gói nhóm/mã ưu đãi/PDF, đồng bộ tổng tiền, mở lại hộp QR, tải PNG, sao chép số tài khoản/nội dung và trường hợp clipboard bị chặn. Đã kiểm tra chuyển động đi xuống rồi quay lên và chế độ giảm chuyển động. Ảnh gốc, ảnh tải xuống và QR hiển thị với vệt quét tại nhiều vị trí được đọc lại bằng ZXing độc lập để đối chiếu ngân hàng, số tài khoản, số tiền, nội dung và CRC. Các ảnh qr-preview*.png và mobile-qr-preview*.png minh họa hộp QR mới.
+Kiểm tra trên Chromium ở 320, 390, 820 và 1360 px: vị trí ô dưới nội dung chuyển khoản, bố cục một hàng, lời nhắc bên dưới, phần chi tiết thu gọn, sao chép đủ 32 môn, clipboard bị chặn, PDF/gói/mã ưu đãi, QR và hai chế độ sáng/tối. Các ảnh copy-preview*.png và mobile-copy-preview*.png minh họa vị trí mới.
 
-Thư viện qrcode-generator 1.4.4 dùng giấy phép MIT; toàn bộ thông báo bản quyền và giấy phép nằm trong index.html và LICENSE-qrcode-generator.txt.
+Thư viện qrcode-generator 1.4.4 dùng giấy phép MIT, đã kèm trong index.html và LICENSE-qrcode-generator.txt.
