@@ -11,7 +11,7 @@ window.LuzVStorage = (() => {
     if (document.body && !document.getElementById('storage-warning')) {
       const note = document.createElement('p');
       note.id = 'storage-warning'; note.setAttribute('role', 'status');
-      note.textContent = 'Trình duyệt không cho phép lưu hoặc bộ nhớ đã đầy. Bạn vẫn mua được; lựa chọn mới chỉ giữ trong lần mở trang này.';
+      note.textContent = 'Trình duyệt không cho phép lưu hoặc bộ nhớ đã đầy. Bạn vẫn đăng ký được; lựa chọn mới chỉ giữ trong lần mở trang này.';
       document.body.prepend(note);
     }
   }
@@ -5121,6 +5121,48 @@ html[data-luzv-theme="dark"] #subjects .subject{
  #subjects .choice-text::after{font-size:10px}
 }
 
+/* Stronger type and contrast for the study interface, including secondary copy. */
+:root{--text:#102f46;--muted:#2d4e67}
+body{font-weight:600}
+.topbar nav a{font-weight:700}
+html[data-luzv-theme="light"] .topbar nav a{color:#234761}
+html[data-luzv-theme="light"] :is(.search,.ref-phone-input,#buyer-accounts,#lv-fast-search,#lv-fast-code,#lv-fast-account)::placeholder{color:#3c5b72;opacity:1;font-weight:500}
+html[data-luzv-theme="dark"] :is(.search,.ref-phone-input,#buyer-accounts,#lv-fast-search,#lv-fast-code,#lv-fast-account)::placeholder{color:#bfd6e6;opacity:1;font-weight:500}
+html[data-luzv-theme="light"] :is(.hero p,.contact p,.group-plan-intro,.search-info){color:#244760}
+html[data-luzv-theme="dark"] :is(.hero p,.contact p,.group-plan-intro,.search-info){color:#d1e4f2}
+:is(.hero p,.contact p,.group-plan-intro,.search-info){font-weight:650}
+html[data-luzv-theme="light"] #luzv-group-plans :is(.group-plan-members,.group-plan-person-price){color:#2d4e67;font-weight:700}
+html[data-luzv-theme="dark"] body #luzv-group-plans :is(.group-plan-members,.group-plan-person-price){color:#d1e4f2;font-weight:700}
+html[data-luzv-theme="light"] body #luzv-exam-countdown-box{
+ --rail-muted:#2d4e67;--rail-price:#244760;--rail-eyebrow:#244b68;
+}
+html[data-luzv-theme="dark"] body #luzv-exam-countdown-box{
+ --rail-muted:#c8deed;--rail-price:#d7e9f6;
+}
+#luzv-exam-countdown-box :is(.luzv-rail-copy p,.luzv-rail-foot,.luzv-rail-price){font-weight:650}
+html[data-luzv-theme="light"] #luzv-gpa-calculator{--gpa-ink:#102f46;--gpa-muted:#2d4e67}
+html[data-luzv-theme="dark"] #luzv-gpa-calculator{--gpa-muted:#c8deed}
+#luzv-gpa-calculator :is(.gpa-desc,.gpa-result-note,.gpa-current-box){font-weight:600}
+#luzv-gpa-calculator .gpa-slider-label{font-weight:700}
+html[data-luzv-theme="light"] #don-hang{--cart-ink:#102f46;--cart-muted:#2d4e67}
+html[data-luzv-theme="dark"] #don-hang{--cart-muted:#c8deed}
+html[data-luzv-theme] #don-hang :is(.order-header p,.note,#buyer-accounts-help,.luzv-file-bottom-note,.luzv-promo-eligibility,.coupon-help,#luzv-memory-status){font-weight:600}
+html[data-luzv-theme="light"] #luzv-dual-free-section{--free-ink:#102f46;--free-muted:#2d4e67}
+html[data-luzv-theme="dark"] #luzv-dual-free-section{--free-muted:#c8deed}
+html[data-luzv-theme] #luzv-dual-free-section .ref-step{font-weight:600}
+html[data-luzv-theme="light"] #subjects .subject{--compact-ink:#102c40;--compact-muted:#2d4e67}
+html[data-luzv-theme="dark"] #subjects .subject{--compact-muted:#d1e4f2}
+#subjects .vinh-price-year-row .luzv-school-year{font-weight:750}
+#subjects .luzv-course-popularity .luzv-purchase-count{font-weight:650}
+html[data-luzv-theme="light"] #sos-panel{--sos-muted:#2d4e67}
+html[data-luzv-theme="dark"] body #sos-panel{--sos-muted:#c8deed}
+html[data-luzv-theme="light"] .mobile-cart{--mc-muted:#2d4e67}
+html[data-luzv-theme="dark"] .mobile-cart{--mc-muted:#c8deed}
+.mobile-cart :is(small,#mobile-quantity,.mobile-drawer-hint){font-weight:650}
+body>footer{color:#244760;font-size:14px;font-weight:700;line-height:1.65}
+body>footer strong{font-weight:850}
+html[data-luzv-theme="dark"] body>footer{color:#d6eaf8}
+
 </style>
 </head>
 
@@ -5327,7 +5369,7 @@ html[data-luzv-theme="dark"] #subjects .subject{
           </details>
 
           <details class="luzv-order-benefits" id="luzv-order-benefits">
-            <summary>🎁 Gói mua và ưu đãi <span class="luzv-benefits-pill" id="luzv-benefits-pill">Xem chi tiết</span></summary>
+            <summary>🎁 Gói ôn tập và ưu đãi <span class="luzv-benefits-pill" id="luzv-benefits-pill">Xem chi tiết</span></summary>
             <div class="luzv-benefits-content">
               <div id="luzv-group-order-note">
             <span id="order-plan-name">Solo một mình · 1 người</span>
@@ -5402,7 +5444,7 @@ html[data-luzv-theme="dark"] #subjects .subject{
               <ul>
                 <li>Gửi ảnh hoặc file đề rõ nét, đủ trang; kèm tên môn, trường và học kỳ hoặc ngày thi.</li>
                 <li>Chỉ gửi đề được phép chia sẻ sau kỳ thi; che tên, mã sinh viên và thông tin cá nhân trên ảnh.</li>
-                <li>Đề cần là đề mới, chưa có trong kho. Shop sẽ kiểm tra và xác nhận quà tặng qua Zalo.</li>
+                <li>Đề cần là đề mới, chưa có trong kho. LuzV sẽ kiểm tra và xác nhận quà tặng qua Zalo.</li>
                 <li>Khi được duyệt, giữ tin nhắn xác nhận để đổi 1 môn miễn phí ở kỳ này hoặc bảo lưu sang kỳ sau.</li>
               </ul>
             </details>
@@ -5516,11 +5558,11 @@ html[data-luzv-theme="dark"] #subjects .subject{
 
   <footer>
     <strong>AZOTA LuzV · KHO ĐỀ ÔN TẬP</strong><br>
-    Trang bán bộ đề cá nhân của LuzV, không phải website chính thức của Azota.
+    Kho đề ôn tập do LuzV quản lý, không phải website chính thức của Azota.
   </footer>
 
   <!-- Giỏ nhanh trên điện thoại: dùng cùng dữ liệu với Túi ôn tập. -->
-  <section class="mobile-cart" aria-label="Giỏ hàng nhanh">
+  <section class="mobile-cart" aria-label="Túi ôn tập nhanh">
     <section id="mobile-cart-drawer" class="mobile-cart-drawer" aria-labelledby="mobile-drawer-title" hidden>
       <div class="mobile-drawer-head">
         <h3 id="mobile-drawer-title">Các mục đã chọn</h3>
@@ -6233,7 +6275,7 @@ function getCourseVisualTheme(course) {
       if (info.saved) parts.push(`Mã ưu đãi ${LuzVPricing.coupon}: −${money(info.saved)}.`);
       if (pdf) parts.push(`File PDF: ${pdf.name} (${money(info.pdfPrice)}).`);
       parts.push(`TỔNG CẦN CHUYỂN KHOẢN: ${money(info.total)}.${accountPart}${refPart}`);
-      parts.push('Mình sẽ gửi đơn và ảnh chuyển khoản qua Zalo/Facebook để shop kiểm tra, cấp quyền Azota hoặc gửi PDF.');
+      parts.push('Mình sẽ gửi đơn và ảnh chuyển khoản qua Zalo/Facebook để LuzV kiểm tra, cấp quyền Azota hoặc gửi PDF.');
       return parts.join('\n');
     }
 
@@ -6282,7 +6324,7 @@ function getCourseVisualTheme(course) {
       } catch {
         subjectsInput.focus();
         subjectsInput.select();
-        copyStatus.textContent = "Đã bôi đen nội dung! Nhấn Ctrl + C (hoặc chạm giữ chọn Sao chép) rồi gửi cho shop.";
+        copyStatus.textContent = "Đã bôi đen nội dung! Nhấn Ctrl + C (hoặc chạm giữ chọn Sao chép) rồi gửi cho LuzV.";
       }
     });
 
@@ -6938,7 +6980,7 @@ function getCourseVisualTheme(course) {
     orderHeader.append(autosavePill);
   }
 
-  function flashAutosaveIndicator(text = "✓ Đã tự lưu giỏ hàng") {
+  function flashAutosaveIndicator(text = "✓ Đã tự lưu túi ôn tập") {
     if (!autosavePill || isRestoringCart) return;
     autosavePill.textContent = LuzVStorage.persistent ? text : 'Chỉ giữ giỏ trong lần mở này';
     autosavePill.classList.add("saving");
@@ -7690,7 +7732,7 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
   function showConnection() {
     document.querySelectorAll('[data-luzv-mode]').forEach(node => {
       node.textContent = isLive
-        ? 'Máy chủ góp ý đã kết nối. Góp ý sẽ được lưu để shop kiểm tra.'
+        ? 'Máy chủ góp ý đã kết nối. Góp ý sẽ được lưu để LuzV kiểm tra.'
         : 'Chưa kết nối máy chủ. Góp ý là bản nháp; hãy sao chép và gửi qua Zalo kèm ảnh.';
       node.classList.toggle('connected', isLive);
     });
@@ -8046,7 +8088,7 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
   status.textContent = "🧠 LuzV Smart Memory · Lưu trên thiết bị này";
   const clear = document.createElement("button");
   clear.type = "button";
-  clear.textContent = "🗑 Xóa bộ nhớ mua hàng";
+  clear.textContent = "🗑 Xóa lựa chọn đã lưu";
   controls.append(status, clear);
   if (header) header.insertAdjacentElement("afterend", controls);
   const toast = document.createElement("div");
@@ -8119,7 +8161,7 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
   window.addEventListener("scroll", scheduleSave, {passive:true});
   window.addEventListener("pagehide", save);
   clear.addEventListener("click", () => {
-    if (!confirm("Xóa giỏ hàng, gói mua, PDF đã chọn và vị trí xem đã lưu trên thiết bị này?")) return;
+    if (!confirm("Xóa túi ôn tập, gói đã chọn, PDF và vị trí xem đã lưu trên thiết bị này?")) return;
     try {
       LuzVStorage.removeItem(KEY);
       LuzVStorage.removeItem(CART);
@@ -8197,20 +8239,20 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
 </script>
 
 
-<button id="lv-fast-open" type="button">⚡ Mua cực nhanh · Chọn môn & xem QR</button>
+<button id="lv-fast-open" type="button">⚡ Đăng ký nhanh · Chọn môn & xem QR</button>
 <dialog id="lv-fast" aria-labelledby="lv-fast-title">
-<header><h2 id="lv-fast-title">⚡ LuzV · Mua cực nhanh</h2><button id="lv-fast-close" type="button" aria-label="Đóng mua nhanh">✕</button></header>
+<header><h2 id="lv-fast-title">⚡ LuzV · Đăng ký nhanh</h2><button id="lv-fast-close" type="button" aria-label="Đóng đăng ký nhanh">✕</button></header>
 <div class="lv-layout"><div class="lv-left">
 <label class="lv-label" for="lv-fast-search">1. Tìm và chọn môn</label><input id="lv-fast-search" type="search" placeholder="Tên môn… tìm không dấu cũng được" autocomplete="off">
 <div id="lv-fast-list"></div>
-<label class="lv-label">2. Chọn gói · giá mỗi môn</label><div id="lv-fast-plans" role="group" aria-label="Gói mua"></div>
+<label class="lv-label">2. Chọn gói · giá mỗi môn</label><div id="lv-fast-plans" role="group" aria-label="Gói ôn tập"></div>
 <details class="lv-optional"><summary>Mã ưu đãi & tài khoản nhận đề</summary>
 <label class="lv-label" for="lv-fast-code">Mã ưu đãi</label><div class="lv-inline"><input id="lv-fast-code" placeholder="Nhập mã" maxlength="12"><button id="lv-fast-apply" type="button">Áp dụng</button><button id="lv-fast-remove" type="button">Bỏ mã</button></div><p id="lv-fast-code-status" role="status"></p>
 <label class="lv-label" for="lv-fast-account">Tài khoản Azota / SĐT của người nhận</label><input id="lv-fast-account" placeholder="Có thể gửi bổ sung qua Zalo">
 </details></div>
 <div class="lv-right"><strong>3. Thanh toán</strong><p id="lv-fast-summary"></p><strong id="lv-fast-total" aria-live="polite">0đ</strong><p>Đã tính ưu đãi hiện có trong giỏ.</p>
 <p id="lv-fast-empty">Tích môn bên trên để hiện mã QR nhé.</p><div id="lv-fast-pay" hidden><img id="lv-fast-qr" alt="Mã QR chuyển khoản cho LuzV"><p id="lv-fast-error" hidden>Chưa tải được QR. Vui lòng liên hệ LuzV bên dưới.</p>
-<p>Chuyển đúng tổng tiền trên, chụp bill rồi gửi cùng nội dung đơn cho LuzV. Shop kiểm tra và cấp đề; trang chưa tự xác nhận thanh toán.</p><button id="lv-fast-copy" type="button">Sao chép đơn mua</button><div class="lv-links"><a href="https://zalo.me/0377300076" target="_blank" rel="noopener">Mở Zalo ↗</a><a href="https://www.facebook.com/share/1DwExJATqS/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook ↗</a></div></div><p id="lv-fast-feedback" role="status"></p></div></div></dialog>
+<p>Chuyển đúng tổng tiền trên, chụp bill rồi gửi cùng nội dung đơn cho LuzV. LuzV kiểm tra và cấp đề; trang chưa tự xác nhận thanh toán.</p><button id="lv-fast-copy" type="button">Sao chép nội dung đăng ký</button><div class="lv-links"><a href="https://zalo.me/0377300076" target="_blank" rel="noopener">Mở Zalo ↗</a><a href="https://www.facebook.com/share/1DwExJATqS/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook ↗</a></div></div><p id="lv-fast-feedback" role="status"></p></div></div></dialog>
 <script>
 (() => {
  const $=id=>document.getElementById(id), dialog=$('lv-fast'), opener=$('lv-fast-open');
@@ -8279,8 +8321,8 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
     {selectors:['#luzv-rail-track','#search'], title:'📚 Chọn môn bạn cần ôn', text:'Vuốt qua các bộ đề và bấm + Chọn môn để thêm vào túi. Bạn có thể chọn nhiều môn, hoặc bấm ✓ Đã thêm để gỡ môn.'},
     {selectors:['#group-plan-grid'], title:'👥 Chọn gói phù hợp', text:'Chọn gói 1, 2 hoặc 5 người. Giá là giá mỗi môn cho cả gói. Solo không tự giảm theo số môn; tổng tiền luôn cập nhật theo lựa chọn của bạn.'},
     {selectors:['#luzv-coupon','#luzv-tier-promo','#luzv-file-store'], title:'🎟️ Áp mã ưu đãi', text:'Có mã ưu đãi? Nhập mã rồi nhấn Áp dụng: Solo giảm 5%, gói 2 người giảm 3%, gói 5 người giảm 1%. Gói nhóm tính mã sau ưu đãi số môn. Không áp dụng cho PDF.', details:'#luzv-order-benefits'},
-    {selectors:['#don-hang .total-row','#order-title'], title:'🛍️ Kiểm tra túi ôn tập', text:'Kiểm tra các môn, gói mua và tổng tiền. Bạn có thể gỡ môn trong túi, bổ sung tài khoản nhận đề trước khi chốt đơn.'},
-    {selectors:['#studio-checkout'], title:'📱 Chốt đơn và thanh toán', text:'Bấm Chốt đơn để xem thông tin chuyển khoản, rồi gửi nội dung đơn và bill qua Zalo/Facebook. Đơn có môn Azota cần nhập tài khoản nhận đề. Shop sẽ kiểm tra và cấp đề. Hướng dẫn chỉ giới thiệu thao tác, không tạo đơn hay chuyển tiền.'}
+    {selectors:['#don-hang .total-row','#order-title'], title:'🛍️ Kiểm tra túi ôn tập', text:'Kiểm tra các môn, gói ôn tập và tổng tiền. Bạn có thể gỡ môn trong túi, bổ sung tài khoản nhận đề trước khi chốt đơn.'},
+    {selectors:['#studio-checkout'], title:'📱 Chốt đơn và thanh toán', text:'Bấm Chốt đơn để xem thông tin chuyển khoản, rồi gửi nội dung đơn và bill qua Zalo/Facebook. Đơn có môn Azota cần nhập tài khoản nhận đề. LuzV sẽ kiểm tra và cấp đề. Hướng dẫn chỉ giới thiệu thao tác, không tạo đơn hay chuyển tiền.'}
   ];
   let index = 0, target = null, previousFocus = null;
   let run = 0, frame = 0, scrolling = false, ringBox = null, cardBox = null;

@@ -1,65 +1,24 @@
-# AZOTA LuzV — Chọn nhanh và nhận đề miễn phí
+# AZOTA LuzV — Cách gọi ôn tập và chữ dễ đọc
 
-`index.html` là bản web đầy đủ đã nhúng CSS, JavaScript và ảnh bìa 3D. Tải file này để thay bản HTML trên hosting.
+index.html là bản web đầy đủ, đã nhúng CSS, JavaScript và ảnh bìa 3D của 32 môn.
 
 ## Tải lên web
 
-1. Tải ZIP của nhánh này và giải nén, hoặc mở Raw của `index.html` rồi lưu với tên `index.html`.
-2. Tải `index.html` lên hosting. Đặt ảnh QR thật của bạn tên `thanh-toan.jpeg` cùng thư mục. Ảnh QR là file riêng, chưa có trong bản gốc người dùng cung cấp.
-3. Khách chọn môn/gói, nhập tài khoản Azota rồi bấm “Chốt đơn”. Đơn chỉ mua PDF không yêu cầu tài khoản Azota.
-4. Khách chuyển khoản và gửi nội dung đơn kèm bill qua Zalo/Facebook. LuzV kiểm tra rồi cấp quyền/gửi PDF.
+1. Tải ZIP và giải nén, lấy index.html thay file hiện tại trên hosting.
+2. Đặt ảnh QR thật tên thanh-toan.jpeg cùng thư mục với index.html. Ảnh QR là file riêng.
+3. Khách chọn môn/gói, nhập tài khoản Azota và bấm Chốt đơn. Trường hợp chỉ chọn PDF không cần tài khoản Azota.
+4. Chuyển khoản theo số tiền hiển thị, gửi nội dung đăng ký cùng ảnh xác nhận qua Zalo/Facebook. LuzV kiểm tra rồi cấp quyền hoặc gửi PDF.
 
-## Giao diện mới
+## Nội dung và kiểu chữ
 
-- Khung chọn nhanh 32 môn nằm ngay dưới banner, hiển thị 4 thẻ trọn vẹn mỗi lượt. Giữ nút chuyển theo 4 môn, bắt dính thẻ, kéo chuột, vuốt, thanh tua hai chiều, nghiêng sổ và hiệu ứng thêm môn.
-- Nền trắng/xanh ở chế độ sáng, navy ở chế độ tối. Màu bìa theo nhóm môn.
-- “Đóng góp đề mới” và “Giới thiệu bạn bè” nằm trong một khung hai cột từ 861 px, xếp dọc ở màn hình nhỏ hơn.
-- Ba nhãn điều kiện ngoài thẻ đã bỏ. Cách gửi và điều kiện duyệt nằm trong phần mở rộng. Đề được duyệt có thể đổi một môn ở kỳ này hoặc bảo lưu sang kỳ sau.
-- Giới thiệu gồm ba bước ngắn, ô SĐT có nhãn, tạo link bằng nút hoặc Enter. Sửa SĐT sẽ ẩn kết quả cũ; dữ liệu vẫn hoạt động khi localStorage bị chặn.
-- Sao chép lời mời không ghi đè URL. Khi trình duyệt từ chối clipboard, ô riêng hiện nội dung để sao chép thủ công.
+- Các mục dùng cách gọi Đăng ký nhanh, Gói ôn tập, Túi ôn tập và Sao chép nội dung đăng ký.
+- Nút bộ nhớ là Xóa lựa chọn đã lưu. Các hướng dẫn, thông báo, nhãn hỗ trợ tiếp cận và nội dung sao chép dùng cách gọi thống nhất.
+- Footer: Kho đề ôn tập do LuzV quản lý, không phải website chính thức của Azota.
+- Nội dung chính dùng độ đậm 600; nhãn và chú thích rõ hơn. Footer 14 px, độ đậm 700.
+- Trên nền sáng dùng chữ navy đậm hơn; trên nền tối dùng chữ xanh trắng sáng hơn. Các phần chọn gói, thẻ môn, GPA, túi ôn tập, hỗ trợ, giới thiệu bạn bè và footer đồng bộ độ tương phản.
 
-## Giá và giỏ hàng
+Bản đầy đủ giữ 32 môn và ảnh bìa theo chủ đề, bố cục 4 môn mỗi hàng trên điện thoại, mục lục 7 mục, hướng dẫn, PDF và nút Chốt đơn. Giá và quy tắc ưu đãi giữ nguyên; Solo 5 môn là 75.000đ khi chưa nhập mã ưu đãi.
 
-- Solo 15.000đ/môn, không tự giảm theo số lượng; 5 môn là 75.000đ.
-- Gói 2 người 25.000đ/môn cho cả nhóm; gói 5 người 50.000đ/môn cho cả nhóm.
-- Gói nhóm giảm 10% cho 3–4 môn, 15% từ 5 môn. Mã hợp lệ tính sau ưu đãi nhóm.
-- PDF 10.000đ/file, không được giảm và không tính vào mốc số môn.
-- Thẻ môn, chọn nhanh, giỏ trên điện thoại, tổng tiền và nội dung thanh toán dùng chung dữ liệu.
+Đã kiểm tra cách gọi trong giao diện, hộp thoại, hướng dẫn 5 bước, xác nhận bộ nhớ, nội dung đăng ký và nhãn hỗ trợ tiếp cận; cả trường hợp bộ nhớ bị chặn. Đã kiểm tra sáng/tối, độ đậm và bố cục ở 320, 390, 430, 820, 1024 và 1360 px.
 
-Đã kiểm tra giao diện và tương tác ở 320, 390, 820, 861 và 1360 px; cả sáng/tối, bộ nhớ bị chặn, clipboard thành công/bị từ chối, sửa SĐT khi đang sao chép, điều hướng theo 4 thẻ, kéo chuột, thanh tua, đồng bộ chọn/bỏ môn, giỏ hàng, QR và hướng dẫn 5 bước.
-
-Các ảnh `carousel-preview*.png`, `free-preview*.png`, `mobile-free-preview.png` minh họa hai phần mới. `preview*.png` minh họa giỏ hàng.
-
-
-## Mục lục nhanh theo nội dung trong file
-
-Thanh đặt ngay dưới banner, trước khung chọn nhanh. Thanh tự lấy các khối nội dung chính đang có trong trang, gồm:
-
-1. Chọn nhanh môn.
-2. Tính điểm cuối kỳ.
-3. Chọn gói & môn học.
-4. PDF & Chốt đơn.
-5. Đóng góp đề.
-6. Giới thiệu bạn bè.
-7. Liên hệ.
-
-Số thứ tự theo đúng vị trí hiển thị, tự đổi khi bố cục điện thoại chuyển phần tính điểm xuống dưới phần chọn môn. Các phần thực mới có tiêu đề cũng được thêm vào; phần ẩn và hộp thoại không tạo mục lục trùng.
-
-Thanh dùng kiểu nút bo tròn trắng/xanh hoặc navy theo chế độ sáng/tối, dính dưới thanh đầu trang. Trên điện thoại vuốt ngang để xem đủ mục. Link dùng đúng phần đang có và hỗ trợ bàn phím, Back/Forward; tiêu đề không bị các thanh dính che. Cuộn trang chỉ đổi mục được tô sáng, không tự kéo trang lên đầu. Giỏ hàng bên phải và menu Nhảy tới đã tính khoảng trống cho thanh mới.
-
-Đã kiểm tra ở 320, 390, 820 và 1360 px, cả cuộn mượt và chế độ giảm chuyển động; kiểm tra lại giỏ hàng, PDF, Chốt đơn, hướng dẫn 5 bước và menu Nhảy tới. Giá, ảnh bìa 3D, mã ưu đãi và công cụ tính điểm giữ nguyên trong bản đầy đủ này.
-
-Các ảnh toc-preview.png, toc-preview-dark.png và mobile-toc-preview.png chụp riêng thanh mục lục. toc-page-preview.png và mobile-toc-page-preview.png minh họa thanh khi cuộn trên máy tính và điện thoại.
-
-
-## Thẻ gọn áp dụng cho toàn bộ 32 môn
-
-Tất cả 32 thẻ trong danh sách đều dùng tên môn căn trái, năm học và giá chung một cụm nét đứt. Giá và năm học cùng hàng khi đủ chỗ, tự xuống dòng ở thẻ nhỏ để không cắt thông tin. Nút chọn gọn màu xanh biển; khi đã chọn chuyển xanh lá và có dấu tích. Nút có chữ đầy đủ trên máy tính, nhãn rút gọn trên điện thoại.
-
-Điện thoại/máy tính bảng vẫn 4 môn mỗi hàng. Ảnh bìa và màu chủ đề từng môn, năm học và lượt đăng ký có sẵn được giữ lại. Không thêm số câu hoặc thông tin đáp án lên thẻ. Màu chữ, đường viền và giá theo chế độ sáng/tối.
-
-Chọn bằng chuột, cảm ứng hoặc Space trên bàn phím. Các thẻ dùng chung giỏ hàng, giá gói và ưu đãi; Solo chọn 5 môn là 75.000đ. Đã kiểm tra chọn đủ 32 môn, giá của cả 32 thẻ khi đổi gói và tổng tiền đồng nhất. Giữ nguyên mục lục 7 mục, Chốt đơn, PDF, giới thiệu bạn bè và công cụ tính điểm.
-
-Đã kiểm tra ở chiều rộng 320, 390, 430, 820, 1024 và 1360 px; ảnh bìa đủ 12 chủ đề, tên không tràn, các bộ lọc, trạng thái đã chọn, thao tác bàn phím và chế độ sáng/tối.
-
-cards-preview.png và cards-preview-dark.png minh họa thẻ trên máy tính. mobile-cards-preview.png và mobile-cards-preview-dark.png minh họa bố cục 4 môn trên điện thoại.
+Các file footer-preview*.png và mobile-footer-preview*.png minh họa footer mới.
