@@ -1,4 +1,4 @@
-# AZOTA LuzV — VietQR theo tổng tiền
+# AZOTA LuzV — QR quét hai chiều và sao chép số tài khoản
 
 index.html là bản web đầy đủ, đã nhúng CSS, JavaScript, thư viện QR và ảnh bìa 3D của 32 môn.
 
@@ -21,6 +21,12 @@ QR dùng chuẩn chuyển khoản NAPAS/VietQR, tiền VND, số tiền nguyên 
 
 Nút sao chép nội dung chuyển khoản và nút chỉ sao chép đăng ký đều có cách chọn văn bản thủ công nếu trình duyệt chặn clipboard. Đây là quy trình xác nhận chuyển khoản thủ công qua LuzV.
 
+## Hiệu ứng QR và sao chép số tài khoản
+
+Khung QR có bốn góc xanh và vệt sáng quét từ trên xuống, rồi đi ngược lên liên tục. Hiệu ứng chỉ hiện khi ảnh sẵn sàng, dừng khi đóng hộp thoại, ẩn khi lỗi hoặc túi trống. Khi thiết bị bật giảm chuyển động, khung giữ bốn góc tĩnh. Ảnh PNG tải xuống vẫn là QR gốc.
+
+Nút Sao chép cạnh số tài khoản chép đúng 0377300076, giữ số 0 đầu. Nếu trình duyệt chặn clipboard, một ô số tài khoản xuất hiện và được bôi đen để sao chép thủ công. Số tài khoản và nút tự xếp lại trên điện thoại nhỏ.
+
 ## Giá và giao diện
 
 - Solo: 15.000đ/môn, không tự giảm theo số môn; 5 môn là 75.000đ khi chưa nhập mã.
@@ -33,6 +39,6 @@ Giữ bố cục 4 môn mỗi hàng trên điện thoại, mục lục theo nộ
 
 ## Kiểm tra
 
-Đã kiểm tra trên Chromium ở 320, 390, 820 và 1360 px, cả sáng/tối: giỏ trống, Solo/gói nhóm/mã ưu đãi/PDF, đồng bộ tổng tiền, mở lại hộp QR, tải PNG, sao chép và trường hợp clipboard bị chặn. Ảnh gốc, ảnh tải xuống và QR hiển thị được đọc lại bằng ZXing độc lập để đối chiếu ngân hàng, số tài khoản, số tiền, nội dung và CRC. Các ảnh qr-preview*.png và mobile-qr-preview*.png minh họa hộp QR mới.
+Đã kiểm tra trên Chromium ở 320, 390, 820 và 1360 px, cả sáng/tối: giỏ trống, Solo/gói nhóm/mã ưu đãi/PDF, đồng bộ tổng tiền, mở lại hộp QR, tải PNG, sao chép số tài khoản/nội dung và trường hợp clipboard bị chặn. Đã kiểm tra chuyển động đi xuống rồi quay lên và chế độ giảm chuyển động. Ảnh gốc, ảnh tải xuống và QR hiển thị với vệt quét tại nhiều vị trí được đọc lại bằng ZXing độc lập để đối chiếu ngân hàng, số tài khoản, số tiền, nội dung và CRC. Các ảnh qr-preview*.png và mobile-qr-preview*.png minh họa hộp QR mới.
 
 Thư viện qrcode-generator 1.4.4 dùng giấy phép MIT; toàn bộ thông báo bản quyền và giấy phép nằm trong index.html và LICENSE-qrcode-generator.txt.

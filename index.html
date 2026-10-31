@@ -5204,12 +5204,37 @@ html[data-luzv-theme] #payment-dialog .payment-close{
 }
 #payment-dialog .payment-visual{min-width:0;text-align:center}
 #payment-dialog .payment-image-link{
+ position:relative;isolation:isolate;
  min-height:200px;max-width:280px!important;margin:0 auto!important;padding:0!important;
  border:1px solid var(--pay-line);border-radius:16px;background:#fff;overflow:hidden;
 }
 #payment-dialog img#payment-image{
  width:100%!important;height:auto!important;max-width:100%!important;max-height:none!important;
  margin:0!important;border-radius:0;image-rendering:pixelated;filter:none;mix-blend-mode:normal;
+}
+#payment-dialog .payment-qr-scan{
+ --scan-color:#0ea5e9;position:absolute;inset:8px;z-index:1;pointer-events:none;
+ background:
+  linear-gradient(var(--scan-color),var(--scan-color)) left top/17px 2px,
+  linear-gradient(var(--scan-color),var(--scan-color)) left top/2px 17px,
+  linear-gradient(var(--scan-color),var(--scan-color)) right top/17px 2px,
+  linear-gradient(var(--scan-color),var(--scan-color)) right top/2px 17px,
+  linear-gradient(var(--scan-color),var(--scan-color)) left bottom/17px 2px,
+  linear-gradient(var(--scan-color),var(--scan-color)) left bottom/2px 17px,
+  linear-gradient(var(--scan-color),var(--scan-color)) right bottom/17px 2px,
+  linear-gradient(var(--scan-color),var(--scan-color)) right bottom/2px 17px;
+ background-repeat:no-repeat;
+}
+#payment-dialog .payment-qr-scan::before{
+ content:"";position:absolute;left:4px;right:4px;top:0;height:2px;opacity:.8;
+ background:linear-gradient(90deg,transparent,#0ea5e9 18%,#38bdf8 50%,#0ea5e9 82%,transparent);
+ box-shadow:0 0 7px #0ea5e970;animation:luzv-qr-sweep 2.6s ease-in-out infinite alternate;
+ animation-play-state:paused;
+}
+#payment-dialog[open] .payment-qr-scan::before{animation-play-state:running}
+@keyframes luzv-qr-sweep{from{top:0}to{top:calc(100% - 2px)}}
+@media(prefers-reduced-motion:reduce){
+ #payment-dialog .payment-qr-scan::before{display:none;animation:none}
 }
 #payment-dialog #payment-image-error{
  margin:0;padding:22px;color:#234761;font-size:13px;line-height:1.6;font-weight:650;
@@ -5232,6 +5257,16 @@ html[data-luzv-theme] #payment-dialog .payment-image-help{
 #payment-dialog .payment-bank-row>span{flex:0 0 auto;color:var(--pay-muted);font-weight:650}
 #payment-dialog .payment-bank-row>strong{min-width:0;color:var(--pay-ink);text-align:right;font-size:14px;font-weight:800;overflow-wrap:anywhere}
 #payment-dialog #payment-account-number{font-size:17px;font-variant-numeric:tabular-nums;letter-spacing:.4px}
+#payment-dialog .payment-account-block{border-bottom:1px solid var(--pay-line)}
+#payment-dialog .payment-account-row{flex-wrap:wrap;border-bottom:0}
+#payment-dialog .payment-account-tools{display:flex;align-items:center;justify-content:flex-end;flex:1 1 190px;min-width:0;gap:8px}
+#payment-dialog .payment-account-tools>strong{color:var(--pay-ink);font-weight:800;white-space:nowrap}
+#payment-dialog .payment-account-manual{padding-bottom:8px}
+#payment-dialog .payment-account-manual>label{display:block;margin-bottom:6px;color:var(--pay-muted);font-size:12px;font-weight:650}
+#payment-dialog #payment-account-field{
+ width:100%;padding:10px;border:1px solid var(--pay-line);border-radius:9px;
+ background:var(--pay-bg);color:var(--pay-ink);font-size:16px;font-weight:800;
+}
 #payment-dialog .payment-bank-row #payment-total{color:var(--pay-accent);font-size:28px;line-height:1.2;font-weight:900}
 #payment-dialog .payment-memo-block{padding:12px 0}
 #payment-dialog .payment-memo-block>label{display:block;margin-bottom:8px;color:var(--pay-muted);font-size:12px;font-weight:750}
@@ -5241,14 +5276,15 @@ html[data-luzv-theme] #payment-dialog .payment-image-help{
  background:var(--pay-bg);color:var(--pay-ink);font-family:ui-monospace,monospace;
  font-size:15px;line-height:1.4;font-weight:800;
 }
-#payment-dialog #payment-memo-copy{
+#payment-dialog :is(#payment-memo-copy,#payment-account-copy){
  flex:none;min-height:44px;padding:8px 10px;border:1px solid var(--pay-line);border-radius:9px;
  background:var(--pay-bg);color:var(--pay-accent);font-size:12px;font-weight:750;
 }
-#payment-dialog :is(#payment-copy-status,#payment-memo-status){
+#payment-dialog :is(#payment-copy-status,#payment-memo-status,#payment-account-status){
  margin:7px 0 0;padding:0;color:var(--pay-muted);font-size:12px;line-height:1.5;font-weight:650;
 }
-#payment-dialog :is(#payment-copy-status,#payment-memo-status):empty{display:none}
+#payment-dialog :is(#payment-copy-status,#payment-memo-status,#payment-account-status):empty{display:none}
+#payment-dialog #payment-account-status:not(:empty){margin:0 0 10px}
 #payment-dialog .payment-footer{display:flex;flex-direction:column;align-items:stretch;gap:10px;margin-top:18px}
 html[data-luzv-theme] #payment-dialog .payment-qr-tip{
  margin:0;padding:12px 14px;border:1px solid var(--pay-line);border-radius:12px;
@@ -5300,6 +5336,7 @@ html[data-luzv-theme] #payment-dialog .payment-qr-tip{
  #payment-dialog #payment-memo{font-size:14px;padding-inline:7px}
 }
 @media(max-width:380px){
+ #payment-dialog .payment-account-tools{flex-basis:100%;justify-content:space-between}
  #payment-dialog .payment-memo-row{flex-direction:column}
  #payment-dialog #payment-memo{flex:none;font-size:16px}
  #payment-dialog #payment-memo-copy{align-self:flex-end;min-width:110px}
@@ -5739,6 +5776,7 @@ html[data-luzv-theme] #payment-dialog .payment-qr-tip{
         <div class="payment-visual">
           <div class="payment-image-link">
             <img class="payment-image" id="payment-image" alt="Mã VietQR chuyển khoản cho LuzV" hidden>
+            <span class="payment-qr-scan" id="payment-qr-scan" aria-hidden="true" hidden></span>
             <p id="payment-image-error" role="status">Chọn môn hoặc tài liệu để tạo mã chuyển khoản.</p>
           </div>
           <a id="payment-download" class="payment-download" download="QR-LuzV.png" hidden>⬇ Tải ảnh QR</a>
@@ -5748,7 +5786,20 @@ html[data-luzv-theme] #payment-dialog .payment-qr-tip{
         <div class="payment-bank-info">
           <div class="payment-bank-row"><span>Ngân hàng</span><strong id="payment-bank-name"></strong></div>
           <div class="payment-bank-row"><span>Chủ tài khoản</span><strong id="payment-account-name"></strong></div>
-          <div class="payment-bank-row"><span>Số tài khoản</span><strong id="payment-account-number"></strong></div>
+          <div class="payment-account-block">
+            <div class="payment-bank-row payment-account-row">
+              <span>Số tài khoản</span>
+              <div class="payment-account-tools">
+                <strong id="payment-account-number"></strong>
+                <button type="button" id="payment-account-copy" aria-label="Sao chép số tài khoản">Sao chép</button>
+              </div>
+            </div>
+            <div class="payment-account-manual" id="payment-account-manual" hidden>
+              <label for="payment-account-field">Số tài khoản để sao chép</label>
+              <input type="text" id="payment-account-field" inputmode="numeric" aria-describedby="payment-account-status" readonly>
+            </div>
+            <p id="payment-account-status" role="status"></p>
+          </div>
           <div class="payment-bank-row payment-amount-row"><span>Số tiền</span><strong id="payment-total">0đ</strong></div>
           <div class="payment-memo-block">
             <label for="payment-memo">Nội dung chuyển khoản đã điền sẵn</label>
@@ -11460,7 +11511,10 @@ var qrcode = function() {
   if (!dialog || !window.LuzVVietQR) return;
   const bank = LuzVVietQR.bank;
   const image = $('payment-image'), download = $('payment-download');
+  const scan = $('payment-qr-scan');
   const error = $('payment-image-error'), memo = $('payment-memo');
+  const accountField = $('payment-account-field'), accountManual = $('payment-account-manual');
+  const accountStatus = $('payment-account-status');
   const order = $('payment-subjects'), details = $('payment-order-details');
   const copyStatus = $('payment-copy-status'), memoStatus = $('payment-memo-status');
   let signature = '', intent = null, imageData = '', renderedMemo = '', copyRevision = 0;
@@ -11492,6 +11546,7 @@ var qrcode = function() {
   }
 
   function clearImages() {
+    scan.hidden = true;
     for (const node of [image, $('lv-fast-qr')]) {
       if (node) { node.hidden = true;node.removeAttribute('src'); }
     }
@@ -11503,6 +11558,7 @@ var qrcode = function() {
     $('payment-bank-name').textContent = bank.name;
     $('payment-account-name').textContent = bank.accountName;
     $('payment-account-number').textContent = bank.accountNumber;
+    accountField.value = bank.accountNumber;
     $('payment-total').textContent = money(info.total);
     const parts = [];
     if (selected.size) parts.push(selected.size + ' môn Azota · Gói ' + activePlan.people + ' người');
@@ -11518,6 +11574,7 @@ var qrcode = function() {
       renderedMemo = state?.memo || '';
       copyRevision++;
       copyStatus.textContent = '';memoStatus.textContent = '';
+      accountStatus.textContent = '';accountManual.hidden = true;
       clearImages();
     }
     memo.value = state?.memo || '';
@@ -11548,7 +11605,7 @@ var qrcode = function() {
     }
   }
 
-  async function copyText(text, field, status, success, isOrder) {
+  async function copyText(text, field, status, success, isOrder, revealFallback) {
     if (!text) return false;
     const revision = copyRevision;
     try {
@@ -11559,6 +11616,7 @@ var qrcode = function() {
     } catch {
       if (revision !== copyRevision || !dialog.open) return false;
       if (isOrder) details.open = true;
+      revealFallback?.();
       field.value = text;field.focus();field.select();
       status.textContent = 'Đã bôi đen nội dung. Nhấn Ctrl + C hoặc chạm giữ và chọn Sao chép nhé.';
       return false;
@@ -11575,8 +11633,20 @@ var qrcode = function() {
   // Keep a real link: opening Zalo remains a direct user action even if copying is refused.
   $('luzv-payment-zalo').addEventListener('click', copyOrder);
   $('payment-memo-copy').addEventListener('click', () => copyText(current()?.memo || '', memo, memoStatus, '✓ Đã sao chép nội dung chuyển khoản.', false));
-  dialog.addEventListener('close', () => { if (!dialog.open) { copyRevision++;details.open = false; } });
+  $('payment-account-copy').addEventListener('click', () => {
+    accountStatus.textContent = '';accountManual.hidden = true;
+    return copyText(bank.accountNumber, accountField, accountStatus,
+      '✓ Đã sao chép số tài khoản.', false, () => { accountManual.hidden = false; });
+  });
+  dialog.addEventListener('close', () => {
+    if (!dialog.open) {
+      copyRevision++;details.open = false;
+      accountStatus.textContent = '';accountManual.hidden = true;
+    }
+  });
+  image.addEventListener('load', () => { scan.hidden = image.hidden || !image.naturalWidth; });
   image.addEventListener('error', () => {
+    scan.hidden = true;
     image.hidden = true;download.hidden = true;
     error.textContent = 'Chưa hiển thị được ảnh QR. Bạn có thể dùng thông tin chuyển khoản bên cạnh.';
     error.hidden = false;
