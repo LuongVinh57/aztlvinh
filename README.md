@@ -1,24 +1,38 @@
-# AZOTA LuzV — Cách gọi ôn tập và chữ dễ đọc
+# AZOTA LuzV — VietQR theo tổng tiền
 
-index.html là bản web đầy đủ, đã nhúng CSS, JavaScript và ảnh bìa 3D của 32 môn.
+index.html là bản web đầy đủ, đã nhúng CSS, JavaScript, thư viện QR và ảnh bìa 3D của 32 môn.
 
 ## Tải lên web
 
-1. Tải ZIP và giải nén, lấy index.html thay file hiện tại trên hosting.
-2. Đặt ảnh QR thật tên thanh-toan.jpeg cùng thư mục với index.html. Ảnh QR là file riêng.
-3. Khách chọn môn/gói, nhập tài khoản Azota và bấm Chốt đơn. Trường hợp chỉ chọn PDF không cần tài khoản Azota.
-4. Chuyển khoản theo số tiền hiển thị, gửi nội dung đăng ký cùng ảnh xác nhận qua Zalo/Facebook. LuzV kiểm tra rồi cấp quyền hoặc gửi PDF.
+1. Tải ZIP, giải nén và lấy index.html thay file hiện tại trên hosting.
+2. Chỉ cần index.html để hiển thị trang và tạo QR. Ảnh QR được tạo ngay trong trình duyệt.
+3. Người đăng ký chọn môn/gói, nhập tài khoản Azota và bấm Chốt đơn. Nếu chỉ chọn PDF thì không cần tài khoản Azota.
+4. Quét mã hoặc tải PNG rồi chọn quét từ ảnh trong ứng dụng ngân hàng. QR điền sẵn số tiền và nội dung chuyển khoản.
+5. Sau khi chuyển khoản, bấm sao chép đăng ký và mở Zalo, dán nội dung rồi gửi kèm ảnh xác nhận. LuzV kiểm tra rồi cấp quyền hoặc gửi PDF.
 
-## Nội dung và kiểu chữ
+## Thông tin nhận tiền đã cấu hình
 
-- Các mục dùng cách gọi Đăng ký nhanh, Gói ôn tập, Túi ôn tập và Sao chép nội dung đăng ký.
-- Nút bộ nhớ là Xóa lựa chọn đã lưu. Các hướng dẫn, thông báo, nhãn hỗ trợ tiếp cận và nội dung sao chép dùng cách gọi thống nhất.
-- Footer: Kho đề ôn tập do LuzV quản lý, không phải website chính thức của Azota.
-- Nội dung chính dùng độ đậm 600; nhãn và chú thích rõ hơn. Footer 14 px, độ đậm 700.
-- Trên nền sáng dùng chữ navy đậm hơn; trên nền tối dùng chữ xanh trắng sáng hơn. Các phần chọn gói, thẻ môn, GPA, túi ôn tập, hỗ trợ, giới thiệu bạn bè và footer đồng bộ độ tương phản.
+- Ngân hàng: MB Bank (BIN 970422).
+- Số tài khoản: 0377300076.
+- Chủ tài khoản: TRAN LUONG VINH.
+- Zalo: https://zalo.me/0377300076.
 
-Bản đầy đủ giữ 32 môn và ảnh bìa theo chủ đề, bố cục 4 môn mỗi hàng trên điện thoại, mục lục 7 mục, hướng dẫn, PDF và nút Chốt đơn. Giá và quy tắc ưu đãi giữ nguyên; Solo 5 môn là 75.000đ khi chưa nhập mã ưu đãi.
+QR dùng chuẩn chuyển khoản NAPAS/VietQR, tiền VND, số tiền nguyên và CRC16. Mã tham chiếu bắt đầu bằng LUZV, dùng chung cho ảnh QR, nút tải và nội dung đăng ký sao chép. Đổi lựa chọn sẽ cập nhật QR; đóng rồi mở lại cùng lựa chọn giữ nguyên mã. Tên Azota và thông tin người đăng ký không nằm trong QR. Không gọi dịch vụ tạo ảnh QR bên ngoài.
 
-Đã kiểm tra cách gọi trong giao diện, hộp thoại, hướng dẫn 5 bước, xác nhận bộ nhớ, nội dung đăng ký và nhãn hỗ trợ tiếp cận; cả trường hợp bộ nhớ bị chặn. Đã kiểm tra sáng/tối, độ đậm và bố cục ở 320, 390, 430, 820, 1024 và 1360 px.
+Nút sao chép nội dung chuyển khoản và nút chỉ sao chép đăng ký đều có cách chọn văn bản thủ công nếu trình duyệt chặn clipboard. Đây là quy trình xác nhận chuyển khoản thủ công qua LuzV.
 
-Các file footer-preview*.png và mobile-footer-preview*.png minh họa footer mới.
+## Giá và giao diện
+
+- Solo: 15.000đ/môn, không tự giảm theo số môn; 5 môn là 75.000đ khi chưa nhập mã.
+- Gói 2 người: 25.000đ/môn cho cả nhóm. Gói 5 người: 50.000đ/môn cho cả nhóm.
+- Hai gói nhóm giảm 10% khi chọn 3–4 môn, giảm 15% từ 5 môn.
+- Mã ưu đãi hợp lệ giảm thêm theo gói, tính sau ưu đãi nhóm.
+- PDF 10.000đ, không tính vào số môn nhận ưu đãi và không giảm giá.
+
+Giữ bố cục 4 môn mỗi hàng trên điện thoại, mục lục theo nội dung thật, hướng dẫn, GPA, hỗ trợ, bộ nhớ túi ôn tập và ảnh 3D theo chủ đề. Giao diện trắng/xanh nhạt/xanh biển, chế độ tối navy, chữ đậm rõ. Các nhãn dùng cách gọi ôn tập và đăng ký; nút chính là Chốt đơn.
+
+## Kiểm tra
+
+Đã kiểm tra trên Chromium ở 320, 390, 820 và 1360 px, cả sáng/tối: giỏ trống, Solo/gói nhóm/mã ưu đãi/PDF, đồng bộ tổng tiền, mở lại hộp QR, tải PNG, sao chép và trường hợp clipboard bị chặn. Ảnh gốc, ảnh tải xuống và QR hiển thị được đọc lại bằng ZXing độc lập để đối chiếu ngân hàng, số tài khoản, số tiền, nội dung và CRC. Các ảnh qr-preview*.png và mobile-qr-preview*.png minh họa hộp QR mới.
+
+Thư viện qrcode-generator 1.4.4 dùng giấy phép MIT; toàn bộ thông báo bản quyền và giấy phép nằm trong index.html và LICENSE-qrcode-generator.txt.
