@@ -1,4 +1,4 @@
-# AZOTA LuzV — QR quét hai chiều và sao chép số tài khoản
+# AZOTA LuzV — Sao chép đăng ký nổi bật và hướng dẫn 3 bước
 
 index.html là bản web đầy đủ, đã nhúng CSS, JavaScript, thư viện QR và ảnh bìa 3D của 32 môn.
 
@@ -21,6 +21,14 @@ QR dùng chuẩn chuyển khoản NAPAS/VietQR, tiền VND, số tiền nguyên 
 
 Nút sao chép nội dung chuyển khoản và nút chỉ sao chép đăng ký đều có cách chọn văn bản thủ công nếu trình duyệt chặn clipboard. Đây là quy trình xác nhận chuyển khoản thủ công qua LuzV.
 
+## Sao chép môn học và hướng dẫn thanh toán
+
+Ngay đầu popup thanh toán là khung Môn học đã chọn: tên môn/PDF hiện sẵn, có số lượng và nút xanh lớn Sao chép môn học & thông tin đăng ký. Nút chép đầy đủ danh sách, gói, tài khoản Azota, tổng tiền và mã chuyển khoản. Người đăng ký dán nội dung này vào Zalo và gửi kèm ảnh xác nhận chuyển khoản cho LuzV. Trường hợp chỉ chọn PDF dùng nhãn Sao chép tài liệu.
+
+Danh sách dài cuộn trong khung; nút vẫn sao chép đủ cả 32 môn. Có thể mở Xem đầy đủ nội dung sẽ gửi để xem tin nhắn. Khi trình duyệt chặn clipboard, phần này tự mở và bôi đen tin nhắn để sao chép thủ công.
+
+Hướng dẫn 3 bước luôn có phía trên QR: Lấy mã QR → Chuyển khoản → Gửi qua Zalo. Bước cuối nhắc dán thông tin đã sao chép và gửi ảnh xác nhận. Hướng dẫn 3 bước trong Túi ôn tập cũng được giữ lại. Nút cuối popup sao chép lại đăng ký rồi mở Zalo theo thao tác của người dùng.
+
 ## Hiệu ứng QR và sao chép số tài khoản
 
 Khung QR có bốn góc xanh và vệt sáng quét từ trên xuống, rồi đi ngược lên liên tục. Hiệu ứng chỉ hiện khi ảnh sẵn sàng, dừng khi đóng hộp thoại, ẩn khi lỗi hoặc túi trống. Khi thiết bị bật giảm chuyển động, khung giữ bốn góc tĩnh. Ảnh PNG tải xuống vẫn là QR gốc.
@@ -39,6 +47,6 @@ Giữ bố cục 4 môn mỗi hàng trên điện thoại, mục lục theo nộ
 
 ## Kiểm tra
 
-Đã kiểm tra trên Chromium ở 320, 390, 820 và 1360 px, cả sáng/tối: giỏ trống, Solo/gói nhóm/mã ưu đãi/PDF, đồng bộ tổng tiền, mở lại hộp QR, tải PNG, sao chép số tài khoản/nội dung và trường hợp clipboard bị chặn. Đã kiểm tra chuyển động đi xuống rồi quay lên và chế độ giảm chuyển động. Ảnh gốc, ảnh tải xuống và QR hiển thị với vệt quét tại nhiều vị trí được đọc lại bằng ZXing độc lập để đối chiếu ngân hàng, số tài khoản, số tiền, nội dung và CRC. Các ảnh qr-preview*.png và mobile-qr-preview*.png minh họa hộp QR mới.
+Đã kiểm tra trên Chromium ở 320, 390, 820 và 1360 px, cả sáng/tối: nút sao chép hiện ngay khi mở popup, danh sách được đồng bộ, chép đủ 32 môn, hướng dẫn đủ 3 bước, giỏ trống, Solo/gói nhóm/mã ưu đãi/PDF, đồng bộ tổng tiền, mở lại hộp QR, tải PNG, sao chép số tài khoản/nội dung và trường hợp clipboard bị chặn. Đã kiểm tra chuyển động đi xuống rồi quay lên và chế độ giảm chuyển động. Ảnh gốc, ảnh tải xuống và QR hiển thị với vệt quét tại nhiều vị trí được đọc lại bằng ZXing độc lập để đối chiếu ngân hàng, số tài khoản, số tiền, nội dung và CRC. Các ảnh qr-preview*.png và mobile-qr-preview*.png minh họa hộp QR mới.
 
 Thư viện qrcode-generator 1.4.4 dùng giấy phép MIT; toàn bộ thông báo bản quyền và giấy phép nằm trong index.html và LICENSE-qrcode-generator.txt.
