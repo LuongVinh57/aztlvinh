@@ -5377,305 +5377,182 @@ html[data-luzv-theme] #payment-dialog .payment-image-help{
  #payment-dialog #payment-memo-copy{align-self:flex-end;min-width:110px}
 }
 
-/* Section tabs: the existing content remains mounted; only the active panel is visible. */
+/* One horizontal navigation row, four real panels and a shared sticky checkout. */
 body.luzv-tabs-mode{
- --tabs-bg:#fff;--tabs-tint:#eef7ff;--tabs-line:#c9e1f2;--tabs-ink:#12334d;
- --tabs-muted:#355a75;--tabs-accent:#086ba9;--tabs-selected:#dff1ff;
+ --tabs-bg:#fff;--tabs-tint:#edf7ff;--tabs-line:#cbdfee;--tabs-ink:#12334d;
+ --tabs-muted:#345570;--tabs-accent:#096ba8;--tabs-selected:#dcf0ff;--workspace-page:#f4f8fc;
+ background:var(--workspace-page);
 }
 html[data-luzv-theme="dark"] body.luzv-tabs-mode{
  --tabs-bg:#132b3e;--tabs-tint:#19394f;--tabs-line:#365c76;--tabs-ink:#edf8ff;
- --tabs-muted:#c1dcea;--tabs-accent:#a5ddff;--tabs-selected:#225571;
+ --tabs-muted:#c1dcea;--tabs-accent:#a5ddff;--tabs-selected:#225571;--workspace-page:#091923;
 }
-.luzv-tabs-mode .luzv-tab-panel[hidden],
-.luzv-tabs-mode #luzv-dual-free-section[hidden],
-.luzv-tabs-mode .hero[hidden]{display:none!important}
-.luzv-tabs-mode .topbar nav>a,.luzv-tabs-mode #sos-nav-trigger,
-.luzv-tabs-mode #luzv-mobile-menu,.luzv-tabs-mode #luzv-sos-widget{display:none!important}
-.luzv-tabs-mode #luzv-night-owl-bar{display:none!important}
-.luzv-tabs-mode .topbar .navigation{gap:12px!important;flex-wrap:nowrap!important}
-.luzv-tabs-mode .topbar nav{display:flex!important;align-items:center;justify-content:flex-end;gap:8px;flex-basis:auto!important;width:auto!important;padding:0!important}
-.luzv-open-sections{
- display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 12px;
- border:1px solid var(--tabs-line);border-radius:12px;background:var(--tabs-tint);color:var(--tabs-ink);
- font:inherit;font-size:14px;font-weight:800;cursor:pointer;
+.luzv-workspace-mode .luzv-tab-panel[hidden],.luzv-workspace-mode .hero,
+.luzv-workspace-mode #luzv-mobile-menu,.luzv-workspace-mode #luzv-sos-widget,
+.luzv-workspace-mode #luzv-night-owl-bar,.luzv-workspace-mode #luzv-quick-nav{display:none!important}
+.luzv-visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.luzv-workspace-mode .container{width:calc(100% - 40px);max-width:1120px}
+.luzv-workspace-mode .topbar{
+ position:sticky;top:0;z-index:50;width:100%;border-bottom:1px solid var(--tabs-line);
+ background:var(--tabs-bg);box-shadow:0 3px 15px #12334d0a;
 }
-.luzv-tabs-mode main>.hero{display:block!important;min-height:0!important;height:auto;margin:18px 0;padding:20px 24px;border-radius:22px}
-.luzv-tabs-mode main>.hero .studio-art,.luzv-tabs-mode .hero-bottom-actions{display:none!important}
-.luzv-tabs-mode .hero .studio-hero-copy{max-width:none}
-.luzv-tabs-mode .hero h1{margin:6px 0!important;font-size:clamp(24px,3vw,32px)!important;line-height:1.22!important;letter-spacing:-.7px!important}
-.luzv-tabs-mode .hero h1 br{display:none}
-.luzv-tabs-mode .hero h1 span::before{content:" "}
-.luzv-tabs-mode .hero p{margin:7px 0;max-width:none;font-size:14px;line-height:1.5}
-.luzv-tabs-mode .hero .badges{margin-top:10px}
-.luzv-tabs-mode .hero .badge{padding:5px 10px;font-size:11.5px}
-.luzv-tabs-nav{
- display:block;position:sticky;top:var(--luzv-tabs-top,80px);z-index:18;
- margin:18px 0;padding:14px;border:1px solid var(--tabs-line);border-radius:20px;
- background:var(--tabs-bg);color:var(--tabs-ink);box-shadow:0 8px 24px #0c4c7910;
+.luzv-workspace-mode .topbar .navigation.luzv-top-nav{
+ display:flex!important;flex-flow:row nowrap!important;justify-content:flex-start!important;
+ align-items:center!important;gap:10px!important;min-height:72px;padding:10px 0!important;
 }
-.luzv-tabs-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
-.luzv-tabs-caption{font-size:14px;font-weight:800}
-.luzv-tabs-tools{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px}
-.luzv-tabs-mode .luzv-tabs-tools :is(#lv-fast-open,#lv-guide-open){
- display:inline-flex;align-items:center;justify-content:center;min-height:36px;margin:0;padding:7px 11px;
- border:1px solid var(--tabs-line);border-radius:10px;background:var(--tabs-tint);color:var(--tabs-ink);
+.luzv-home-pill{
+ display:inline-flex;align-items:center;justify-content:center;flex:none;gap:7px;min-height:44px;
+ padding:10px 13px;border:1px solid var(--tabs-line);border-radius:12px;background:var(--tabs-tint);
+ color:var(--tabs-ink)!important;text-decoration:none;font-size:13px;line-height:1.35;font-weight:800;white-space:nowrap;
+}
+.luzv-workspace-mode .topbar .luzv-nav-tabs{
+ display:flex!important;flex:1 1 0!important;align-items:center;justify-content:flex-start!important;
+ min-width:0;width:auto!important;gap:6px!important;padding:2px!important;
+ flex-wrap:nowrap!important;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:var(--tabs-line) transparent;
+}
+.luzv-nav-tab{
+ flex:none;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 13px;
+ border:1px solid transparent;border-radius:11px;background:transparent;color:var(--tabs-muted);
+ font:inherit;font-size:13px;line-height:1.35;font-weight:800;white-space:nowrap;cursor:pointer;
+}
+.luzv-nav-tab:hover{background:var(--tabs-tint);color:var(--tabs-ink)}
+.luzv-nav-tab[aria-selected="true"]{background:#0b6aa2;color:#fff;border-color:#0b6aa2;box-shadow:0 3px 9px #0b6aa221}
+.luzv-workspace-mode .topbar .luzv-theme-toggle{
+ flex:none;display:grid;place-items:center;width:44px;min-width:44px;height:44px;padding:0!important;
+ border:1px solid var(--tabs-line);border-radius:12px;background:var(--tabs-tint);color:var(--tabs-ink);font-size:0!important;
+}
+.luzv-workspace-mode .luzv-theme-toggle::before{content:"☾";font-size:24px}
+html[data-luzv-theme="dark"] .luzv-workspace-mode .luzv-theme-toggle::before{content:"☀"}
+.luzv-workspace-mode main.container{margin-top:24px;margin-bottom:32px;min-width:0}
+.luzv-two-col-layout{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:24px;align-items:start;min-width:0}
+.luzv-left-column,.luzv-tab-pane{min-width:0;width:100%}
+.luzv-tab-pane{color:var(--tabs-ink);scroll-margin-top:var(--luzv-workspace-top,88px)}
+.luzv-tab-pane :is(h2,h3){color:var(--tabs-ink)}
+.luzv-tab-pane .section-heading{margin:4px 0 14px;align-items:center;gap:10px}
+.luzv-tab-pane .section-heading h2{font-size:23px;font-weight:850;line-height:1.3}
+.luzv-workspace-mode .section-heading .count{display:none}
+.luzv-library-tools{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.luzv-library-links,.luzv-library-buttons{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.luzv-library-links a{display:inline-flex;align-items:center;min-height:36px;color:var(--tabs-accent);font-size:12px;font-weight:800;text-decoration:none}
+.luzv-library-buttons :is(#lv-fast-open,#lv-guide-open){
+ display:inline-flex;align-items:center;justify-content:center;min-height:36px;margin:0;padding:7px 10px;
+ border:1px solid var(--tabs-line);border-radius:10px;background:var(--tabs-bg);color:var(--tabs-ink);
  font-size:12px;line-height:1.4;font-weight:750;box-shadow:none;
 }
-.luzv-tabs-grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px}
-.luzv-section-tab{
- position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;
- min-width:0;min-height:84px;padding:9px 6px;border:1px solid transparent;border-radius:14px;
- background:var(--tabs-tint);color:var(--tabs-ink);font:inherit;font-size:12px;line-height:1.35;font-weight:750;
- text-align:center;cursor:pointer;transition:background .15s,border-color .15s;
+.luzv-current-plan{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:11px 13px;margin:0 0 18px;border:1px solid var(--tabs-line);border-radius:13px;background:var(--tabs-tint)}
+.luzv-current-plan strong{color:var(--tabs-ink);font-size:13px;font-weight:800;line-height:1.5}
+.luzv-current-plan a,.luzv-empty-links a{color:var(--tabs-accent);font-size:12px;font-weight:800;text-underline-offset:3px}
+.luzv-quick-feedback{padding:9px 12px;margin:0 0 12px;border-radius:10px;background:var(--tabs-selected);color:var(--tabs-ink);font-size:13px;font-weight:700}
+.luzv-quick-feedback[hidden]{display:none}
+.luzv-quick-library{margin:0 0 14px;border:1px solid var(--tabs-line);border-radius:12px;background:var(--tabs-bg)}
+.luzv-quick-library>summary{padding:11px 13px;color:var(--tabs-ink);font-size:13px;font-weight:800;cursor:pointer}
+.luzv-quick-library #luzv-exam-countdown-box{margin:0;padding:12px;border:0;box-shadow:none}
+.luzv-quick-library #luzv-study-dashboard{margin:12px;padding:14px}
+.luzv-workspace-mode #subjects{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
+.luzv-workspace-mode #subjects .subject-name{margin:12px 12px 8px!important;min-height:2.6em!important;font-size:clamp(13px,3.7vw,16.5px)!important;line-height:1.35}
+.luzv-workspace-mode #subjects .vinh-price-year-row{margin:0 12px 10px!important;gap:6px}
+.luzv-workspace-mode #subjects .vinh-price-year-row .luzv-school-year{font-size:11px}
+.luzv-workspace-mode #subjects .vinh-price-year-row .subject-price{font-size:19px!important}
+.luzv-workspace-mode #subjects .subject-choice{margin:auto 12px 12px!important;min-height:42px!important;height:auto!important;padding:9px 6px!important;font-size:13px!important;line-height:1.4}
+.luzv-workspace-mode #subjects .choice-text::after{font-size:13px!important;line-height:1.4}
+.luzv-workspace-mode #subjects .studio-cover-label,.luzv-workspace-mode #subjects .course-cover-tags{display:none}
+.luzv-workspace-mode .search-box-wrap{margin-bottom:12px}
+.luzv-workspace-mode #search{width:100%;min-height:48px;font-size:16px;border-color:var(--tabs-line);background:var(--tabs-bg);color:var(--tabs-ink)}
+.luzv-workspace-mode #search::placeholder{color:var(--tabs-muted);font-size:13px;font-weight:550}
+.luzv-workspace-mode .filter-tabs{max-width:100%;min-width:0}
+.luzv-workspace-mode .filter-tab{min-height:38px;font-size:12px}
+.luzv-workspace-mode .search-info{margin:4px 0 12px;color:var(--tabs-muted);font-size:12px;font-weight:650}
+.luzv-workspace-mode #don-hang.order{
+ position:sticky;top:var(--luzv-workspace-top,88px);align-self:start;width:100%;max-width:none;
+ max-height:calc(100dvh - var(--luzv-workspace-top,88px) - 16px);margin:0;overflow:auto;overscroll-behavior:contain;
+ scrollbar-width:thin;scrollbar-color:var(--tabs-line) transparent;scroll-margin-top:var(--luzv-workspace-top,88px);
 }
-.luzv-section-tab-icon{display:grid;place-items:center;width:32px;height:32px;font-size:23px}
-.luzv-section-tab[aria-selected="true"]{border-color:var(--tabs-accent);background:var(--tabs-selected);color:var(--tabs-accent);box-shadow:inset 0 -3px 0 var(--tabs-accent)}
-.luzv-section-tab-badge,.luzv-bottom-tabs b{
- position:absolute;right:8px;top:5px;min-width:19px;padding:2px 5px;border-radius:99px;
- background:#0875b8;color:#fff;font-size:10px;line-height:1.4;font-weight:850;
-}
-.luzv-tabs-nav [hidden],.luzv-bottom-tabs [hidden]{display:none!important}
-.luzv-tabs-stage{margin:22px 0 30px;min-width:0}
-.luzv-tab-panel{min-width:0;width:100%;margin:0;color:var(--tabs-ink)}
-.luzv-tab-panel>.layout{display:block;margin:0}
-.luzv-tabs-mode #don-hang.order{position:static;top:auto;width:100%;max-width:440px;max-height:none;margin:0 auto;overflow:visible}
-.luzv-tabs-mode #luzv-dual-free-section{grid-template-columns:1fr;max-width:820px;margin:0 auto;padding:18px}
-.luzv-tabs-mode #luzv-dual-free-section .luzv-free-eyebrow{min-height:0}
-.luzv-tab-heading{margin:0 0 20px}
-.luzv-tab-heading h2{margin:0 0 8px;color:var(--tabs-ink);font-size:26px;line-height:1.25;font-weight:850}
-.luzv-tab-heading p{margin:0;color:var(--tabs-muted);font-size:14px;line-height:1.6;font-weight:600}
-.luzv-tab-panel :is(.luzv-tab-rules,.luzv-current-plan){
- border:1px solid var(--tabs-line);border-radius:16px;background:var(--tabs-bg);color:var(--tabs-ink);
-}
-.luzv-current-plan{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:12px 16px;margin:18px 0}
-.luzv-current-plan strong{font-size:14px;font-weight:800}
-.luzv-current-plan a,.luzv-cart-tab-shortcuts a,.luzv-empty-links a{color:var(--tabs-accent);font-size:13px;line-height:1.5;font-weight:750;text-underline-offset:3px}
-.luzv-tab-rules{padding:18px;margin:20px 0}
-.luzv-tab-rules h3{margin:0 0 10px;color:var(--tabs-ink);font-size:17px;font-weight:800}
-.luzv-tab-rules p{margin:8px 0;color:var(--tabs-muted);font-size:14px;line-height:1.65}
-.luzv-tab-next,.luzv-help-actions button{
- display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:11px 18px;
- border:0;border-radius:12px;background:linear-gradient(110deg,#087bbd,#075ca0);color:#fff;
- font:inherit;font-size:14px;font-weight:800;text-decoration:none;cursor:pointer;
-}
-.luzv-cart-tab-shortcuts{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:10px 16px}
-.luzv-cart-tab-shortcuts a{display:inline-flex;align-items:center;min-height:38px;padding:6px 10px;border:1px solid var(--tabs-line);border-radius:99px;background:var(--tabs-tint);text-decoration:none}
+.luzv-workspace-mode #don-hang .order-header{padding:17px 18px 9px}
+.luzv-workspace-mode #order-title{font-size:19px;line-height:1.4;font-weight:850}
+#luzv-cart-count{color:var(--tabs-accent);white-space:nowrap}
+.luzv-workspace-mode #don-hang .order-header p{margin-top:5px;font-size:12px;line-height:1.5}
+.luzv-cart-tab-shortcuts{display:flex;flex-wrap:wrap;gap:8px;padding:0 18px 10px}
+.luzv-cart-tab-shortcuts a{display:inline-flex;align-items:center;min-height:34px;padding:6px 9px;border:1px solid var(--tabs-line);border-radius:99px;background:var(--tabs-tint);color:var(--tabs-accent);font-size:12px;font-weight:800;text-decoration:none}
 .luzv-empty-links{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:12px}
-.luzv-help-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:20px}
-.luzv-tabs-mode #luzv-panel-pdf{max-width:820px;margin:0 auto}
-.luzv-tabs-mode #luzv-panel-pdf #luzv-file-store{
- margin:0 0 18px;padding:0;border:1px solid var(--tabs-line);border-radius:18px;
- background:var(--tabs-bg);color:var(--tabs-ink);box-shadow:none;overflow:hidden;
+.luzv-sidebar-plans{display:grid;gap:7px;min-width:0;padding:0;margin:0 0 12px;border:0}
+.luzv-sidebar-plans legend{margin:0 0 8px;color:var(--tabs-ink);font-size:13px;font-weight:850}
+.luzv-sidebar-plans label{display:flex;align-items:center;gap:9px;min-height:48px;padding:9px;border:1px solid var(--tabs-line);border-radius:10px;background:var(--tabs-bg);cursor:pointer}
+.luzv-sidebar-plans label:has(input:checked){border-color:var(--tabs-accent);background:var(--tabs-selected)}
+.luzv-sidebar-plans input{width:17px;height:17px;flex:none;margin:0;accent-color:#0b6aa2}
+.luzv-sidebar-plans span{display:grid;gap:3px;min-width:0}
+.luzv-sidebar-plans strong{color:var(--tabs-ink);font-size:13px}
+.luzv-sidebar-plans small{color:var(--tabs-muted);font-size:11px;line-height:1.5;font-weight:650}
+.luzv-tab-heading{margin:0 0 18px}
+.luzv-tab-heading h2{margin:0 0 8px;font-size:24px;line-height:1.3;font-weight:850}
+.luzv-tab-heading p{margin:0;color:var(--tabs-muted);font-size:13px;font-weight:600;line-height:1.65}
+.luzv-tab-rules{margin:18px 0;padding:17px;border:1px solid var(--tabs-line);border-radius:14px;background:var(--tabs-bg)}
+.luzv-tab-rules h3{margin:0 0 10px;font-size:17px;font-weight:850}
+.luzv-tab-rules p{margin:8px 0;color:var(--tabs-muted);font-size:13px;font-weight:600;line-height:1.65}
+.luzv-tab-rules a{color:var(--tabs-accent);font-size:13px;font-weight:800}
+.luzv-tab-next,.luzv-help-actions button{
+ display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:11px 16px;
+ border:0;border-radius:11px;background:linear-gradient(110deg,#087bbd,#075ca0);color:#fff;
+ font:inherit;font-size:13px;font-weight:800;text-decoration:none;cursor:pointer;
 }
-.luzv-tabs-mode #luzv-panel-pdf #luzv-file-store>summary{
- display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;padding:14px 18px;
- color:var(--tabs-ink);font-size:15px;font-weight:800;cursor:pointer;
+.luzv-workspace-mode #luzv-gpa-calculator{margin:0;padding:18px}
+.luzv-workspace-mode #luzv-gpa-calculator .gpa-grid{grid-template-columns:minmax(0,1fr)!important;gap:14px}
+.luzv-workspace-mode #luzv-gpa-calculator .gpa-header{grid-template-columns:minmax(0,1fr);gap:10px}
+.luzv-workspace-mode #luzv-gpa-calculator .gpa-weight-field{max-width:100%}
+.luzv-workspace-mode #luzv-gpa-calculator .gpa-tier-card{min-width:0}
+.luzv-workspace-mode #luzv-file-store{margin:20px 0 0;padding:0;border:1px solid var(--tabs-line);border-radius:14px;background:var(--tabs-bg);color:var(--tabs-ink);overflow:hidden;box-shadow:none}
+.luzv-workspace-mode #luzv-file-store>summary{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:50px;padding:13px 15px;color:var(--tabs-ink);font-size:14px;font-weight:850;cursor:pointer}
+.luzv-workspace-mode #luzv-file-store .luzv-file-content{padding:15px;border-top:1px solid var(--tabs-line)}
+.luzv-workspace-mode #luzv-file-store .luzv-file-form{display:block}
+.luzv-workspace-mode #luzv-file-store .luzv-file-label{display:block;margin-bottom:9px;color:var(--tabs-ink);font-size:13px;font-weight:750}
+.luzv-workspace-mode #luzv-file-store .luzv-file-control{width:100%;height:48px;border:1px solid var(--tabs-line);border-radius:10px;background:var(--tabs-tint);color:var(--tabs-ink);font-size:16px}
+.luzv-workspace-mode #luzv-file-store .luzv-file-selected{display:flex;justify-content:space-between;gap:10px;margin-top:14px;color:var(--tabs-ink);font-size:13px}
+.luzv-workspace-mode #luzv-file-store .luzv-file-bottom-note{margin:12px 0 0;color:var(--tabs-muted);font-size:12px;font-weight:600;line-height:1.6}
+.luzv-help-actions{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.luzv-workspace-mode #lien-he{margin:0 0 18px;padding:18px;max-width:100%}
+.luzv-workspace-mode #luzv-dual-free-section{display:flex;flex-direction:column;gap:12px;padding:0;margin:0;border:0;background:transparent;box-shadow:none;max-width:none}
+.luzv-support-details{border:1px solid var(--tabs-line);border-radius:14px;background:var(--tabs-bg);overflow:hidden}
+.luzv-support-details>summary{padding:14px 16px;color:var(--tabs-ink);font-size:15px;font-weight:850;cursor:pointer}
+.luzv-support-details .luzv-free-col{padding:0 16px 16px}
+.luzv-support-details .luzv-free-eyebrow{min-height:0}
+.luzv-workspace-mode :is(.luzv-nav-tab,.luzv-home-pill,.luzv-library-buttons button,.luzv-help-actions button,.luzv-tab-next):focus-visible{outline:3px solid var(--tabs-accent);outline-offset:-3px}
+.luzv-tab-pane:focus-visible{outline:2px solid var(--tabs-accent);outline-offset:5px;border-radius:12px}
+@media(max-width:980px){
+ .luzv-workspace-mode .container{width:calc(100% - 28px)}
+ .luzv-workspace-mode .topbar .navigation.luzv-top-nav{min-height:64px;gap:7px!important;padding:8px 0!important}
+ .luzv-home-pill{padding:9px 10px;gap:5px;font-size:12px}
+ .luzv-nav-tab{padding:9px 11px;font-size:12px}
+ .luzv-workspace-mode main.container{margin-top:18px}
+ .luzv-two-col-layout{grid-template-columns:minmax(0,1fr);gap:24px}
+ .luzv-workspace-mode #don-hang.order{position:static;max-height:none;max-width:440px;overflow:visible;overscroll-behavior:auto;margin:0 auto}
+ .luzv-workspace-mode .mobile-cart{gap:0!important;padding:7px 12px calc(7px + env(safe-area-inset-bottom))!important}
+ .luzv-workspace-mode .mobile-cart-chips{display:none!important}
+ .luzv-workspace-mode .mobile-cart[data-has-items="false"]{display:none!important}
+ .luzv-workspace-mode .mobile-cart-info-trigger{min-height:44px}
+ .luzv-workspace-mode .mobile-cart-main-row>a{min-height:42px;padding:9px 13px;font-size:12px}
 }
-.luzv-tabs-mode #luzv-panel-pdf .luzv-file-content{padding:18px;border-top:1px solid var(--tabs-line)}
-.luzv-tabs-mode #luzv-panel-pdf .luzv-file-form{display:block}
-.luzv-tabs-mode #luzv-panel-pdf .luzv-file-label{display:block;margin-bottom:10px;color:var(--tabs-ink);font-size:14px;font-weight:750}
-.luzv-tabs-mode #luzv-panel-pdf .luzv-file-control{width:100%;height:48px;border-color:var(--tabs-line);background:var(--tabs-tint);color:var(--tabs-ink);font-size:16px}
-.luzv-tabs-mode #luzv-panel-pdf .luzv-file-selected{display:flex;justify-content:space-between;gap:10px;margin-top:16px;padding:12px;border-radius:10px;background:var(--tabs-tint);color:var(--tabs-ink);font-size:14px}
-.luzv-tabs-mode #luzv-panel-pdf .luzv-file-bottom-note{margin:12px 0 0;color:var(--tabs-muted);font-size:12px;line-height:1.6}
-.luzv-bottom-tabs{display:none}
-.luzv-tabs-mode :is(.luzv-section-tab,.luzv-open-sections,.luzv-tab-next,.luzv-help-actions button):focus-visible{outline:3px solid var(--tabs-accent);outline-offset:3px}
-.luzv-tab-panel:focus-visible{outline:2px solid var(--tabs-accent);outline-offset:6px;border-radius:14px}
-body:has(#lv-tour[open]) .luzv-tabs-nav{visibility:hidden;pointer-events:none}
-@media(max-width:1024px) and (min-width:821px){.luzv-tabs-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
-@media(max-width:820px){
- .luzv-tabs-mode .topbar .brand{font-size:17px;gap:8px}
- .luzv-tabs-mode .topbar .brand-icon{width:34px;height:36px;font-size:22px}
- .luzv-tabs-mode .topbar .navigation{gap:8px!important}
- .luzv-tabs-mode .topbar .night-toggle-btn{display:grid;place-items:center;width:44px;height:44px;min-width:44px;padding:0!important;font-size:0!important}
- .luzv-tabs-mode .topbar .night-toggle-btn::before{content:"☾";font-size:24px}
- html[data-luzv-theme="dark"] .luzv-tabs-mode .topbar .night-toggle-btn::before{content:"☀"}
- .luzv-open-sections{width:44px;min-width:44px;padding:0;font-size:25px}
- .luzv-tabs-mode .topbar .luzv-open-sections{padding:0!important;font-size:25px!important}
- .luzv-open-sections span{display:none}
- .luzv-tabs-mode main>.hero{padding:15px 18px;margin:14px 0}
- .luzv-tabs-mode .hero h1{font-size:24px!important}
- .luzv-tabs-mode .hero p,.luzv-tabs-mode .hero .badges,.luzv-tabs-mode .hero .eyebrow{display:none!important}
- .luzv-tabs-nav{position:static;margin:14px 0;padding:10px;border-radius:18px}
- .luzv-tabs-toolbar{justify-content:flex-end;margin-bottom:10px}
- .luzv-tabs-caption{display:none}
- .luzv-tabs-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
- .luzv-section-tab{min-height:78px;padding:8px 3px;font-size:11.5px}
- .luzv-tabs-tools{gap:6px}
- .luzv-tabs-mode .luzv-tabs-tools :is(#lv-fast-open,#lv-guide-open){padding:7px 9px;font-size:11px}
- .luzv-tabs-stage{margin-top:18px}
- .luzv-tab-heading h2{font-size:23px}
- .luzv-current-plan{padding:10px 12px}
+@media(max-width:480px){
+ .luzv-workspace-mode .container{width:calc(100% - 24px)}
+ .luzv-workspace-mode .topbar .navigation.luzv-top-nav{gap:6px!important;min-height:62px}
+ .luzv-workspace-mode .topbar .luzv-theme-toggle{width:38px;min-width:38px;height:42px}
+ .luzv-home-pill{padding:9px 8px;font-size:11px}
+ .luzv-home-pill>span:first-child{font-size:15px}
+ .luzv-nav-tab{padding:9px 10px;font-size:12px}
+ .luzv-library-tools{gap:6px;margin-bottom:10px}
+ .luzv-library-links{gap:12px}
+ .luzv-library-buttons{gap:6px}
+ .luzv-library-buttons :is(#lv-fast-open,#lv-guide-open){font-size:11px;padding:6px 9px}
+ .luzv-current-plan{margin-bottom:15px}
  .luzv-current-plan strong{font-size:12px}
- .luzv-current-plan a{font-size:12px}
- .luzv-tabs-mode .mobile-cart{display:flex!important;gap:6px!important;padding:5px 10px calc(5px + env(safe-area-inset-bottom))!important}
- .luzv-tabs-mode .mobile-cart-chips{display:none!important}
- .luzv-tabs-mode .mobile-cart[data-has-items="false"]>.mobile-cart-main-row,
- .luzv-tabs-mode[data-luzv-active-tab="cart"] .mobile-cart>.mobile-cart-main-row{display:none}
- .luzv-tabs-mode .mobile-cart-info-trigger{min-height:44px}
- .luzv-tabs-mode .mobile-cart-main-row>a{min-height:42px;padding:9px 13px;font-size:12px}
- .luzv-bottom-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));width:100%;gap:3px;padding-top:3px;border-top:1px solid var(--tabs-line)}
- .luzv-bottom-tabs button{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:54px;min-width:0;padding:5px 2px;border:0;border-radius:10px;background:transparent;color:var(--tabs-muted);font:inherit;cursor:pointer}
- .luzv-bottom-tabs button>span{font-size:21px;line-height:1.2}
- .luzv-bottom-tabs small{font-size:10.5px;line-height:1.3;font-weight:750}
- .luzv-bottom-tabs button.is-active{background:var(--tabs-selected);color:var(--tabs-accent)}
- .luzv-bottom-tabs b{right:5px;top:1px;font-size:9px;min-width:17px}
- .luzv-tabs-mode #luzv-quick-nav{display:none!important}
- .luzv-bottom-tabs button:focus-visible{outline:3px solid var(--tabs-accent);outline-offset:-2px}
-}
-@media(prefers-reduced-motion:reduce){.luzv-section-tab{transition:none}}
-
-/* Reference layout: blue search header, white LuzV banner, eight shortcuts and a home view. */
-body.luzv-reference-mode{
- --app-blue:#0d5d8d;--app-page:#f3f7fb;--app-surface:#fff;--app-ink:#123b56;--app-muted:#47677d;--app-line:#d8e3ec;
- background:var(--app-page)!important;
-}
-html[data-luzv-theme="dark"] body.luzv-reference-mode{
- --app-blue:#0c527b;--app-page:#091923;--app-surface:#142e40;--app-ink:#edf8ff;--app-muted:#bdd6e5;--app-line:#315368;
-}
-.luzv-reference-mode .topbar{background:linear-gradient(110deg,#0b5684,#0b699c);border-bottom:0;box-shadow:none}
-.luzv-reference-mode .topbar .navigation.luzv-reference-header{
- display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);align-items:center!important;
- gap:24px!important;padding:14px 0 22px!important;
-}
-.luzv-header-title{display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0}
-.luzv-reference-mode .topbar .brand{display:flex!important;align-items:center;flex:1;min-width:0;gap:7px;color:#fff!important;font-size:16px!important;letter-spacing:.1px;white-space:nowrap}
-.luzv-reference-mode .topbar .brand>svg{width:19px;height:22px;flex:none}
-.luzv-reference-mode .topbar .brand>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.luzv-reference-mode .topbar nav{flex:none;gap:5px!important}
-.luzv-reference-mode .topbar nav #night-owl-toggle,
-.luzv-reference-mode .topbar nav .luzv-open-sections{
- display:grid;place-items:center;min-width:40px;width:40px;height:44px;min-height:44px;
- margin:0!important;padding:0!important;border:1px solid #ffffff45;border-radius:10px;
- background:#ffffff10;color:#fff!important;box-shadow:none;
-}
-.luzv-reference-mode .topbar nav #night-owl-toggle{font-size:0!important}
-.luzv-reference-mode .topbar nav #night-owl-toggle::before{content:"☾";color:#fff;font-size:24px}
-html[data-luzv-theme="dark"] .luzv-reference-mode .topbar nav #night-owl-toggle::before{content:"☀"}
-.luzv-reference-mode .topbar nav .luzv-open-sections{font-size:24px!important}
-.luzv-reference-mode .luzv-open-sections span{display:none}
-.luzv-header-search-row{display:flex;align-items:center;gap:9px;min-width:0}
-.luzv-header-search{display:flex;align-items:center;gap:8px;flex:1;min-width:0;height:46px;padding:0 13px;border:1px solid #ffffff60;border-radius:999px;background:var(--app-surface);color:var(--app-muted)}
-.luzv-header-search>svg{width:22px;height:22px;flex:none}
-.luzv-reference-mode #luzv-quick-search{width:100%;min-width:0;height:44px;padding:0;border:0;outline:none;background:transparent;color:var(--app-ink);font:inherit;font-size:16px;font-weight:550}
-.luzv-reference-mode #luzv-quick-search::placeholder{color:var(--app-muted);opacity:.9;font-weight:500}
-.luzv-header-search:focus-within{outline:3px solid #b7e5ff;outline-offset:3px}
-.luzv-header-icon{position:relative;display:grid;place-items:center;flex:none;width:40px;min-height:44px;padding:4px;border:0;background:transparent;color:#fff;cursor:pointer}
-.luzv-header-icon>svg{width:29px;height:29px}
-.luzv-header-icon>b{position:absolute;right:-1px;top:0;min-width:18px;padding:2px 4px;border:2px solid #0b6596;border-radius:99px;background:#fff;color:#075b8e;font-size:10px;line-height:1.2;font-weight:850}
-.luzv-header-icon [hidden]{display:none!important}
-.luzv-reference-mode main.container{position:relative;isolation:isolate}
-.luzv-reference-mode[data-luzv-active-tab="home"] main::before{content:"";position:absolute;top:0;left:calc((100vw - 100%)/-2);right:calc((100vw - 100%)/-2);height:28px;background:#0b6394;z-index:-1}
-.luzv-reference-mode main>.hero{
- max-width:1000px;margin:0 auto 18px!important;padding:18px 28px 20px!important;border:1px solid var(--app-line)!important;
- border-radius:12px!important;background:var(--app-surface)!important;box-shadow:0 4px 9px #142c4628;min-height:0!important;text-align:center;
-}
-.luzv-reference-mode .hero .studio-hero-copy{margin:0;max-width:none}
-.luzv-reference-mode .hero .eyebrow,.luzv-reference-mode .hero .badges{display:none!important}
-.luzv-reference-mode .hero h1{margin:0 0 10px!important;color:#0b5988!important;font-size:60px!important;line-height:1.05!important;font-weight:900;letter-spacing:-2px!important}
-html[data-luzv-theme="dark"] .luzv-reference-mode .hero h1{color:#a6ddff!important}
-.luzv-reference-mode .hero p{display:block!important;margin:0!important;color:var(--app-ink)!important;max-width:none;font-size:16px!important;line-height:1.6!important;font-weight:550}
-.luzv-reference-mode .hero p strong{font-weight:650}
-.luzv-reference-mode .hero .hero-bottom-actions{display:block!important;gap:0;margin:14px 0 0!important}
-.luzv-reference-mode .hero .hero-primary-bar{
- display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;padding:10px 16px!important;
- border-radius:999px!important;background:linear-gradient(100deg,#0d6294,#0b5685)!important;color:#fff!important;
- box-shadow:none!important;font-size:17px!important;font-weight:850;text-decoration:none;
-}
-.luzv-reference-mode .hero .hero-secondary-link{display:none!important}
-.luzv-reference-mode .luzv-tabs-nav{position:sticky;background:var(--app-page);margin:14px 0;padding:6px 0;border:0;border-radius:0;box-shadow:none}
-.luzv-reference-mode .luzv-tabs-toolbar{position:absolute;right:0;top:6px;margin:0;z-index:1}
-.luzv-reference-mode .luzv-tabs-caption{display:none}
-.luzv-reference-mode .luzv-tabs-tools :is(#lv-fast-open,#lv-guide-open){min-height:34px;background:var(--app-surface);border-color:var(--app-line);color:var(--app-ink)}
-.luzv-reference-mode .luzv-tabs-grid{gap:9px}
-.luzv-reference-mode .luzv-section-tab{
- min-height:88px;padding:8px 5px;border:1px solid var(--app-line);border-radius:10px;
- background:var(--app-surface);color:var(--app-ink);box-shadow:0 2px 5px #102c421a;font-size:12px;font-weight:750;
-}
-.luzv-reference-mode .luzv-section-tab-icon{width:39px;height:39px;padding:8px;border-radius:50%;background:#0d5e8e;color:#fff}
-.luzv-reference-mode .luzv-section-tab-icon svg{width:100%;height:100%}
-.luzv-reference-mode .luzv-section-tab-icon>strong{font-size:23px;line-height:1;font-weight:850}
-.luzv-reference-mode .luzv-section-tab[aria-selected="true"]{border-color:#1376b0;background:var(--tabs-selected);color:var(--tabs-accent);box-shadow:0 0 0 1px #1376b080}
-.luzv-reference-mode .luzv-section-home{grid-column:1/-1;justify-self:start;display:flex;flex-direction:row;gap:5px;min-height:34px;height:34px;padding:5px 10px;font-size:12px;box-shadow:none}
-.luzv-reference-mode .luzv-section-home .luzv-section-tab-icon{width:17px;height:17px;padding:0;background:transparent;color:inherit}
-.luzv-reference-mode .luzv-section-home[aria-selected="true"]{background:#0d5e8e;color:#fff;border-color:#0d5e8e}
-.luzv-reference-mode .luzv-tab-panel[data-luzv-panel="home"]{max-width:1100px;margin:0 auto}
-.luzv-home-featured{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.luzv-home-card{display:flex;flex-direction:column;min-width:0;container-type:inline-size;overflow:hidden;border:1px solid var(--app-line);border-radius:12px;background:#0c5e8e;box-shadow:0 3px 8px #102c4228}
-.luzv-home-cover{position:relative;aspect-ratio:3/2;overflow:hidden;background:var(--home-cover-color)}
-.luzv-home-card .course-art{position:absolute;inset:0;background-size:400% 300%;background-position:var(--course-art-x) var(--course-art-y);background-repeat:no-repeat}
-.luzv-home-book-code{position:absolute;left:51%;top:31%;transform:translate(-50%,-50%) rotate(-12deg);color:#efffff;font-size:clamp(13px,14cqw,38px);line-height:1;font-weight:950;white-space:nowrap;text-shadow:0 2px 0 var(--home-cover-color),0 4px 4px #0008}
-.luzv-home-card-body{display:flex;flex:1;flex-direction:column;align-items:stretch;padding:13px 14px;color:#fff}
-.luzv-home-card h3{margin:0 0 6px;color:#fff;font-size:19px;line-height:1.3;min-height:2.6em;font-weight:800;overflow-wrap:anywhere}
-.luzv-home-price{font-size:24px;line-height:1.2;font-weight:900;color:#fff}
-.luzv-home-price-unit{margin:3px 0 10px;color:#dfF3ff;font-size:12px;line-height:1.3;font-weight:650}
-.luzv-home-select{display:flex;align-items:center;justify-content:center;min-height:44px;width:100%;margin-top:auto;padding:8px 10px;border:0;border-radius:999px;background:#fff;color:#0b5685;font:inherit;font-size:14px;line-height:1.25;font-weight:800;cursor:pointer}
-.luzv-home-card.is-selected{box-shadow:0 0 0 2px #20b58b,0 3px 9px #102c4230}
-.luzv-home-card.is-selected .luzv-home-select{background:#d2ffef;color:#075d42}
-.luzv-home-feedback{margin:12px 0;padding:10px 12px;border:1px solid var(--app-line);border-radius:10px;background:var(--app-surface);color:var(--app-ink);font-size:13px;font-weight:650;line-height:1.5}
-.luzv-home-feedback[hidden]{display:none}
-.luzv-home-offers{margin-top:22px}
-.luzv-home-section-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
-.luzv-home-section-heading h2{margin:0;color:var(--app-ink);font-size:23px;line-height:1.3;font-weight:850}
-.luzv-home-section-heading a{flex:none;color:var(--tabs-accent);font-size:13px;font-weight:700;text-decoration:none}
-.luzv-home-vouchers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.luzv-home-vouchers button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;min-height:90px;padding:12px 8px;border:1px solid var(--app-line);border-radius:12px;background:#d7efff;color:#104c72;cursor:pointer}
-html[data-luzv-theme="dark"] .luzv-home-vouchers button{background:#1b4059;color:#e9f7ff}
-.luzv-home-vouchers strong{font-size:22px;line-height:1.2;font-weight:850}
-.luzv-home-vouchers small{font-size:12px;line-height:1.4;font-weight:700;text-align:center}
-.luzv-reference-mode .luzv-bottom-tabs{border-top:0}
-.luzv-reference-mode .luzv-bottom-tabs button{color:var(--app-ink)}
-.luzv-reference-mode .luzv-bottom-tabs button>span{width:24px;height:24px}
-.luzv-reference-mode .luzv-bottom-tabs svg{width:100%;height:100%}
-.luzv-reference-mode .luzv-bottom-tabs button.is-active{background:transparent;color:#0873ad}
-html[data-luzv-theme="dark"] .luzv-reference-mode .luzv-bottom-tabs button.is-active{color:#a4ddff}
-.luzv-reference-mode :is(.luzv-home-select,.luzv-home-vouchers button,.luzv-header-icon):focus-visible{outline:3px solid var(--tabs-accent);outline-offset:3px}
-.luzv-reference-mode .luzv-header-icon:focus-visible{outline-color:#d1efff}
-@media(max-width:820px){
- .luzv-reference-mode .topbar .navigation.luzv-reference-header{grid-template-columns:1fr;gap:8px!important;padding:10px 0 20px!important}
- .luzv-reference-mode .topbar .brand{font-size:clamp(11.5px,3.4vw,15px)!important}
- .luzv-reference-mode .topbar nav{gap:4px!important}
- .luzv-reference-mode .topbar nav #night-owl-toggle,.luzv-reference-mode .topbar nav .luzv-open-sections{width:38px;min-width:38px}
- .luzv-header-search-row{gap:7px}
- .luzv-header-search{padding-inline:10px;gap:7px;height:44px}
- .luzv-reference-mode #luzv-quick-search{font-size:14px}
- .luzv-header-icon{width:36px}
- .luzv-header-icon>svg{width:27px;height:27px}
- .luzv-reference-mode main>.hero{padding:12px 18px 15px!important;margin:0 0 14px!important;border-radius:11px!important}
- .luzv-reference-mode .hero h1{font-size:49px!important;margin-bottom:8px!important}
- .luzv-reference-mode .hero p{font-size:13px!important;line-height:1.55!important}
- .luzv-reference-mode .hero .hero-primary-bar{min-height:44px!important;font-size:15px!important;margin:0!important}
- .luzv-reference-mode .luzv-tabs-nav{position:relative;top:0;margin:12px 0;padding:3px 0}
- .luzv-reference-mode .luzv-tabs-toolbar{top:3px}
- .luzv-reference-mode .luzv-tabs-tools{gap:5px}
- .luzv-reference-mode .luzv-tabs-tools :is(#lv-fast-open,#lv-guide-open){padding:6px 8px;font-size:10.5px;min-height:34px}
- .luzv-reference-mode .luzv-tabs-grid{gap:8px}
- .luzv-reference-mode .luzv-section-tab{min-height:85px;padding:7px 4px;gap:5px;font-size:11.5px}
- .luzv-reference-mode .luzv-section-tab-icon{width:38px;height:38px;padding:8px}
- .luzv-reference-mode .luzv-section-home{min-height:34px;height:34px;padding:5px 8px;font-size:11px}
- .luzv-reference-mode .luzv-section-home .luzv-section-tab-icon{width:16px;height:16px;padding:0}
- .luzv-home-featured{gap:9px}
- .luzv-home-card{border-radius:10px}
- .luzv-home-card-body{padding:8px 7px}
- .luzv-home-card h3{font-size:12px;min-height:2.6em;margin-bottom:5px}
- .luzv-home-price{font-size:16px}
- .luzv-home-price-unit{font-size:9.5px;margin-bottom:8px}
- .luzv-home-select{font-size:11.5px;min-height:44px;padding:7px 4px}
- .luzv-home-section-heading h2{font-size:20px}
- .luzv-home-section-heading a{font-size:12px}
- .luzv-home-vouchers{gap:8px}
- .luzv-home-vouchers button{min-height:82px;padding:10px 5px}
- .luzv-home-vouchers strong{font-size:17px}
- .luzv-home-vouchers small{font-size:10.5px}
-}
-@media(max-width:360px){
- .luzv-reference-mode .hero h1{font-size:44px!important}
- .luzv-reference-mode .hero p{font-size:12px!important}
- .luzv-reference-mode .luzv-section-tab{font-size:10.5px}
- .luzv-reference-mode .luzv-tabs-tools :is(#lv-fast-open,#lv-guide-open){font-size:10px;padding-inline:6px}
- .luzv-home-card h3{font-size:11px}
- .luzv-home-price{font-size:14px}
- .luzv-home-select{font-size:10.5px}
- .luzv-home-vouchers strong{font-size:15px}
+ .luzv-tab-pane .section-heading h2{font-size:21px}
+ .luzv-tab-pane .section-heading .count{font-size:11px}
+ .luzv-workspace-mode #subjects{gap:10px!important}
+ .luzv-workspace-mode #subjects .subject-name{margin:10px 9px 8px!important}
+ .luzv-workspace-mode #subjects .vinh-price-year-row{margin:0 9px 9px!important}
+ .luzv-workspace-mode #subjects .vinh-price-year-row .subject-price{font-size:17px!important}
+ .luzv-workspace-mode #subjects .subject-choice{margin:auto 9px 10px!important;font-size:12px!important}
+ .luzv-workspace-mode #subjects .choice-text::after{font-size:12px!important}
+ .luzv-tab-heading h2{font-size:22px}
+ .luzv-workspace-mode #luzv-gpa-calculator{padding:14px}
 }
 
 </style>
@@ -8788,13 +8665,13 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
   const open = $('lv-guide-open');
   $('lv-fast-open')?.insertAdjacentElement('afterend', open);
   const steps = [
-    {selectors:['#luzv-rail-track','#search'], title:'📚 Chọn môn bạn cần ôn', text:'Vuốt qua các bộ đề và bấm + Chọn môn để thêm vào túi. Bạn có thể chọn nhiều môn, hoặc bấm ✓ Đã thêm để gỡ môn.'},
+    {selectors:['#search','#luzv-rail-track'], title:'📚 Chọn môn bạn cần ôn', text:'Tìm môn cần ôn và bấm + Chọn môn để thêm vào túi. Bạn có thể chọn nhiều môn, hoặc bấm ✓ Đã chọn để gỡ môn.'},
     {selectors:['#group-plan-grid'], title:'👥 Chọn gói phù hợp', text:'Chọn gói 1, 2 hoặc 5 người. Giá là giá mỗi môn cho cả gói. Solo không tự giảm theo số môn; tổng tiền luôn cập nhật theo lựa chọn của bạn.'},
     {selectors:['#luzv-coupon','#luzv-tier-promo','#luzv-file-store'], title:'🎟️ Áp mã ưu đãi', text:'Có mã ưu đãi? Nhập mã rồi nhấn Áp dụng: Solo giảm 5%, gói 2 người giảm 3%, gói 5 người giảm 1%. Gói nhóm tính mã sau ưu đãi số môn. Không áp dụng cho PDF.', details:'#luzv-order-benefits'},
     {selectors:['#don-hang .total-row','#order-title'], title:'🛍️ Kiểm tra túi ôn tập', text:'Kiểm tra các môn, gói ôn tập và tổng tiền. Bạn có thể gỡ môn trong túi, bổ sung tài khoản nhận đề trước khi chốt đơn.'},
     {selectors:['#studio-checkout'], title:'📱 Chốt đơn và thanh toán', text:'Bấm Chốt đơn để xem thông tin chuyển khoản, rồi gửi nội dung đơn và bill qua Zalo/Facebook. Đơn có môn Azota cần nhập tài khoản nhận đề. LuzV sẽ kiểm tra và cấp đề. Hướng dẫn chỉ giới thiệu thao tác, không tạo đơn hay chuyển tiền.'}
   ];
-  let index = 0, target = null, previousFocus = null, previousTab = null;
+  let index = 0, target = null, previousFocus = null, previousTab = null, previousDetails = [];
   let run = 0, frame = 0, scrolling = false, ringBox = null, cardBox = null;
   let autoTimer = 0, autoPending = false, autoHandled = false;
   const reduceMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -8962,6 +8839,7 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
     if (tour.open || document.querySelector('dialog[open]')) return;
     previousFocus = document.activeElement;
     previousTab = window.LuzVTabs?.active || null;
+    previousDetails = [...document.querySelectorAll('details')].map(node => [node, node.open]);
     index = 0; ringBox = null; cardBox = null; ring.hidden = true;
     // Start the explanation inside the viewport before showModal moves focus into it.
     Object.assign(card.style, {top:'12px', left:'12px'});
@@ -8976,7 +8854,8 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
     ++run; scrolling = false;
     cancelAnimationFrame(frame); frame = 0;
     tour.setAttribute('aria-busy', 'false'); tour.classList.remove('is-moving');
-    // Stay at the last explained section instead of jumping to the launch button.
+    for (const [node, wasOpen] of previousDetails) if (node.isConnected) node.open = wasOpen;
+    previousDetails = [];
     if (window.LuzVTabs) window.LuzVTabs.activate(previousTab || 'home', {history:false,scroll:previousTab==='home',smooth:false});
     if (previousFocus?.isConnected && previousFocus.getClientRects().length) previousFocus.focus({preventScroll:true});
   });
@@ -9323,297 +9202,208 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
 
 </script>
 <script>
-/* Show one section at a time, retaining the original controls and shared cart. */
+/* Four content tabs and one shared checkout, using the existing controls and prices. */
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
   const main = document.querySelector('main.container'), hero = main?.querySelector('.hero');
   const catalog = $('mon-hoc'), cart = $('don-hang'), calculator = $('luzv-gpa-calculator');
   const plans = $('luzv-group-plans'), pdf = $('luzv-file-store'), free = $('luzv-dual-free-section');
-  const contact = $('lien-he'), layout = catalog?.parentElement;
-  if (!main || !hero || !catalog || !cart || !calculator || !plans || !pdf || !free || !contact) return;
-  function icon(name) {
-    const paths = {
-      home:'<path d="m3 11 9-8 9 8M5 10v11h5v-7h4v7h5V10"/>',
-      courses:'<path d="M4 4h6l2 2 2-2h6v16h-6l-2 1-2-1H4zM12 6v15"/>',
-      pdf:'<path d="M6 2h9l4 4v16H6zM14 2v5h5"/><text x="8" y="16" fill="currentColor" stroke="none" font-size="6" font-weight="800">PDF</text>',
-      plans:'<circle cx="12" cy="7" r="3"/><path d="M6 21v-3a6 6 0 0 1 12 0v3M3 8a2 2 0 0 0 0 4M21 8a2 2 0 0 1 0 4M2 15v5M22 15v5"/>',
-      cart:'<path d="M3 5h3l2 12h11l3-9H7M9 21h.01M18 21h.01"/>',
-      gpa:'<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h1M14 11h1M8 15h1M14 15h1M8 19h1M14 19h1"/>',
-      contribute:'<path d="M13 4H4v17h16v-9M10 14l1-4 8-8 3 3-8 8z"/>',
-      referral:'<path d="M3 9h18v5H3zM5 14v8h14v-8M12 9v13M12 9H8a3 3 0 1 1 3-3l1 3Zm0 0h4a3 3 0 1 0-3-3l-1 3Z"/>',
-      support:'<path d="M21 11a9 9 0 0 1-9 9H6l-4 3 1-7a9 9 0 1 1 18-5Z"/><text x="5" y="13" fill="currentColor" stroke="none" font-size="6.5" font-weight="800">SOS</text>',
-      search:'<circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/>',
-      bell:'<path d="M5 9a7 7 0 0 1 14 0v7l2 3H3l2-3zM9 22h6"/>',
-      plane:'<path d="m22 2-7 20-4-9-9-4 20-7ZM11 13 22 2"/>'
-    };
-    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'+(paths[name]||paths.courses)+'</svg>';
-  }
-
-  const nav = document.createElement('nav');
-  nav.id = 'luzv-toc';nav.className = 'luzv-tabs-nav';nav.setAttribute('aria-label','Các mục ôn tập');
-  const toolbar = document.createElement('div');toolbar.className = 'luzv-tabs-toolbar';
-  const title = document.createElement('span');title.className = 'luzv-tabs-caption';title.textContent = 'Bạn muốn làm gì hôm nay?';
-  const tools = document.createElement('div');tools.className = 'luzv-tabs-tools';
-  for (const id of ['lv-fast-open','lv-guide-open']) if ($(id)) tools.append($(id));
-  tools.querySelector('#lv-fast-open').textContent = '⚡ Nhanh';
-  tools.querySelector('#lv-fast-open').setAttribute('aria-label','Đăng ký nhanh: chọn môn và xem QR');
-  tools.querySelector('#lv-guide-open').textContent = '✨ Hướng dẫn';
-  tools.querySelector('#lv-guide-open').setAttribute('aria-label','Xem hướng dẫn sử dụng 5 bước');
-  toolbar.append(title,tools);
-  const tabs = document.createElement('div');tabs.className = 'luzv-tabs-grid';
-  tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','Chọn nội dung');
-  nav.append(toolbar,tabs);
-  const stage = document.createElement('div');stage.id = 'luzv-tab-content';stage.className = 'luzv-tabs-stage';
-  hero.after(nav,stage);
-  const definitions = [
-    {id:'courses',label:'32 Môn Azota',icon:'📚',anchor:'mon-hoc'},
-    {id:'pdf',label:'Ngân hàng PDF',icon:'📄',anchor:'luzv-file-store'},
-    {id:'plans',label:'Gói & ưu đãi',icon:'👥',anchor:'luzv-group-plans'},
-    {id:'cart',label:'Túi ôn tập',icon:'👜',anchor:'don-hang'},
-    {id:'gpa',label:'Tính điểm',icon:'🧮',anchor:'luzv-gpa-calculator'},
-    {id:'contribute',label:'Đóng góp đề',icon:'📝',anchor:'luzv-contribute'},
-    {id:'referral',label:'Giới thiệu bạn',icon:'🎁',anchor:'luzv-referral'},
-    {id:'support',label:'Hỗ trợ / SOS',icon:'🆘',anchor:'lien-he'}
-  ];
-  function panelFor(def,node) {
-    const panel = node || document.createElement('section');
-    panel.id = 'luzv-panel-' + def.id;panel.classList.add('luzv-tab-panel');panel.dataset.luzvPanel = def.id;
-    panel.setAttribute('role','tabpanel');panel.setAttribute('aria-labelledby','luzv-tab-' + def.id);
-    panel.tabIndex = 0;panel.hidden = true;def.panel = panel;
-    if (!node) stage.append(panel);
-    return panel;
-  }
-  function link(text,target) {
-    const a = document.createElement('a');a.href = '#' + target;a.textContent = text;return a;
-  }
-  function heading(panel,text,description) {
-    const head = document.createElement('div');head.className = 'luzv-tab-heading';
-    const h2 = document.createElement('h2');h2.textContent = text;head.append(h2);
-    if (description) {const p = document.createElement('p');p.textContent = description;head.append(p);}
+  const contact = $('lien-he'), oldLayout = catalog?.parentElement, header = document.querySelector('.topbar');
+  if (!main || !hero || !catalog || !cart || !calculator || !plans || !pdf || !free || !contact || !header) return;
+  const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fold = value => String(value || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/\s+/g,' ').trim();
+  function link(text,id) {const a=document.createElement('a');a.href='#'+id;a.textContent=text;return a;}
+  function heading(panel,title,description) {
+    const head=document.createElement('div');head.className='luzv-tab-heading';
+    const h2=document.createElement('h2');h2.textContent=title;head.append(h2);
+    if(description){const p=document.createElement('p');p.textContent=description;head.append(p);}
     panel.append(head);
   }
-  const coursePanel = panelFor(definitions[0]);
-  const rail = $('luzv-exam-countdown-box');if (rail) coursePanel.append(rail);
-  const planSummary = document.createElement('div');planSummary.className = 'luzv-current-plan';
-  const planText = document.createElement('strong');planText.id = 'luzv-tabs-plan-summary';
-  planSummary.append(planText,link('Đổi gói →','luzv-group-plans'));
-  coursePanel.append(planSummary,layout);
-  const pdfPanel = panelFor(definitions[1]);
-  heading(pdfPanel,'Ngân hàng PDF','10.000đ/file · LuzV gửi tài liệu sau khi xác nhận chuyển khoản.');
-  pdfPanel.append(pdf,link('Xem túi ôn tập →','don-hang'));pdfPanel.lastElementChild.className = 'luzv-tab-next';
-  const plansPanel = panelFor(definitions[2]);
-  heading(plansPanel,'Gói ôn tập & ưu đãi','Chọn gói cho 1, 2 hoặc 5 người. Mỗi người dùng tài khoản Azota riêng.');
-  plansPanel.append(plans);
-  const rules = document.createElement('div');rules.className = 'luzv-tab-rules';
-  rules.innerHTML = '<h3>Ưu đãi theo gói</h3><p><strong>Solo:</strong> 15.000đ/môn, không tự giảm theo số môn.</p><p><strong>Gói nhóm:</strong> Giảm 10% khi chọn 3–4 môn, giảm 15% từ 5 môn. Giá gói 5 người là 50.000đ/môn cho cả nhóm, tương đương 10.000đ/người/môn trước ưu đãi.</p><p>Mã ưu đãi nhập trong Túi ôn tập. PDF giữ nguyên 10.000đ/file.</p>';
-  rules.append(link('Nhập mã ưu đãi trong Túi ôn tập →','luzv-coupon'));
-  plansPanel.append(rules,link('Chọn môn với gói này →','mon-hoc'));plansPanel.lastElementChild.className = 'luzv-tab-next';
-  panelFor(definitions[3]).append(cart);
-  const shortcuts = document.createElement('div');shortcuts.className = 'luzv-cart-tab-shortcuts';
-  shortcuts.append(link('＋ Chọn môn','mon-hoc'),link('＋ Thêm PDF','luzv-file-store'),link('Đổi gói','luzv-group-plans'));
-  cart.querySelector('.order-header').after(shortcuts);
-  const emptyLinks = document.createElement('div');emptyLinks.className = 'luzv-empty-links';
-  emptyLinks.append(link('Chọn môn →','mon-hoc'),link('Chọn PDF →','luzv-file-store'));$('empty').append(emptyLinks);
-  panelFor(definitions[4]).append(calculator);
-  stage.append(free);
-  panelFor(definitions[5],$('luzv-contribute').closest('.luzv-free-col'));
-  panelFor(definitions[6],$('luzv-referral').closest('.luzv-free-col'));
-  const help = panelFor(definitions[7]);
-  heading(help,'Hỗ trợ & góp ý','Chọn nội dung bạn cần, LuzV sẽ hướng dẫn gửi qua Zalo hoặc Facebook.');
-  const helpActions = document.createElement('div');helpActions.className = 'luzv-help-actions';
-  for (const [text,report] of [['🆘 Hỏi bài 1-1',false],['📝 Góp ý bộ đề',true]]) {
-    const button = document.createElement('button');button.type = 'button';button.textContent = text;
-    button.addEventListener('click',() => {$('sos-nav-trigger').click();$(report?'sos-tab-report':'sos-tab-help').click();});
-    helpActions.append(button);
-  }
-  help.append(helpActions,contact);
-  const homeDefinition = {id:'home',label:'Trang chủ',icon:'home',anchor:'trang-chu'};
-  const home = panelFor(homeDefinition);hero.id = 'trang-chu';
-  const featured = document.createElement('div');featured.className = 'luzv-home-featured';featured.id = 'luzv-subject-cards';
-  const featuredItems = [
-    {index:0,type:'azota',name:COURSE_DATA[0].name},
-    {index:9,type:'azota',name:COURSE_DATA[9].name},
-    {index:5,type:'pdf',name:'PDF Điện Tử Số',file:'nhch-dien-tu-so'}
-  ];
-  for (const item of featuredItems) {
-    const course = COURSE_DATA[item.index], theme = getCourseVisualTheme(course);
-    const card = document.createElement('article');card.className = 'luzv-home-card luzv-product-card';card.dataset.name = item.name;
-    card.style.setProperty('--course-art-x',theme.art%4*100/3+'%');card.style.setProperty('--course-art-y',Math.floor(theme.art/4)*50+'%');
-    card.style.setProperty('--home-cover-color',theme.dark);
-    const cover = document.createElement('div');cover.className = 'luzv-home-cover';cover.setAttribute('aria-hidden','true');
-    const art = document.createElement('span');art.className = 'course-art';
-    const code = document.createElement('span');code.className = 'luzv-home-book-code';code.textContent = item.type==='pdf'?'PDF':course.code;
-    cover.append(art,code);
-    const body = document.createElement('div');body.className = 'luzv-home-card-body';
-    const name = document.createElement('h3');name.textContent = item.name;
-    const price = document.createElement('strong');price.className = 'luzv-home-price';
-    const unit = document.createElement('small');unit.className = 'luzv-home-price-unit';
-    const button = document.createElement('button');button.type = 'button';button.className = 'luzv-home-select';
-    button.addEventListener('click',() => {
-      if (item.type==='pdf' && window.luzvGetFileSelection?.()?.id===item.file) {
-        $('luzv-file-product').value='';$('luzv-file-product').dispatchEvent(new Event('change',{bubbles:true}));
-        feedback.textContent='Đã bỏ '+item.name+' khỏi Túi ôn tập.';feedback.hidden=false;
-      } else if (item.type!=='pdf' && selected.has(item.index)) {
-        checkboxes[item.index].click();feedback.textContent='Đã bỏ '+item.name+' khỏi Túi ôn tập.';feedback.hidden=false;
-      }
-      else quickAddSubject(item.type==='pdf'?item.file:item.name,0,item.type);
-    });
-    body.append(name,price,unit,button);card.append(cover,body);featured.append(card);
-    Object.assign(item,{card,price,unit,button});
-  }
-  const feedback = document.createElement('p');feedback.id = 'luzv-quick-feedback';feedback.className = 'luzv-home-feedback';feedback.setAttribute('role','status');feedback.hidden=true;
-  const offers = document.createElement('section');offers.className = 'luzv-home-offers';
-  const offersHead = document.createElement('div');offersHead.className = 'luzv-home-section-heading';
-  const offersTitle = document.createElement('h2');offersTitle.textContent = 'Nấc ưu đãi kho đề';offersHead.append(offersTitle,link('Xem tất cả','luzv-group-plans'));
-  const vouchers = document.createElement('div');vouchers.className = 'luzv-home-vouchers';
-  for (const [title,description] of [['Giảm 10%','Gói nhóm · 3–4 môn'],['Giảm 15%','Gói nhóm · từ 5 môn'],['10.000đ','/người/môn · gói 5']]) {
-    const button = document.createElement('button');button.type='button';button.dataset.luzvOpenTab='plans';
-    const strong = document.createElement('strong');strong.textContent=title;
-    const small = document.createElement('small');small.textContent=description;button.append(strong,small);vouchers.append(button);
-  }
-  offers.append(offersHead,vouchers);home.append(featured,feedback,offers);
-  definitions.unshift(homeDefinition);
-  for (const def of definitions) {
-    const button = document.createElement('button');button.type = 'button';button.id = 'luzv-tab-' + def.id;
-    button.className = 'luzv-section-tab'+(def.id==='home'?' luzv-section-home':'');button.dataset.luzvOpenTab = def.id;button.setAttribute('role','tab');
-    button.setAttribute('aria-controls',def.panel.id);button.setAttribute('aria-selected','false');button.tabIndex = -1;
-    const glyph = document.createElement('span');glyph.className = 'luzv-section-tab-icon';glyph.setAttribute('aria-hidden','true');
-    glyph.innerHTML = def.id==='courses'?'<strong>32</strong>':icon(def.id);
-    const label = document.createElement('span');label.textContent = def.label;button.append(glyph,label);
-    if (def.id === 'cart') {
-      const badge = document.createElement('span');badge.className = 'luzv-section-tab-badge';badge.dataset.luzvCartCount = '';badge.hidden = true;button.append(badge);
-    }
-    def.button = button;tabs.append(button);
-  }
-  const dock = document.createElement('nav');dock.className = 'luzv-bottom-tabs';dock.setAttribute('aria-label','Chuyển mục nhanh');
-  for (const id of ['home','courses','cart','gpa','support']) {
-    const def = definitions.find(item=>item.id===id), button = document.createElement('button');
-    button.type = 'button';button.dataset.luzvOpenTab = id;button.setAttribute('aria-controls',def.panel.id);
-    const glyph = document.createElement('span');glyph.setAttribute('aria-hidden','true');glyph.innerHTML=icon(id);
-    const label = document.createElement('small');label.textContent = {home:'Trang chủ',courses:'Chọn môn',cart:'Túi ôn tập',gpa:'Tính điểm',support:'SOS LuzV'}[id];
-    button.append(glyph,label);
-    if (id === 'cart') {const badge=document.createElement('b');badge.id='luzv-bottom-badge';badge.dataset.luzvCartCount='';badge.hidden=true;button.append(badge);}
-    dock.append(button);
-  }
-  const mobile = document.querySelector('.mobile-cart');mobile.append(dock);
-  const header = document.querySelector('.topbar'), headerNav = header.querySelector('nav');
-  const menu = document.createElement('button');menu.type = 'button';menu.className = 'luzv-open-sections';
-  menu.setAttribute('aria-label','Mở danh sách các mục');menu.setAttribute('aria-controls',nav.id);
-  menu.innerHTML = '☷<span> Các mục</span>';headerNav.append(menu);headerNav.setAttribute('aria-label','Điều hướng và giao diện');
-  const navigation = header.querySelector('.navigation'), brand = header.querySelector('.brand');
-  navigation.classList.add('luzv-reference-header');
-  const headerTitle = document.createElement('div');headerTitle.className='luzv-header-title';
-  brand.innerHTML=icon('plane')+'<span>KHO ĐỀ LUZV · '+COURSE_DATA.length+' MÔN HỌC</span>';
-  brand.setAttribute('aria-label','Kho đề LuzV, về Trang chủ');headerTitle.append(brand,headerNav);
-  for (const child of [...navigation.children]) headerNav.append(child);
-  const headerSearchRow = document.createElement('div');headerSearchRow.className='luzv-header-search-row';
-  const searchLabel = document.createElement('label');searchLabel.className='luzv-header-search';searchLabel.innerHTML=icon('search');
-  const headerSearch = document.createElement('input');headerSearch.id='luzv-quick-search';headerSearch.type='search';headerSearch.autocomplete='off';
-  headerSearch.placeholder='Bạn muốn tìm môn gì hôm nay?';headerSearch.setAttribute('aria-label','Tìm môn học');searchLabel.append(headerSearch);
-  const offersButton = document.createElement('button');offersButton.type='button';offersButton.className='luzv-header-icon';offersButton.dataset.luzvOpenTab='plans';
-  offersButton.setAttribute('aria-label','Xem gói và ưu đãi');offersButton.innerHTML=icon('bell');
-  const cartButton = document.createElement('button');cartButton.type='button';cartButton.className='luzv-header-icon';cartButton.dataset.luzvOpenTab='cart';cartButton.id='luzv-header-cart';
-  cartButton.setAttribute('aria-label','Mở túi ôn tập');cartButton.innerHTML=icon('cart');
-  const headerBadge = document.createElement('b');headerBadge.id='luzv-top-badge';headerBadge.dataset.luzvCartCount='';headerBadge.hidden=true;cartButton.append(headerBadge);
-  headerSearchRow.append(searchLabel,offersButton,cartButton);navigation.replaceChildren(headerTitle,headerSearchRow);
 
-  let active = null, routeFrame = 0;
-  const aliases = {'trang-chu':hero,'phan-chon-mon':catalog,'phan-ngan-hang-pdf':pdf,'phan-uu-dai':plans,
-    'phan-tui-on-tap':cart,'phan-tinh-diem':calculator,'phan-gop-y':help,'phan-sos':help};
-  function resolveTarget(value) {
-    if (value?.nodeType===1) return value;
-    let id;try {id=decodeURIComponent(String(value||'').replace(/^#/,''));} catch {return null;}
+  main.id='trang-chu';hero.hidden=true;
+  const pageTitle=document.createElement('h1');pageTitle.className='luzv-visually-hidden';pageTitle.textContent='Kho đề ôn tập LuzV';main.prepend(pageTitle);
+  const workspace=document.createElement('div');workspace.className='luzv-two-col-layout';workspace.id='luzv-workspace';
+  const stage=document.createElement('div');stage.className='luzv-left-column';stage.id='luzv-tab-content';
+  workspace.append(stage,cart);main.append(workspace);cart.classList.add('luzv-right-column');
+  const definitions=[
+    {id:'courses',pane:'tab-kho-de',label:'📚 Kho đề Azota & PDF',anchor:'mon-hoc'},
+    {id:'plans',pane:'tab-goi-uu-dai',label:'🎁 Gói & Ưu đãi',anchor:'luzv-group-plans'},
+    {id:'gpa',pane:'tab-tinh-diem',label:'🧮 Tính điểm',anchor:'luzv-gpa-calculator'},
+    {id:'support',pane:'tab-ho-tro',label:'💬 Hỗ trợ & Đóng góp',anchor:'lien-he'}
+  ];
+  for(const def of definitions){
+    const panel=document.createElement('section');panel.id=def.pane;panel.className='luzv-tab-pane luzv-tab-panel';
+    panel.dataset.luzvPanel=def.id;panel.setAttribute('role','tabpanel');panel.setAttribute('aria-labelledby','luzv-tab-'+def.id);
+    panel.tabIndex=0;panel.hidden=true;stage.append(panel);def.panel=panel;
+  }
+  const [courseDef,planDef,gpaDef,supportDef]=definitions;
+  const tools=document.createElement('div');tools.className='luzv-library-tools';
+  const toolLinks=document.createElement('div');toolLinks.className='luzv-library-links';
+  toolLinks.append(link('📄 Chọn PDF','luzv-file-store'),link('🎒 Xem túi ôn tập','don-hang'));
+  const toolButtons=document.createElement('div');toolButtons.className='luzv-library-buttons';
+  for(const [id,label] of [['lv-fast-open','⚡ Chọn nhanh'],['lv-guide-open','✨ Hướng dẫn']]){
+    const button=$(id);if(button){button.textContent=label;toolButtons.append(button);}
+  }
+  tools.append(toolLinks,toolButtons);
+  const planSummary=document.createElement('div');planSummary.className='luzv-current-plan';
+  const planText=document.createElement('strong');planText.id='luzv-tabs-plan-summary';
+  planSummary.append(planText,link('Đổi gói →','luzv-group-plans'));
+  const feedback=document.createElement('p');feedback.id='luzv-quick-feedback';feedback.className='luzv-quick-feedback';feedback.setAttribute('role','status');feedback.hidden=true;
+  courseDef.panel.append(tools,planSummary,feedback,catalog,pdf);
+  catalog.querySelector('.section-heading h2').textContent='Chọn môn Azota (32 môn)';
+  $('search').placeholder='Tìm môn học: Pháp luật, Khí cụ điện, CN XHKH…';
+  $('search').setAttribute('aria-label','Tìm kiếm trong 32 môn Azota');
+  pdf.querySelector('#luzv-file-heading').textContent='📄 Ngân hàng câu hỏi PDF';
+  const rail=$('luzv-exam-countdown-box');
+  if(rail){
+    const quick=document.createElement('details');quick.className='luzv-quick-library';
+    const summary=document.createElement('summary');summary.textContent='⚡ Chọn nhanh & tiến độ ôn tập';quick.append(summary,rail);
+    const progress=$('luzv-study-dashboard');if(progress)quick.append(progress);
+    catalog.querySelector('.section-heading').after(quick);
+  }
+  heading(planDef.panel,'Gói ôn tập & ưu đãi','Chọn gói cho 1, 2 hoặc 5 người. Mỗi người dùng tài khoản Azota riêng.');
+  planDef.panel.append(plans);
+  const rules=document.createElement('div');rules.className='luzv-tab-rules';
+  rules.innerHTML='<h3>Ưu đãi theo gói</h3><p><strong>Solo:</strong> 15.000đ/môn, không tự giảm theo số môn.</p><p><strong>Gói nhóm 2 hoặc 5 người:</strong> Giảm 10% khi chọn 3–4 môn, giảm 15% từ 5 môn. Giá gói 5 người là 50.000đ/môn cho cả nhóm, tương đương 10.000đ/người/môn trước ưu đãi.</p><p>Mã ưu đãi tính sau ưu đãi nhóm. PDF giữ nguyên 10.000đ/file.</p>';
+  rules.append(link('Nhập mã ưu đãi trong túi →','luzv-coupon'));
+  planDef.panel.append(rules,link('Chọn môn với gói này →','mon-hoc'));planDef.panel.lastElementChild.className='luzv-tab-next';
+  gpaDef.panel.append(calculator);
+  heading(supportDef.panel,'Hỗ trợ & Đóng góp','Hỏi bài, góp ý bộ đề hoặc nhận đề từ chương trình đóng góp và giới thiệu bạn.');
+  const helpActions=document.createElement('div');helpActions.className='luzv-help-actions';
+  for(const [text,report] of [['🆘 Hỏi bài 1-1',false],['📝 Góp ý bộ đề',true]]){
+    const button=document.createElement('button');button.type='button';button.textContent=text;
+    button.addEventListener('click',()=>{$('sos-nav-trigger').click();$(report?'sos-tab-report':'sos-tab-help').click();});helpActions.append(button);
+  }
+  supportDef.panel.append(helpActions,contact,free);
+  for(const [id,title] of [['luzv-contribute','📝 Đóng góp bộ đề'],['luzv-referral','🎁 Giới thiệu bạn nhận đề']]){
+    const content=$(id).closest('.luzv-free-col'), details=document.createElement('details'), summary=document.createElement('summary');
+    details.className='luzv-support-details';summary.textContent=title;content.before(details);details.append(summary,content);
+  }
+  if(oldLayout && !oldLayout.children.length)oldLayout.remove();
+
+  const cartTitle=$('order-title'), cartCount=document.createElement('span');
+  cartCount.id='luzv-cart-count';cartTitle.append(' ',cartCount);
+  const shortcuts=document.createElement('div');shortcuts.className='luzv-cart-tab-shortcuts';
+  shortcuts.append(link('＋ Chọn môn','mon-hoc'),link('＋ Thêm PDF','luzv-file-store'));cart.querySelector('.order-header').after(shortcuts);
+  const emptyLinks=document.createElement('div');emptyLinks.className='luzv-empty-links';
+  emptyLinks.append(link('Chọn môn →','mon-hoc'),link('Chọn PDF →','luzv-file-store'));$('empty').append(emptyLinks);
+  const planChoices=document.createElement('fieldset');planChoices.className='luzv-sidebar-plans';
+  const legend=document.createElement('legend');legend.textContent='Chọn gói ôn tập';planChoices.append(legend);
+  for(const [index,plan] of PLANS.entries()){
+    const label=document.createElement('label'), input=document.createElement('input'), text=document.createElement('span');
+    input.type='radio';input.name='luzv-cart-plan';input.value=plan.id;input.id='luzv-sidebar-plan-'+plan.id;
+    text.innerHTML='<strong>'+({solo:'Solo · 1 người',duo:'Đôi bạn · 2 người',team:'Nhóm · 5 người'}[plan.id])+'</strong><small>'+money(plan.price)+'/môn'+(plan.people>1?' cho cả nhóm · '+money(plan.price/plan.people)+'/người':'')+'</small>';
+    input.addEventListener('change',()=>{if(input.checked)planButtons[index].btn.click();});
+    label.append(input,text);planChoices.append(label);
+  }
+  cart.querySelector('.luzv-benefits-content').prepend(planChoices);
+
+  const navigation=header.querySelector('.navigation'), homeLink=header.querySelector('.brand');
+  homeLink.className='luzv-home-pill';homeLink.href='#trang-chu';homeLink.innerHTML='<span aria-hidden="true">🏠</span><span>Trang chủ</span>';homeLink.setAttribute('aria-label','Trang chủ LuzV');
+  const tabs=document.createElement('nav');tabs.id='luzv-toc';tabs.className='luzv-nav-tabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','Điều hướng chính');
+  for(const def of definitions){
+    const button=document.createElement('button');button.type='button';button.id='luzv-tab-'+def.id;button.className='luzv-nav-tab';
+    button.dataset.luzvOpenTab=def.id;button.textContent=def.label;button.setAttribute('role','tab');button.setAttribute('aria-controls',def.pane);button.setAttribute('aria-selected','false');button.tabIndex=-1;
+    tabs.append(button);def.button=button;
+  }
+  const oldNav=header.querySelector('nav'), triggers=document.createElement('div');triggers.hidden=true;
+  // The original SOS handler stays mounted for the support buttons.
+  triggers.append($('sos-nav-trigger'));
+  const theme=$('night-owl-toggle');theme.setAttribute('aria-label','Đổi giao diện sáng hoặc tối');
+  theme.classList.add('luzv-theme-toggle');
+  navigation.replaceChildren(homeLink,tabs,theme,triggers);oldNav?.remove();navigation.classList.add('luzv-top-nav');
+  const mobile=document.querySelector('.mobile-cart');
+  let active=null, routeFrame=0;
+  const aliases={
+    'phan-chon-mon':catalog,'phan-ngan-hang-pdf':pdf,'phan-uu-dai':plans,'phan-tui-on-tap':cart,'phan-chot-don':cart,
+    'phan-tinh-diem':calculator,'phan-gui-de':$('luzv-contribute'),'phan-gop-y':contact,'phan-sos':contact,
+    'luzv-panel-home':main,'luzv-panel-courses':catalog,'luzv-panel-pdf':pdf,'luzv-panel-plans':plans,
+    'luzv-panel-cart':cart,'luzv-panel-gpa':calculator,'luzv-panel-support':contact,
+    'luzv-panel-contribute':$('luzv-contribute'),'luzv-panel-referral':$('luzv-referral'),
+    home:main,pdf,cart,contribute:$('luzv-contribute'),referral:$('luzv-referral')
+  };
+  function resolveTarget(value){
+    if(value?.nodeType===1)return value;
+    let id;try{id=decodeURIComponent(String(value||'').replace(/^#/,''));}catch{return null;}
     return aliases[id] || $(id) || definitions.find(def=>def.id===id)?.panel || null;
   }
-  const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function offsets() {
-    const h = header.getBoundingClientRect().height;
-    const sticky = getComputedStyle(nav).position === 'sticky' ? nav.getBoundingClientRect().height + 12 : 0;
-    document.documentElement.style.scrollPaddingTop = h + 12 + 'px';
-    document.documentElement.style.setProperty('--luzv-toc-space','0px');
-    document.documentElement.style.setProperty('--luzv-section-offset',h + sticky + 12 + 'px');
-    nav.style.setProperty('--luzv-tabs-top',h + 6 + 'px');
-    for (const def of definitions) def.panel.style.scrollMarginTop = sticky + 'px';
+  function offsets(){
+    const height=Math.ceil(header.getBoundingClientRect().height);
+    document.documentElement.style.setProperty('--luzv-workspace-top',height+16+'px');
+    document.documentElement.style.setProperty('--luzv-section-offset',height+16+'px');
+    document.documentElement.style.setProperty('--luzv-toc-space',height+16+'px');
+    document.documentElement.style.scrollPaddingTop=height+16+'px';
   }
-  function hashFor(def) {return '#' + def.anchor;}
-  function writeHash(hash) {
-    if (location.hash === hash || (!hash && !location.hash)) return;
-    const url = new URL(location.href);url.hash = hash;
-    try {history.pushState(null,'',url.href);} catch {}
+  function writeHash(hash){
+    if(location.hash===hash || (!hash&&!location.hash))return;
+    const url=new URL(location.href);url.hash=hash;
+    try{history.pushState({luzvTab:active?.id},'',url.href);}catch{}
   }
-  function scrollTarget(target,smooth=true) {
-    requestAnimationFrame(() => {
+  function scrollTarget(target,smooth=true){
+    requestAnimationFrame(()=>{
       offsets();
-      const sticky = getComputedStyle(nav).position === 'sticky' ? nav.getBoundingClientRect().height + 12 : 0;
-      target.style.scrollMarginTop = sticky + 'px';
+      if(target===main){window.scrollTo({top:0,behavior:smooth&&!reduced()?'smooth':'instant'});return;}
+      // The cart can have its own viewport on larger screens.
       target.scrollIntoView({block:'start',behavior:smooth&&!reduced()?'smooth':'instant'});
     });
   }
-  function activate(id,options={}) {
-    const def = definitions.find(item=>item.id===id);if (!def) return false;
-    const changed = active !== def, focused = document.activeElement;
-    if (changed && $('mobile-cart-toggle').getAttribute('aria-expanded') === 'true') $('mobile-cart-toggle').click();
-    active = def;
-    for (const item of definitions) {
-      const on = item === def;item.panel.hidden = !on;item.button.setAttribute('aria-selected',String(on));item.button.tabIndex = on?0:-1;
+  function showTab(def,options={}){
+    const changed=active!==def, focused=document.activeElement;
+    if(changed&&$('mobile-cart-toggle').getAttribute('aria-expanded')==='true')$('mobile-cart-toggle').click();
+    active=def;
+    for(const item of definitions){
+      const on=item===def;item.panel.hidden=!on;item.panel.classList.toggle('active',on);
+      item.button.setAttribute('aria-selected',String(on));item.button.classList.toggle('active',on);item.button.tabIndex=on?0:-1;
     }
-    free.hidden = !['contribute','referral'].includes(id);hero.hidden = id !== 'home';
-    document.body.dataset.luzvActiveTab = id;
-    if (!options.keepSearch) {
-      if(document.activeElement===headerSearch)headerSearch.blur();
-      headerSearch.value=id==='courses'?$('search').value:'';
+    document.body.dataset.luzvActiveTab=def.id;
+    if(options.history!==false)writeHash(options.hash||'#'+def.anchor);
+    if(changed){
+      if(focused?.closest('[data-luzv-panel]')?.hidden&&!document.querySelector('dialog[open]'))def.panel.focus({preventScroll:true});
+      window.dispatchEvent(new Event('resize'));window.dispatchEvent(new CustomEvent('luzv:tabchange',{detail:{id:def.id}}));
     }
-    if (id==='home') {
-      for (const item of featuredItems) item.card.style.display='';
-      feedback.textContent='';feedback.hidden=true;
-    }
-    for (const button of dock.querySelectorAll('button')) {
-      const on = button.dataset.luzvOpenTab === id;button.classList.toggle('is-active',on);
-      if (on) button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');
-    }
-    for (const item of document.querySelectorAll('.luzv-bottom-nav .luzv-tab-item')) {
-      const target=resolveTarget(item.getAttribute('href')), owner=target===hero?'home':target?.closest('[data-luzv-panel]')?.dataset.luzvPanel;
-      item.classList.toggle('active',owner===id);
-      if(owner===id)item.setAttribute('aria-current','page');else item.removeAttribute('aria-current');
-    }
-    if (id === 'pdf') pdf.open = true;
-    if (options.history !== false) writeHash(options.hash || hashFor(def));
-    offsets();syncOrder();
-    if (changed) {
-      if (!reduced()) def.panel.animate([{opacity:.35},{opacity:1}],{duration:140});
-      window.dispatchEvent(new Event('resize'));
-      window.dispatchEvent(new CustomEvent('luzv:tabchange',{detail:{id}}));
-      if (focused?.closest('[data-luzv-panel]')?.hidden && !document.querySelector('dialog[open]')) def.panel.focus({preventScroll:true});
-    }
-    if (options.scroll !== false) {
-      if(id==='home')requestAnimationFrame(()=>window.scrollTo({top:0,behavior:options.smooth!==false&&!reduced()?'smooth':'instant'}));
-      else scrollTarget(def.panel,options.smooth !== false);
-    }
+    const button=def.button,left=button.offsetLeft-tabs.offsetLeft,right=left+button.offsetWidth;
+    if(left<tabs.scrollLeft)tabs.scrollLeft=left;
+    else if(right>tabs.scrollLeft+tabs.clientWidth)tabs.scrollLeft=right-tabs.clientWidth;
+    if(options.scroll!==false)scrollTarget(def.panel,options.smooth!==false);
     return true;
   }
-  function openFor(target,options={}) {
-    if (typeof target === 'string') {try {target=document.querySelector(target);} catch {return false;}}
-    const id = target?.closest('[data-luzv-panel]')?.dataset.luzvPanel;if (!id) return false;
-    activate(id,{...options,scroll:false});
-    for (let node=target;node && node!==main;node=node.parentElement) if (node.tagName==='DETAILS') node.open=true;
-    if (options.scroll !== false) scrollTarget(target,options.smooth !== false);
+  function openFor(value,options={}){
+    let target=value;
+    if(typeof target==='string'){
+      target=resolveTarget(target);
+      if(!target){try{target=document.querySelector(value);}catch{return false;}}
+    }
+    if(!target || !(target===main || workspace.contains(target)))return false;
+    if(target===main){
+      showTab(courseDef,{...options,scroll:false,hash:options.hash||'#trang-chu'});
+    }else{
+      const owner=target.closest('[data-luzv-panel]')?.dataset.luzvPanel;
+      if(owner)showTab(definitions.find(def=>def.id===owner),{...options,scroll:false,hash:options.hash||'#'+target.id});
+      else if(cart.contains(target)){
+        if(!active)showTab(courseDef,{history:false,scroll:false});
+        if(options.history!==false)writeHash(options.hash||'#'+(target.id||cart.id));
+        if($('mobile-cart-toggle').getAttribute('aria-expanded')==='true')$('mobile-cart-toggle').click();
+      }else return false;
+    }
+    for(let node=target;node&&node!==main;node=node.parentElement)if(node.tagName==='DETAILS')node.open=true;
+    if(options.scroll!==false)scrollTarget(target,options.smooth!==false);
     return true;
   }
-  function openMenu() {
-    offsets();nav.scrollIntoView({block:'start',behavior:reduced()?'instant':'smooth'});
-    active?.button.focus({preventScroll:true});
+  function activate(id,options={}){
+    const def=definitions.find(item=>item.id===id||item.pane===id);
+    if(def)return showTab(def,options);
+    return openFor(resolveTarget(id),options);
   }
-  function quickAddSubject(name, price, type) {
-    const fold=value=>String(value||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/\s+/g,' ').trim();
+  function openMenu(){active?.button.focus({preventScroll:true});}
+  function quickAddSubject(name,price,type){
     let added=false;
-    if (String(type).toLowerCase()==='pdf' || /^(file\s*)?pdf\b/i.test(String(name))) {
-      const query=fold(name).replace(/^(file\s*)?pdf\s*:?\s*/,'');
-      const select=$('luzv-file-product');
+    if(String(type).toLowerCase()==='pdf'||/^(file\s*)?pdf\b/i.test(String(name))){
+      const query=fold(name).replace(/^(file\s*)?pdf\s*:?\s*/,''), select=$('luzv-file-product');
       const matches=[...select.options].map(option=>window.luzvGetFileProduct(option.value)).filter(product=>product&&(product.id===name||fold(product.name)===query));
       if(matches.length!==1)return false;
       if(select.value!==matches[0].id){select.value=matches[0].id;select.dispatchEvent(new Event('change',{bubbles:true}));added=true;}
-    } else {
+    }else{
       const exact=COURSE_DATA.findIndex(course=>fold(course.name)===fold(name));
       const matches=exact>=0?[exact]:COURSE_DATA.flatMap((course,index)=>fold(course.code).replace(/ /g,'')===fold(name).replace(/ /g,'')?[index]:[]);
       if(matches.length!==1)return false;
@@ -9622,84 +9412,62 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
     feedback.textContent=added?'Đã thêm vào Túi ôn tập.':'Mục này đã có trong Túi ôn tập.';feedback.hidden=false;
     return added;
   }
-  function filterFeaturedSubjects() {
-    const keyword=headerSearch.value, fold=value=>String(value||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').trim();
-    $('search').value=keyword;activate('courses',{scroll:false,keepSearch:true});
+  function filterFeaturedSubjects(){
+    showTab(courseDef,{scroll:false});
     const all=catalog.querySelector('.filter-tab[data-filter="all"]');
     if(all&&!all.classList.contains('active'))all.click();else window.filterSubjects();
-    for(const item of featuredItems)item.card.style.display=fold(item.name).includes(fold(keyword))?'':'none';
     return true;
   }
-  function jumpToSection(sectionId) {
-    const target=resolveTarget(sectionId);if(!target)return false;
-    if(target===hero)return activate('home');
-    return openFor(target);
-  }
-  function setActiveTab(clickedTab) {
+  function jumpToSection(sectionId){const target=resolveTarget(sectionId);return target?openFor(target):false;}
+  function setActiveTab(clickedTab){
     const id=clickedTab?.dataset?.luzvOpenTab;
-    if(id)return activate(id,{history:active?.id!==id});
-    const target=resolveTarget(typeof clickedTab==='string'?clickedTab:clickedTab?.getAttribute('href')||clickedTab?.getAttribute('aria-controls'));
-    if(!target)return false;
-    if(target===hero)return activate('home',{history:active?.id!=='home'});
-    const owner=target.closest('[data-luzv-panel]')?.dataset.luzvPanel;
-    return openFor(target,{history:active?.id!==owner});
+    if(id)return activate(id);
+    const destination=typeof clickedTab==='string'?clickedTab:clickedTab?.getAttribute('href')||clickedTab?.getAttribute('aria-controls');
+    const target=resolveTarget(destination);
+    return target?openFor(target,{history:location.hash!==destination}):false;
   }
-  Object.assign(window,{quickAddSubject,filterFeaturedSubjects,jumpToSection,setActiveTab});
-  headerSearch.addEventListener('input',filterFeaturedSubjects);
-  $('search').addEventListener('input',()=>{if(active?.id==='courses')headerSearch.value=$('search').value;});
-  menu.addEventListener('click',openMenu);
-  document.addEventListener('click',event => {
-    const button = event.target.closest('button[data-luzv-open-tab]');
-    if (button) activate(button.dataset.luzvOpenTab);
+  Object.assign(window,{quickAddSubject,filterFeaturedSubjects,jumpToSection,setActiveTab,switchLeftTab:(id)=>activate(id)});
+  document.addEventListener('click',event=>{
+    const button=event.target.closest('button[data-luzv-open-tab]');if(button)activate(button.dataset.luzvOpenTab);
   });
-  tabs.addEventListener('keydown',event => {
-    const index = definitions.findIndex(item=>item.button===event.target);
-    if (index<0 || !['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'].includes(event.key)) return;
+  tabs.addEventListener('keydown',event=>{
+    const index=definitions.findIndex(item=>item.button===event.target);
+    if(index<0||!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
     event.preventDefault();
-    const columns = getComputedStyle(tabs).gridTemplateColumns.split(' ').length;
-    const delta = {ArrowLeft:-1,ArrowRight:1,ArrowUp:-columns,ArrowDown:columns}[event.key] || 0;
-    const next = event.key==='Home'?0:event.key==='End'?definitions.length-1:index===0&&event.key==='ArrowDown'?1:(index+delta+definitions.length)%definitions.length;
-    definitions[next].button.focus({preventScroll:true});activate(definitions[next].id,{scroll:false});
+    const next=event.key==='Home'?0:event.key==='End'?definitions.length-1:(index+(event.key==='ArrowLeft'?-1:1)+definitions.length)%definitions.length;
+    definitions[next].button.focus({preventScroll:true});showTab(definitions[next],{scroll:false});
   });
-  document.addEventListener('click',event => {
-    if (event.button!==0 || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
-    const anchor = event.target.closest('a[href]'), hash = anchor?.getAttribute('href');
-    if (!hash?.startsWith('#')) return;
-    if (hash==='#') {
-      event.preventDefault();activate('home',{scroll:false,hash:'#'});window.scrollTo({top:0,behavior:reduced()?'instant':'smooth'});return;
-    }
-    const target=resolveTarget(hash);
-    if(target===hero){event.preventDefault();activate('home');return;}
-    if (!target?.closest('[data-luzv-panel]')) return;
-    event.preventDefault();openFor(target,{hash:aliases[hash.slice(1)]?'#'+target.id:hash});
+  document.addEventListener('click',event=>{
+    if(event.button!==0||event.ctrlKey||event.metaKey||event.altKey||event.shiftKey)return;
+    const hash=event.target.closest('a[href]')?.getAttribute('href');if(!hash?.startsWith('#'))return;
+    const target=hash==='#'?main:resolveTarget(hash);
+    if(!target || !(target===main||workspace.contains(target)))return;
+    event.preventDefault();openFor(target,{hash:hash==='#'?'#trang-chu':hash});
   },true);
-  function fromHash() {
+  function fromHash(){
     const target=resolveTarget(location.hash);
-    if(target===hero){activate('home',{history:false,scroll:true,smooth:false});return;}
-    if (target && openFor(target,{history:false,scroll:true,smooth:false})) return;
-    activate('home',{history:false,scroll:false});
-    if (!location.hash) window.scrollTo({top:0,behavior:'instant'});
-  }
-  function route() {cancelAnimationFrame(routeFrame);routeFrame=requestAnimationFrame(fromHash);}
-  window.addEventListener('hashchange',route);window.addEventListener('popstate',route);
-  function syncOrder() {
-    const count=selected.size+(window.luzvGetFileSelection?.()?1:0);
-    if(!count){feedback.textContent='';feedback.hidden=true;}
-    for (const badge of document.querySelectorAll('[data-luzv-cart-count]')) {badge.textContent=String(count);badge.hidden=!count;}
-    for(const item of featuredItems){
-      const on=item.type==='pdf'?window.luzvGetFileSelection?.()?.id===item.file:selected.has(item.index);
-      item.price.textContent=money(item.type==='pdf'?window.luzvGetFileProduct(item.file).price:PRICE);
-      item.unit.textContent=item.type==='pdf'?'/ file':activePlan.people===1?'/ môn':'/ nhóm '+activePlan.people+' người';
-      item.button.textContent=on?'✓ Đã thêm':'Chọn ngay ›';item.button.setAttribute('aria-pressed',String(on));item.card.classList.toggle('is-selected',on);
+    if(target && cart.contains(target)){
+      showTab(definitions.find(def=>def.id===history.state?.luzvTab)||courseDef,{history:false,scroll:false});
     }
-    planText.textContent=activePlan.name+' · '+money(PRICE)+'/môn';mobile.dataset.hasItems=String(count>0);
+    if(target&&openFor(target,{history:false,scroll:true,smooth:false}))return;
+    showTab(courseDef,{history:false,scroll:false});
+    if(!location.hash)window.scrollTo({top:0,behavior:'instant'});
+  }
+  function route(){cancelAnimationFrame(routeFrame);routeFrame=requestAnimationFrame(fromHash);}
+  window.addEventListener('hashchange',route);window.addEventListener('popstate',route);
+  function syncOrder(){
+    const count=selected.size+(window.luzvGetFileSelection?.()?1:0);
+    cartCount.textContent='('+count+')';mobile.dataset.hasItems=String(count>0);
+    if(!count){feedback.textContent='';feedback.hidden=true;}
+    for(const badge of document.querySelectorAll('[data-luzv-cart-count]')){badge.textContent=String(count);badge.hidden=!count;}
+    for(const input of planChoices.querySelectorAll('input'))input.checked=input.value===activePlan.id;
+    planText.textContent=activePlan.name+' · '+money(PRICE)+'/môn'+(activePlan.people>1?' cho cả nhóm':'');
   }
   window.LuzVTabs=Object.freeze({activate,openFor,openMenu,get active(){return active?.id;}});
-  document.body.classList.add('luzv-tabs-mode','luzv-reference-mode');
+  document.body.classList.add('luzv-tabs-mode','luzv-workspace-mode');
   LuzVOrder.subscribe('section-tabs',syncOrder);
-  new ResizeObserver(offsets).observe(header);new ResizeObserver(offsets).observe(nav);
-  window.addEventListener('resize',offsets,{passive:true});
-  fromHash();
+  new ResizeObserver(offsets).observe(header);window.addEventListener('resize',offsets,{passive:true});
+  syncOrder();offsets();fromHash();
 })();
 
 </script>
