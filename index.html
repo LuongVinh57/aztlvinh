@@ -3998,7 +3998,7 @@ body.night-owl-mode #don-hang .total-row>span:first-child {color:#cbdae7;}
 @media (prefers-reduced-motion:reduce){#don-hang *{scroll-behavior:auto!important;}}
 
 /* Compact, accessible cart preview. Its measured height keeps other UI above it. */
-@media(max-width:820px){
+@media(max-width:820px),(hover:none) and (pointer:coarse){
  body{padding-bottom:calc(var(--luzv-mobile-cart-height,86px) + 16px)}
  html{scroll-padding-bottom:calc(var(--luzv-mobile-cart-height,86px) + 16px)}
  footer{padding-bottom:20px}
@@ -4006,9 +4006,12 @@ body.night-owl-mode #don-hang .total-row>span:first-child {color:#cbdae7;}
   --mc-bg:#fffdfcf5;--mc-border:#c8deef;--mc-surface:#edf7ff;
   --mc-ink:#263c4f;--mc-muted:#5b6f80;--mc-chip:#e3eef8;
   --mc-remove:#cae2f5;--mc-price:#276495;
+  position:fixed;top:auto;left:0;right:0;bottom:var(--luzv-dock-bottom,0px);width:auto;margin:0;z-index:40;
+  border-top:1px solid var(--mc-border);box-shadow:0 -5px 25px #2b618d18;
+  transform:translateZ(0);
   flex-direction:column;align-items:stretch!important;gap:8px!important;
   padding:10px 14px calc(10px + env(safe-area-inset-bottom))!important;
-  border-radius:20px 20px 0 0;max-height:calc(100dvh - 24px);
+  border-radius:20px 20px 0 0;max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);
  }
  html[data-luzv-theme="dark"] .mobile-cart{
   --mc-bg:#121b23f7;--mc-border:#2f4150;--mc-surface:#17232d;
@@ -5263,7 +5266,10 @@ body:has(#lv-tour[open]) .luzv-tabs-nav{visibility:hidden;pointer-events:none}
  .luzv-current-plan{padding:10px 12px}
  .luzv-current-plan strong{font-size:12px}
  .luzv-current-plan a{font-size:12px}
- .luzv-tabs-mode .mobile-cart{display:flex!important;gap:6px!important;padding:5px 10px calc(5px + env(safe-area-inset-bottom))!important}
+}
+/* Touch phones keep their dock after rotating beyond the portrait breakpoint. */
+@media(max-width:820px),(hover:none) and (pointer:coarse){
+ .luzv-tabs-mode .mobile-cart{display:flex!important;gap:6px!important;padding:5px 10px!important;padding:5px 10px calc(5px + env(safe-area-inset-bottom,0px))!important;padding:5px max(10px,env(safe-area-inset-right,0px)) calc(5px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px))!important}
  .luzv-tabs-mode .mobile-cart-chips{display:none!important}
  .luzv-tabs-mode .mobile-cart[data-has-items="false"]>.mobile-cart-main-row,
  .luzv-tabs-mode[data-luzv-active-tab="cart"] .mobile-cart>.mobile-cart-main-row{display:none}
@@ -15968,5 +15974,44 @@ html[data-luzv-theme="dark"] #luzv-pdf-dropdown .luzv-pdf-search-field,html[data
 html[data-luzv-theme="dark"] #luzv-pdf-search{background:#203c53;border-color:#527b9a;color:#f0f9ff}
 html[data-luzv-theme="dark"] #luzv-pdf-search::placeholder{color:#c7dce9;opacity:1}
 </style>
+<script id="luzv-mobile-dock-viewport">
+/* Keep the existing dock attached to the visible viewport, including Safari UI changes. */
+(() => {
+  'use strict';
+  const bar = document.querySelector('.mobile-cart');
+  if (!bar) return;
+  const media = matchMedia('(max-width:820px),(hover:none) and (pointer:coarse)');
+  const viewport = window.visualViewport;
+  let lift = 0, frame = 0;
+  function sync() {
+    frame = 0;
+    const rect = bar.getBoundingClientRect();
+    let next = 0;
+    // During pinch zoom, leave the page position under the visitor's control.
+    if (media.matches && rect.height && getComputedStyle(bar).position === 'fixed' &&
+        (!viewport || Math.abs(viewport.scale - 1) < .01)) {
+      const visibleBottom = viewport ? viewport.offsetTop + viewport.height : innerHeight;
+      // Measure the actual gap so browsers that already reposition fixed elements
+      // do not receive a second correction.
+      next = Math.max(0, Math.round(lift + rect.bottom - visibleBottom));
+    }
+    if (next !== lift) {
+      lift = next;
+      bar.style.setProperty('--luzv-dock-bottom', lift + 'px');
+    }
+  }
+  function schedule() {
+    if (!frame) frame = requestAnimationFrame(sync);
+  }
+  const passive = {passive:true};
+  for (const event of ['resize','scroll','orientationchange','pageshow']) window.addEventListener(event,schedule,passive);
+  viewport?.addEventListener('resize',schedule,passive);
+  viewport?.addEventListener('scroll',schedule,passive);
+  if (media.addEventListener) media.addEventListener('change',schedule);
+  else media.addListener(schedule);
+  if (typeof ResizeObserver === 'function') new ResizeObserver(schedule).observe(bar);
+  schedule();
+})();
+</script>
 </body>
 </html>
