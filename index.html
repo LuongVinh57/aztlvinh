@@ -14870,10 +14870,9 @@ html[data-luzv-theme="dark"] #luzv-admin-preview-dialog .lvap-history-empty p,bo
 <script id="luzv-admin-local-preview">
 /* Admin UI adapted from the supplied reference; no hardcoded admin PIN or fake payment confirmation.
    PREVIEW ONLY: Records stay in THIS browser, never sent to Vercel. */
-window.luzvAdminMount = () => {
+(() => {
   'use strict';
-  if (window.__luzvAdminMounted) return;
-  window.__luzvAdminMounted = true;
+  // Load saved vouchers during page startup; admin UI remains mounted only on request.
   const storageKey = 'luzv_admin_local_preview_v1';
   const stores = window.LuzVStorage || {
     getItem: key => {try{return localStorage.getItem(key);}catch{return null;}},
@@ -14909,6 +14908,9 @@ window.luzvAdminMount = () => {
     }
     window.updateOrder?.();window.LuzVOrder?.render();
   }
+  window.luzvAdminMount = () => {
+  if (window.__luzvAdminMounted) return;
+  window.__luzvAdminMounted = true;
   const el=(tag,props={})=>{
     const n=document.createElement(tag);
     for(const [k,v] of Object.entries(props)) {if (k==='text') n.textContent=v; else if (k==='className') n.className=v;else n.setAttribute(k,v);}
@@ -15401,7 +15403,8 @@ window.luzvAdminMount = () => {
     feedback('Đã tải bản sao lưu JSON.');
   });
   render();
-};
+  };
+})();
 </script>
 
 

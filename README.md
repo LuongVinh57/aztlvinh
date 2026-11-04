@@ -13,9 +13,16 @@ Giữ đủ 32 môn, chọn nhiều PDF, gói giá/mã ưu đãi, giỏ, QR, sao
 ## Trạng thái quản trị
 Phần tài khoản/quản trị vẫn là bản dùng thử cục bộ trong trình duyệt, như bản gốc. Nhãn demo trong trang được giữ nguyên. File này không bổ sung máy chủ xác thực hay dữ liệu khách hàng thực.
 
+## Mã ưu đãi sau khi tải lại trang
+Danh sách mã đã lưu trên trình duyệt được nạp khi mở website, trước khi người dùng mở bảng quản trị. Tạo mã trong Admin rồi tải lại trang vẫn có thể nhập mã để áp dụng, không cần đăng nhập/mở Admin trước.
+
+Giữ nguyên dữ liệu và khóa lưu cũ, giảm phần trăm hoặc số tiền, điều kiện hết hạn/bật/tắt/xóa và cách tính gói/PDF. Giao diện quản trị vẫn chỉ được dựng khi người dùng mở theo luồng có sẵn. Đây vẫn là dữ liệu cục bộ của bản dùng thử.
+
+Kiểm tra hồi quy: node tests/voucher-reload.cjs (cần Playwright và Chromium). Kiểm tra ở 390/1360px gồm tạo mã → tải lại → áp dụng trước khi mở Admin, mã phần trăm/giảm tiền, bật/tắt/xóa, hết hạn, mã gốc, gói nhóm, PDF và tổng QR; có kiểm tra lưu trữ hỏng/bị chặn.
+
 ## Kiểm tra
 Đã kiểm tra ở 320, 390, 820 và 1360px, sáng/tối: bố cục, danh sách môn, menu/tìm kiếm, đăng nhập demo, quản trị, đăng xuất, hướng dẫn 5 bước, giỏ, nhiều PDF, các ca giá, QR và sao chép. Không tràn ngang, trùng ID hoặc lỗi JavaScript trong các thao tác thử.
 
-SHA256 của index.html: d2cca6fa3e29cc37603cb7d6195a44bd9352a6e96458f956a1d796ada8cea0cd.
+SHA256 của index.html: c8518eae50e2ded7f9f44f8dada8e8cc7e96f62964c9f782d3c20590075f561f.
 
 Thư viện qrcode-generator dùng giấy phép MIT, giữ trong HTML và LICENSE-qrcode-generator.txt.
