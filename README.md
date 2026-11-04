@@ -34,9 +34,19 @@ Bổ sung xử lý VisualViewport cho các thay đổi của giao diện trình 
 
 Kiểm tra: node tests/mobile-dock.cjs (cần Playwright và Chromium). Có thử kích thước/touch iPhone, Android và iPad, cuộn dài, xoay ngang/dọc, đổi chiều cao, mở/đóng chi tiết giỏ, chuyển tab, phần nội dung cuối trang và máy tính. Kiểm tra mô phỏng thay đổi VisualViewport để phát hiện lệch tích lũy và khôi phục vị trí. Bài kiểm tra thất bại trên bản cũ khi xoay ngang. Chưa xác nhận trên Safari của iPhone thật.
 
+## Mã chuyển khoản giữ nguyên khi tải lại
+Lưu mã tham chiếu cùng thông tin nhận diện giỏ và giá trên thiết bị. Cùng môn/PDF, gói, giá, mã ưu đãi và tài khoản nhận tiền sẽ dùng lại mã chuyển khoản, payload QR và nội dung sao chép sau khi tải lại. Mã ưu đãi đã áp dụng chỉ được khôi phục sau khi kiểm tra còn hợp lệ và khớp lần đăng ký đã lưu. Thay đổi nội dung/giá/ưu đãi hoặc xóa túi sẽ tạo lần đăng ký mới; mã cũ không được dùng lại cho giỏ đã thay đổi.
+
+Chỉ lưu mã tham chiếu và thông tin môn/gói/giá; không lưu tên tài khoản Azota, thông tin người nhận đề, ảnh bill hay ảnh QR. Khi trình duyệt chặn lưu trữ, chức năng vẫn dùng được trong lần mở hiện tại và trang giữ thông báo giới hạn lưu trữ có sẵn. Việc tạo/khôi phục QR không xác nhận đã nhận tiền.
+
+## Các gói AI/Shopee tham khảo
+Cả 5 gói đang được đánh dấu chưa mở đăng ký. Vẫn xem được thông tin và giá tham khảo; các nút thêm được đổi thành “Chưa mở đăng ký” và khóa. Lớp dữ liệu cũng từ chối thêm/chuyển gói chưa sẵn sàng, nên chúng không vào tổng tiền, QR hay nội dung sao chép. Các lựa chọn tham khảo đã lưu từ bản cũ được bỏ khỏi túi và có thông báo kèm cách liên hệ LuzV để đối chiếu nếu đã chuyển khoản theo lần trước. Giữ nguyên dữ liệu môn Azota, PDF và ảnh gốc.
+
+Kiểm tra hai thay đổi: node tests/payment-reference.cjs (cần Playwright và Chromium). Đã thử tải lại nhiều lần ở 320/390/820/1360px; QR chính/đăng ký nhanh/sao chép khớp nhau; mã gốc và mã tự tạo được khôi phục khi hợp lệ; mã bị tắt, đổi môn cùng tổng tiền, đổi giá và xóa túi sinh mã mới. Đã kiểm tra gói tham khảo mới/cũ, túi có cả môn/PDF và lưu trữ hỏng/bị chặn. Các bộ kiểm tra PDF, mã ưu đãi và thanh dưới cũng chạy đạt sau thay đổi.
+
 ## Kiểm tra
 Đã kiểm tra ở 320, 390, 820 và 1360px, sáng/tối: bố cục, danh sách môn, menu/tìm kiếm, đăng nhập demo, quản trị, đăng xuất, hướng dẫn 5 bước, giỏ, nhiều PDF, các ca giá, QR và sao chép. Không tràn ngang, trùng ID hoặc lỗi JavaScript trong các thao tác thử.
 
-SHA256 của index.html: e2c59a9e015cbf82ee5f3ebe4b230423566cbefa0f06c9a89cfcd3e35513ca7f.
+SHA256 của index.html: 249a450c7eb9b6a7936db1bc0b9d547e0b735c27b40ac824794342eff7e7a78f.
 
 Thư viện qrcode-generator dùng giấy phép MIT, giữ trong HTML và LICENSE-qrcode-generator.txt.

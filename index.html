@@ -42,31 +42,36 @@ window.LuzVStorage = (() => {
 window.LuzVExtras = (() => {
   const KEY = 'luzv_demo_extra_bag_v1';
   const products = Object.freeze([
-    Object.freeze({id:'shopee-100k-tu-tao',name:'Voucher Shopee 100K – Cấp số để tự tạo',price:20000,kind:'voucher',icon:'🛍️'}),
-    Object.freeze({id:'shopee-100k-cap-san',name:'Voucher Shopee 100K – Tài khoản cấp sẵn',price:40000,kind:'voucher',icon:'🛍️'}),
-    Object.freeze({id:'ai-chatgpt',name:'ChatGPT Plus (1 tháng)',price:35000,kind:'ai',icon:'🧠',detail:'Hỗ trợ học tập, phân tích đề và tài liệu.'}),
-    Object.freeze({id:'ai-gemini',name:'Google Gemini Pro + 2TB (1 tháng)',price:25000,kind:'ai',icon:'✨',detail:'Tham khảo tính năng đọc tài liệu và lưu trữ.'}),
-    Object.freeze({id:'ai-canva-capcut',name:'Canva Pro & CapCut Pro (1 tháng)',price:20000,kind:'ai',icon:'🎨',detail:'Tham khảo bộ công cụ thiết kế và video.'})
+    Object.freeze({id:'shopee-100k-tu-tao',available:false,name:'Voucher Shopee 100K – Cấp số để tự tạo',price:20000,kind:'voucher',icon:'🛍️'}),
+    Object.freeze({id:'shopee-100k-cap-san',available:false,name:'Voucher Shopee 100K – Tài khoản cấp sẵn',price:40000,kind:'voucher',icon:'🛍️'}),
+    Object.freeze({id:'ai-chatgpt',available:false,name:'ChatGPT Plus (1 tháng)',price:35000,kind:'ai',icon:'🧠',detail:'Hỗ trợ học tập, phân tích đề và tài liệu.'}),
+    Object.freeze({id:'ai-gemini',available:false,name:'Google Gemini Pro + 2TB (1 tháng)',price:25000,kind:'ai',icon:'✨',detail:'Tham khảo tính năng đọc tài liệu và lưu trữ.'}),
+    Object.freeze({id:'ai-canva-capcut',available:false,name:'Canva Pro & CapCut Pro (1 tháng)',price:20000,kind:'ai',icon:'🎨',detail:'Tham khảo bộ công cụ thiết kế và video.'})
   ]);
   const byId = new Map(products.map(p => [p.id,p]));
   let stored=[];
   try{const raw=JSON.parse(window.LuzVStorage.getItem(KEY)||'[]');if(Array.isArray(raw))stored=raw;}catch{}
   // Voucher cũ 15.000đ không tự động chuyển thành gói mới; khách cần chọn lại.
-  const chosen=new Set(stored.filter(id => byId.has(id)));
+  const canSelect=id=>byId.get(id)?.available===true;
+  const hadReferenceSelections=stored.some(id=>byId.has(id)&&!canSelect(id));
+  const chosen=new Set(stored.filter(canSelect));
   const chosenVoucher=products.find(p=>p.kind==='voucher'&&chosen.has(p.id));
   for(const product of products)if(product.kind==='voucher'&&product.id!==chosenVoucher?.id)chosen.delete(product.id);
-  const items=()=>products.filter(p=>chosen.has(p.id));
+  // Previously selected reference offers must not survive into a new payment.
+  if(stored.length!==chosen.size || stored.some(id=>!chosen.has(id)))
+    window.LuzVStorage.setItem(KEY,JSON.stringify([...chosen]));
+  const items=()=>products.filter(p=>canSelect(p.id)&&chosen.has(p.id));
   const update=()=>{window.LuzVStorage.setItem(KEY,JSON.stringify([...chosen]));window.updateOrder?.();};
-  return Object.freeze({products,items,has:id=>chosen.has(id),price:()=>items().reduce((sum,p)=>sum+p.price,0),
+  return Object.freeze({products,items,canSelect,hadReferenceSelections,has:id=>canSelect(id)&&chosen.has(id),price:()=>items().reduce((sum,p)=>sum+p.price,0),
     toggle(id){
-      const product=byId.get(id);if(!product)return false;
+      const product=byId.get(id);if(!product||!canSelect(id))return false;
       if(chosen.has(id))chosen.delete(id);
       else {if(product.kind==='voucher')for(const v of products)if(v.kind==='voucher')chosen.delete(v.id);chosen.add(id);}
       update();return true;
     },
     // Đổi từ gói Shopee này sang gói kia mà không cộng cả hai vào túi.
     selectVoucher(id){
-      if(byId.get(id)?.kind!=='voucher')return false;
+      if(byId.get(id)?.kind!=='voucher'||!canSelect(id))return false;
       const active=products.find(p=>p.kind==='voucher'&&chosen.has(p.id));
       if(!active||active.id===id)return false;
       chosen.delete(active.id);chosen.add(id);update();return true;
@@ -11663,7 +11668,7 @@ html[data-luzv-theme="dark"] .luzv-extra-bag,body.night-owl-mode .luzv-extra-bag
   help.append(helpActions,contact);
   // 8th menu: layout adapted from the user-provided sample, with prices marked as unverified.
   const extrasPanel=panelFor(definitions.find(def=>def.id==='extras'));
-  heading(extrasPanel,'Gói AI & Deal 100K','Sản phẩm tham khảo từ bản mẫu · Vui lòng xác nhận điều kiện trước khi giao dịch.');
+  heading(extrasPanel,'Gói AI & Deal 100K','Chỉ xem tham khảo · Chưa mở đăng ký các gói AI/Shopee.');
   const extraSection=document.createElement('section');extraSection.id='luzv-extra-store';extraSection.className='luzv-extra-store';
   const dealOptions=window.LuzVExtras.products.filter(p=>p.kind==='voucher');
   let selectedDealId=window.LuzVExtras.items().find(p=>p.kind==='voucher')?.id || dealOptions[0].id;
@@ -11676,11 +11681,11 @@ html[data-luzv-theme="dark"] .luzv-extra-bag,body.night-owl-mode .luzv-extra-bag
   ticketPhoto.alt='Ảnh minh họa voucher Shopee 100.000đ cho khách hàng mới';
   ticketPhoto.width=1084;ticketPhoto.height=358;ticketPhoto.decoding='async';
   const ticketCaption=document.createElement('p');ticketCaption.className='luzv-extra-ticket-caption';
-  ticketCaption.textContent='Chọn một trong hai gói ở bên cạnh hoặc bên dưới';
+  ticketCaption.textContent='Xem thông tin từng gói Shopee ở bên cạnh hoặc bên dưới';
   ticketLeft.append(ticketPhoto,ticketCaption);
   const ticketRight=document.createElement('div');ticketRight.className='luzv-extra-ticket-right';
   const dealChoices=document.createElement('fieldset');dealChoices.className='luzv-deal-choices';
-  const dealLegend=document.createElement('legend');dealLegend.textContent='Chọn gói Shopee';dealChoices.append(dealLegend);
+  const dealLegend=document.createElement('legend');dealLegend.textContent='Xem gói Shopee tham khảo';dealChoices.append(dealLegend);
   const dealRadios=[];
   const voucherLabels={
     'shopee-100k-tu-tao':'Cấp số để tự tạo',
@@ -11695,13 +11700,13 @@ html[data-luzv-theme="dark"] .luzv-extra-bag,body.night-owl-mode .luzv-extra-bag
     label.append(input,title,price);dealChoices.append(label);dealRadios.push(input);
   }
   const dealFooter=document.createElement('div');dealFooter.className='luzv-deal-footer';
-  const ticketPrice=document.createElement('div');ticketPrice.className='luzv-extra-price';ticketPrice.innerHTML='<small>Giá gói đã chọn</small><strong></strong><span>/ gói</span>';
+  const ticketPrice=document.createElement('div');ticketPrice.className='luzv-extra-price';ticketPrice.innerHTML='<small>Giá tham khảo</small><strong></strong><span>/ gói</span>';
   const ticketButton=document.createElement('button');ticketButton.type='button';ticketButton.className='luzv-extra-add luzv-extra-deal-button';
   dealFooter.append(ticketPrice,ticketButton);
   ticketRight.append(dealChoices,dealFooter);ticket.append(ticketLeft,ticketRight);extraSection.append(ticket);
   const aiHeading=document.createElement('div');aiHeading.className='luzv-extra-heading';
   const aiH=document.createElement('h3');aiH.textContent='🤖 Trợ thủ AI học tập';
-  const aiHint=document.createElement('span');aiHint.textContent='Chung túi ôn tập · thanh toán 1 lần';
+  const aiHint=document.createElement('span');aiHint.textContent='Chỉ tham khảo · Chưa mở đăng ký';
   aiHeading.append(aiH,aiHint);extraSection.append(aiHeading);
   const grid=document.createElement('div');grid.className='luzv-extra-grid';
   const buttons=new Map();
@@ -11726,8 +11731,22 @@ html[data-luzv-theme="dark"] .luzv-extra-bag,body.night-owl-mode .luzv-extra-bag
   extraBagLink.addEventListener('click',()=>activate('cart'));
   extraBag.append(extraBagText,extraBagTotal,extraBagLink);
   const extraNote=document.createElement('p');extraNote.className='luzv-extra-note';
-  extraNote.textContent='Lưu ý: giá và mô tả được lấy từ mã tham khảo bạn cung cấp; các ưu đãi và quyền sử dụng dịch vụ chưa được xác minh. Không liên kết chính thức với các thương hiệu được nhắc đến.';
+  extraNote.textContent='Các gói AI/Shopee hiện chỉ để tham khảo, chưa mở đăng ký và chưa được tính vào tổng thanh toán. Bạn có thể liên hệ LuzV để hỏi tình trạng cung cấp.';
   extraSection.append(extraBag,extraNote);extrasPanel.append(extraSection);
+  if(window.LuzVExtras.hadReferenceSelections){
+    const notice=document.createElement('p');notice.id='luzv-reference-cart-note';notice.setAttribute('role','status');
+    notice.textContent='Các gói AI/Shopee tham khảo đã được bỏ khỏi túi vì chưa mở đăng ký. Tổng tiền hiện chỉ tính môn Azota và PDF. Nếu đã chuyển khoản theo lần trước, hãy gửi ảnh xác nhận cho LuzV để đối chiếu. ';
+    const contactLink=document.createElement('a');contactLink.href='https://zalo.me/0377300076';
+    contactLink.target='_blank';contactLink.rel='noopener noreferrer';contactLink.textContent='Liên hệ LuzV ↗';
+    notice.append(contactLink);cart.querySelector('.order-header').after(notice);
+  }
+  function syncExtraButton(button,product,on){
+    const available=window.LuzVExtras.canSelect(product.id);
+    button.disabled=!available;
+    button.textContent=available?(on?'✓ Đã trong túi':'+ Thêm vào túi'):'Chưa mở đăng ký';
+    button.setAttribute('aria-pressed',String(on));
+    button.setAttribute('aria-label',available?((on?'Bỏ ':'Thêm ')+product.name):(product.name+' · Chưa mở đăng ký'));
+  }
   function renderExtras(){
     const extras=window.LuzVExtras.items();
     const chosen=new Set(extras.map(p=>p.id));
@@ -11740,15 +11759,11 @@ html[data-luzv-theme="dark"] .luzv-extra-bag,body.night-owl-mode .luzv-extra-bag
     const activeDeal=dealOptions.find(p=>p.id===selectedDealId)||dealOptions[0];
     ticketPrice.querySelector('strong').textContent=money(activeDeal.price);
     const dealInBag=chosen.has(activeDeal.id);
-    ticketButton.textContent=dealInBag?'✓ Đã trong túi':'+ Thêm vào túi';
-    ticketButton.setAttribute('aria-pressed',String(dealInBag));
-    ticketButton.setAttribute('aria-label',(dealInBag?'Bỏ ':'Thêm ')+activeDeal.name);
+    syncExtraButton(ticketButton,activeDeal,dealInBag);
     ticket.classList.toggle('is-selected',!!chosenVoucher);
     for(const [id,entry] of buttons){
       const on=chosen.has(id);
-      entry.button.textContent=on?'✓ Đã trong túi':'+ Thêm vào túi';
-      entry.button.setAttribute('aria-pressed',String(on));
-      entry.button.setAttribute('aria-label',(on?'Bỏ ':'Thêm ')+(window.LuzVExtras.products.find(p=>p.id===id)?.name||id));
+      syncExtraButton(entry.button,window.LuzVExtras.products.find(p=>p.id===id),on);
       entry.card.classList.toggle('is-selected',on);
     }
     const pdfCount=window.luzvGetFileSelections?.().length||0;
@@ -14532,6 +14547,31 @@ var qrcode = function() {
   const orderCopyButton = $('payment-copy'), zaloLink = $('luzv-payment-zalo');
   const registration = dialog.querySelector('.payment-registration');
   let signature = '', intent = null, imageData = '', renderedMemo = '', copyRevision = 0;
+  const INTENT_KEY = 'luzv_payment_intent_v1';
+  let booting = true;
+  function readSavedIntent() {
+    try {
+      const value = JSON.parse(LuzVStorage.getItem(INTENT_KEY) || 'null');
+      return value?.version === 1 && typeof value.signature === 'string' && value.signature.length <= 8192 &&
+        typeof value.memo === 'string' && /^LUZV [A-Z0-9]{12}$/.test(value.memo) ? value : null;
+    } catch { return null; }
+  }
+  let savedIntent = readSavedIntent();
+  function cartSignature(info, pdfs) {
+    const indices = [...selected].sort((a,b) => a-b);
+    const extras = window.LuzVExtras?.items() || [];
+    const sortItems = items => items.map(item => [item.id,item.price]).sort((a,b) => a[0].localeCompare(b[0]));
+    return JSON.stringify([indices, activePlan.id, LuzVPricing.coupon,
+      pdfs.map(pdf=>pdf.id).sort(), extras.map(item=>item.id).sort(), info.total, bank.bin, bank.accountNumber,
+      indices.map(index=>[index,window.LuzVDemoPrices.coursePrice(index,activePlan.id)]),
+      sortItems(pdfs), sortItems(extras), info.discountAmount, info.saved]);
+  }
+  function saveIntent(next, reference) {
+    if (booting) return;
+    // Store a reference and cart/pricing identifiers; never store names, accounts or QR images.
+    savedIntent = {version:1, signature:next, memo:reference};
+    try { LuzVStorage.setItem(INTENT_KEY,JSON.stringify(savedIntent)); } catch {}
+  }
   let copiedOrderText = ''; // Chỉ xác nhận khi nội dung đơn ĐÚNG đã được sao chép.
 
   function resetOrderCopy(){
@@ -14574,15 +14614,19 @@ var qrcode = function() {
     const info = LuzVPricing.current(), pdfs = window.luzvGetFileSelections?.() || [];
     if ((!selected.size && !pdfs.length && !(window.LuzVExtras?.items().length)) || !Number.isSafeInteger(info.total) || info.total <= 0) {
       signature = '';intent = null;imageData = '';
+      if (!booting && savedIntent) {
+        savedIntent = null;
+        try { LuzVStorage.removeItem(INTENT_KEY); } catch {}
+      }
       return null;
     }
-    const next = JSON.stringify([[...selected].sort((a,b) => a-b), activePlan.id,
-      LuzVPricing.coupon, pdfs.map(pdf=>pdf.id).sort(), (window.LuzVExtras?.items() || []).map(p=>p.id).sort(), info.total, bank.bin, bank.accountNumber]);
+    const next = cartSignature(info,pdfs);
     if (next !== signature) {
-      const reference = makeMemo();
+      const reference = savedIntent?.signature === next ? savedIntent.memo : makeMemo();
       const payload = LuzVVietQR.buildPayload({amount: info.total, memo: reference});
       intent = Object.freeze({amount: info.total, memo: reference, payload, bank});
       signature = next;imageData = '';
+      saveIntent(next,reference);
     }
     return intent;
   }
@@ -14776,6 +14820,24 @@ var qrcode = function() {
   window.LuzVPayment = Object.freeze({current, render});
   LuzVOrder.subscribe('payment-qr', render);
   render();
+  function finishStartup() {
+    // Wait for cart/PDF restoration and the saved voucher registry before replacing a reference.
+    if (savedIntent && !LuzVPricing.coupon) {
+      let code = '';
+      try { code = JSON.parse(savedIntent.signature)[2]; } catch {}
+      if (typeof code === 'string' && code && LuzVPricing.validCode(code)) {
+        LuzVPricing.coupon = code;
+        if (cartSignature(LuzVPricing.current(),window.luzvGetFileSelections?.() || []) !== savedIntent.signature)
+          LuzVPricing.coupon = '';
+        else if ($('luzv-coupon-input')) $('luzv-coupon-input').value = code;
+      }
+    }
+    booting = false;
+    signature = '';
+    window.updateOrder();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',finishStartup,{once:true});
+  else finishStartup();
 })();
 
 </script>
@@ -16013,5 +16075,14 @@ html[data-luzv-theme="dark"] #luzv-pdf-search::placeholder{color:#c7dce9;opacity
   schedule();
 })();
 </script>
+<style id="luzv-reference-offers-style">
+#luzv-extra-store .luzv-extra-footer{flex-wrap:wrap}
+#luzv-extra-store .luzv-extra-add:disabled{background:#e8eef4;color:#435970;border-color:#bccbd8;box-shadow:none;cursor:not-allowed;opacity:1;white-space:normal;max-width:100%;min-height:44px;line-height:1.4}
+#luzv-reference-cart-note{margin:12px 14px;padding:12px;border:1px solid #b9d8ee;border-radius:12px;background:#edf7ff;color:#234763;font-size:13px;line-height:1.6}
+#luzv-reference-cart-note a{color:#075e96;font-weight:700}
+html[data-luzv-theme="dark"] #luzv-extra-store .luzv-extra-add:disabled{background:#263d50;color:#d7e7f2;border-color:#526c81}
+html[data-luzv-theme="dark"] #luzv-reference-cart-note{background:#17354b;color:#e4f1fb;border-color:#456e8b}
+html[data-luzv-theme="dark"] #luzv-reference-cart-note a{color:#a8dcff}
+</style>
 </body>
 </html>
