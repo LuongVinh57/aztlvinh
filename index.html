@@ -8156,19 +8156,15 @@ body.night-owl-mode #payment-dialog #payment-copy-status[data-tone="success"]{co
                     <summary class="luzv-pdf-dropdown-trigger" aria-controls="luzv-pdf-options" aria-label="Mở danh sách chọn tài liệu PDF">
                       <span id="luzv-pdf-trigger-text">— Không chọn file PDF —</span>
                     </summary>
+                    <label class="luzv-pdf-search-field"><input id="luzv-pdf-search" type="search" autocomplete="off" placeholder="Tìm PDF theo tên môn..." aria-label="Tìm tài liệu PDF trong 32 môn"></label>
                     <div id="luzv-pdf-options" class="luzv-pdf-options" role="group" aria-labelledby="luzv-pdf-choose-label">
                       <button type="button" class="luzv-pdf-option luzv-pdf-option-clear" id="luzv-pdf-clear-option">
                         <span class="luzv-pdf-checkmark" aria-hidden="true">✓</span><span>— Không chọn file PDF —</span>
                       </button>
-                      <label class="luzv-pdf-option"><input class="luzv-pdf-check" type="checkbox" value="nhch-dien-tu-so"><span class="luzv-pdf-checkmark" aria-hidden="true">✓</span><span>Điện tử số · PDF</span><strong>10.000đ</strong></label>
-                      <label class="luzv-pdf-option"><input class="luzv-pdf-check" type="checkbox" value="nhch-triet-hoc-mac-lenin"><span class="luzv-pdf-checkmark" aria-hidden="true">✓</span><span>Triết học Mác – Lênin · PDF</span><strong>10.000đ</strong></label>
-                      <label class="luzv-pdf-option"><input class="luzv-pdf-check" type="checkbox" value="nhch-may-dien-4-tin"><span class="luzv-pdf-checkmark" aria-hidden="true">✓</span><span>Máy điện (4 tín chỉ) · PDF</span><strong>10.000đ</strong></label>
                     </div>
+                    <p id="luzv-pdf-no-results" role="status" hidden>Chưa tìm thấy môn phù hợp.</p>
                   </details>
                   <select id="luzv-file-product" multiple hidden aria-hidden="true" tabindex="-1">
-                    <option value="nhch-dien-tu-so">Điện tử số</option>
-                    <option value="nhch-triet-hoc-mac-lenin">Triết học Mác – Lênin</option>
-                    <option value="nhch-may-dien-4-tin">Máy điện (4 tín chỉ)</option>
                   </select>
                 </div>
                 <div class="luzv-file-selected" aria-live="polite">
@@ -8538,17 +8534,20 @@ body.night-owl-mode #payment-dialog #payment-copy-status[data-tone="success"]{co
       { id: "duo", name: "Đôi bạn cùng tiến", people: 2, price: 25000, badge: "-17%" },
       { id: "team", name: "Hội nhóm cùng vui", people: 5, price: 50000, badge: "Chỉ 10k/người" }
     ];
+    // One PDF catalogue follows the 32 original subject names; legacy IDs stay stable.
+    window.LuzVPDFCatalog = Object.freeze(COURSE_DATA.map(course => Object.freeze({
+      id: 'nhch-' + course.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''),
+      name: course.name,
+      code: course.code,
+      price: 10000
+    })));
     // DEMO ONLY: locally editable prices for the standalone Admin preview.
     // Production must load prices from an authenticated server API.
     window.LuzVDemoPrices = (() => {
       const KEY = 'luzv_admin_demo_pricing_v1';
       const defaults = {
         plans: Object.fromEntries(PLANS.map(p => [p.id, p.price])),
-        pdfs: {
-          'nhch-dien-tu-so': 10000,
-          'nhch-triet-hoc-mac-lenin': 10000,
-          'nhch-may-dien-4-tin': 10000
-        },
+        pdfs: Object.fromEntries(window.LuzVPDFCatalog.map(pdf => [pdf.id,pdf.price])),
         courses: Object.fromEntries(PLANS.map(p=>[p.id,{}]))
       };
       const valid = x => typeof x === 'number' && Number.isInteger(x) && x >= 1000 && x <= 10000000;
@@ -10430,15 +10429,30 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
 (() => {
   'use strict';
   const select = document.getElementById('luzv-file-product');
-  const checks = [...document.querySelectorAll('.luzv-pdf-check')];
+  const options = document.getElementById('luzv-pdf-options');
   const checkoutBtn = document.getElementById('studio-checkout');
-  if (!select || !checkoutBtn || !checks.length) return;
-  const FILE_PRICE = 10000;
-  const FILES = Object.freeze({
-    'nhch-dien-tu-so': 'Điện tử số',
-    'nhch-triet-hoc-mac-lenin': 'Triết học Mác – Lênin',
-    'nhch-may-dien-4-tin': 'Máy điện (4 tín chỉ)'
+  const catalogue = window.LuzVPDFCatalog;
+  if (!select || !options || !checkoutBtn || !catalogue?.length) return;
+  const selectedIds = new Set([...select.selectedOptions].map(option => option.value));
+  const rows = catalogue.map(pdf => {
+    const label = document.createElement('label');label.className = 'luzv-pdf-option';
+    label.dataset.pdfName = pdf.name + ' ' + pdf.code;
+    const check = document.createElement('input');check.className = 'luzv-pdf-check';
+    check.type = 'checkbox';check.value = pdf.id;
+    const mark = document.createElement('span');mark.className = 'luzv-pdf-checkmark';
+    mark.setAttribute('aria-hidden','true');mark.textContent = '✓';
+    const name = document.createElement('span');name.textContent = pdf.name + ' · PDF';
+    const price = document.createElement('strong');price.textContent = pdf.price.toLocaleString('vi-VN') + 'đ';
+    label.append(check,mark,name,price);return label;
   });
+  options.replaceChildren(document.getElementById('luzv-pdf-clear-option'),...rows);
+  select.replaceChildren(...catalogue.map(pdf => {
+    const option = document.createElement('option');option.value = pdf.id;option.textContent = pdf.name;
+    option.selected = selectedIds.has(pdf.id);return option;
+  }));
+  const checks = [...options.querySelectorAll('.luzv-pdf-check')];
+  const FILE_PRICE = 10000;
+  const FILES = Object.freeze(Object.fromEntries(catalogue.map(pdf => [pdf.id,pdf.name])));
   const moneyVN = n => Number(n).toLocaleString('vi-VN') + 'đ';
   const getProduct = id => Object.hasOwn(FILES,id) ? {id, name: FILES[id],price:window.LuzVDemoPrices?.pdfPrice(id) ?? FILE_PRICE} : null;
   const getPDFs = () => [...select.selectedOptions].map(option=>getProduct(option.value)).filter(Boolean);
@@ -10463,6 +10477,23 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
   // The list stays open while selecting multiple PDFs, like a multi-select dropdown.
   const dropdown = document.getElementById('luzv-pdf-dropdown');
   const clearOption = document.getElementById('luzv-pdf-clear-option');
+  const search = document.getElementById('luzv-pdf-search');
+  const emptySearch = document.getElementById('luzv-pdf-no-results');
+  const fold = text => String(text).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/\s+/g,' ').trim();
+  function filterPDFs() {
+    const query = fold(search.value);
+    let visible = 0;
+    for (const row of rows) {
+      row.hidden = !fold(row.dataset.pdfName).includes(query);
+      if (!row.hidden) visible++;
+    }
+    emptySearch.hidden = visible > 0;
+  }
+  search.addEventListener('input',filterPDFs);
+  dropdown?.addEventListener('toggle',() => {
+    if (!dropdown.open) {search.value='';filterPDFs();}
+  });
+
   if (clearOption) clearOption.addEventListener('click', () => setPDFs([]));
   if (dropdown) {
     document.addEventListener('pointerdown', event => {
@@ -10496,6 +10527,7 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
     });
     const count=selected.size, pdfCount=pdfs.length;
     const orderList=document.getElementById('order-list');
+    orderList.querySelectorAll('.luzv-pdf-cart-item').forEach(item=>item.remove());
     const empty=document.getElementById('empty');
     const unit=document.getElementById('luzv-order-qty-unit');
     for (const pdf of pdfs) {
@@ -10524,14 +10556,17 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
       const section=document.getElementById(id);if(section)section.hidden=onlyPDF;
     }
   }
+  window.luzvGetPdfPriceSummary = () => {
+    const prices = catalogue.map(pdf => getProduct(pdf.id).price);
+    return prices.every(price => price === prices[0]) ? moneyVN(prices[0])+'/file' : 'Giá theo từng file';
+  };
   window.luzvRefreshPdfPrices = () => {
     render();
-    const prices=Object.keys(FILES).map(id=>getProduct(id).price);
-    const summaryText=prices.every(x=>x===prices[0]) ? moneyVN(prices[0])+'/file' : 'Giá theo từng file';
+    const summaryText=window.luzvGetPdfPriceSummary();
     const summary=document.getElementById('luzv-file-summary');
     if(summary)summary.textContent=summaryText;
     const pdfHeading=document.querySelector('#luzv-panel-pdf .luzv-tab-heading p');
-    if(pdfHeading)pdfHeading.textContent=summaryText+' · LuzV gửi tài liệu sau khi xác nhận chuyển khoản.';
+    if(pdfHeading)pdfHeading.textContent=catalogue.length+' môn · '+summaryText+' · LuzV gửi tài liệu sau khi xác nhận chuyển khoản.';
   };
   LuzVOrder.subscribe('pdf',render);
   window.luzvRefreshPdfPrices();
@@ -11174,7 +11209,7 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
     if (LuzVPricing.coupon && courses) pieces.push('Mã ' + LuzVPricing.coupon);
     if (pieces.length === 1) pieces.push(extras.length && !courses ? 'Giá theo sản phẩm' : 'Giá niêm yết');
     badge.textContent = pieces.join(' · ');
-    fileSummary.textContent = pdfs.length ? `Đã chọn ${pdfs.length} PDF · ` + money(pdfs.reduce((sum,pdf)=>sum+pdf.price,0)) : (new Set(['nhch-dien-tu-so','nhch-triet-hoc-mac-lenin','nhch-may-dien-4-tin'].map(id=>window.luzvGetFileProduct(id).price)).size===1 ? money(window.luzvGetFileProduct('nhch-dien-tu-so').price)+'/file' : 'Giá theo từng file');
+    fileSummary.textContent = pdfs.length ? `Đã chọn ${pdfs.length} PDF · ` + money(pdfs.reduce((sum,pdf)=>sum+pdf.price,0)) : (new Set(window.LuzVPDFCatalog.map(pdf=>window.luzvGetFileProduct(pdf.id).price)).size===1 ? money(window.luzvGetFileProduct('nhch-dien-tu-so').price)+'/file' : 'Giá theo từng file');
   }
 
   function revealPDF() {
@@ -11575,7 +11610,7 @@ html[data-luzv-theme="dark"] .luzv-extra-bag,body.night-owl-mode .luzv-extra-bag
   planSummary.append(planText,link('Xem gói & ưu đãi ↓','luzv-group-plans'));
   coursePanel.append(planSummary);
   const pdfPanel = panelFor(definitions.find(def=>def.id==='pdf'));
-  heading(pdfPanel,'Ngân hàng PDF','10.000đ/file · LuzV gửi tài liệu sau khi xác nhận chuyển khoản.');
+  heading(pdfPanel,'Ngân hàng PDF',window.LuzVPDFCatalog.length+' môn · '+window.luzvGetPdfPriceSummary()+' · LuzV gửi tài liệu sau khi xác nhận chuyển khoản.');
   pdfPanel.append(pdf,link('Xem túi ôn tập →','don-hang'));pdfPanel.lastElementChild.className = 'luzv-tab-next';
   // The Azota catalogue and its discounts are ONE navigation destination.
   // Reuse the original plan selector unchanged, without duplicating any prices.
@@ -15012,7 +15047,7 @@ html[data-luzv-theme="dark"] #luzv-admin-preview-dialog .lvap-history-empty p,bo
     <section class="lvap-pane" id="lvap-pane-catalog" role="tabpanel" aria-labelledby="lvap-tab-catalog" hidden>
       <h3>Chỉnh sửa giá gói Azota và PDF</h3>
       <p class="lvap-pricing-tip"><strong>Bản Admin dùng thử:</strong> Sửa giá bằng ô nhập rồi bấm <strong>Lưu giá</strong>. Phần PDF đã được thu gọn: chỉ cần chọn môn/file PDF, nhập giá ở ô bên cạnh rồi lưu. Giá mới được áp dụng ngay trên website mẫu và lưu trên trình duyệt này.</p>
-      <div class="lvap-actions lvap-pricing-tools"><span class="lvap-muted">32 môn Azota dùng giá theo gói; 3 PDF có giá riêng và chỉnh nhanh bằng danh sách chọn.</span><button class="lvap-secondary" id="lvap-reset-prices" type="button">Khôi phục giá gốc</button></div>
+      <div class="lvap-actions lvap-pricing-tools"><span class="lvap-muted">32 môn Azota dùng giá theo gói; 32 PDF có giá riêng và chỉnh nhanh bằng danh sách chọn.</span><button class="lvap-secondary" id="lvap-reset-prices" type="button">Khôi phục giá gốc</button></div>
       <div class="lvap-catalog" id="lvap-catalog-stats"></div>
       <div id="lvap-catalog-table"></div>
     </section>
@@ -15076,7 +15111,7 @@ html[data-luzv-theme="dark"] #luzv-admin-preview-dialog .lvap-history-empty p,bo
   const catalogs = () => {
     const courses=typeof COURSE_DATA!=='undefined' ? COURSE_DATA : [];
     const plans=typeof PLANS!=='undefined' ? PLANS : [];
-    const pdfIds=['nhch-dien-tu-so','nhch-triet-hoc-mac-lenin','nhch-may-dien-4-tin'];
+    const pdfIds=window.LuzVPDFCatalog.map(pdf=>pdf.id);
     const pdfs=pdfIds.map(id=>window.luzvGetFileProduct?.(id)).filter(Boolean);
     $('lvap-catalog-stats').replaceChildren();
     [courses.length+' môn Azota',pdfs.length+' PDF',plans.length+' gói'].forEach(t=>$('lvap-catalog-stats').append(el('span',{className:'lvap-pill',text:t})));
@@ -15229,7 +15264,7 @@ html[data-luzv-theme="dark"] #luzv-admin-preview-dialog .lvap-history-empty p,bo
     host.append(planCard,pdfCard,subjectCard);
   };
   $('lvap-reset-prices').addEventListener('click',()=>{
-    if(!confirm('Khôi phục giá gốc 3 gói và 3 PDF trong bản dùng thử?'))return;
+    if(!confirm('Khôi phục giá gốc 3 gói và 32 PDF trong bản dùng thử?'))return;
     if(!window.LuzVDemoPrices?.reset()){feedback('Không thể khôi phục giá trên thiết bị này.');return;}
     PRICE=activePlan.price;
     window.refreshPlanDisplay?.();window.updateOrder?.();window.luzvRefreshPdfPrices?.();window.LuzVOrder?.render();
@@ -15921,5 +15956,17 @@ html[data-luzv-theme="dark"] #luzv-mobile-actions .luzv-mobile-account-action {b
 })();
 
 </script>
+<style id="luzv-pdf-32-style">
+#luzv-pdf-dropdown .luzv-pdf-search-field{display:block;padding:10px;border-inline:1.5px solid #9dc9eb;background:#f9fcff}
+#luzv-pdf-search{display:block;width:100%;min-height:44px;margin:0;padding:10px 12px;border:1px solid #b5d2e7;border-radius:9px;background:#fff;color:#173b59;font:inherit;font-size:16px;line-height:1.4}
+#luzv-pdf-search:focus-visible{outline:2px solid #1679bf;outline-offset:1px}
+#luzv-pdf-dropdown .luzv-pdf-options{max-height:min(330px,45dvh);overscroll-behavior:contain;scrollbar-width:thin}
+#luzv-pdf-dropdown .luzv-pdf-option[hidden],#luzv-pdf-no-results[hidden]{display:none!important}
+#luzv-pdf-no-results{margin:0;padding:12px;border:1px solid #9dc9eb;background:#f9fcff;color:#375d77;font-size:13px;font-weight:600}
+#lvap-catalog-table #lvap-pdf-select{min-width:0!important;max-width:100%;width:min(100%,360px)}
+html[data-luzv-theme="dark"] #luzv-pdf-dropdown .luzv-pdf-search-field,html[data-luzv-theme="dark"] #luzv-pdf-no-results{background:#15293a;border-color:#527b9a;color:#eaf7ff}
+html[data-luzv-theme="dark"] #luzv-pdf-search{background:#203c53;border-color:#527b9a;color:#f0f9ff}
+html[data-luzv-theme="dark"] #luzv-pdf-search::placeholder{color:#c7dce9;opacity:1}
+</style>
 </body>
 </html>

@@ -20,9 +20,16 @@ Giữ nguyên dữ liệu và khóa lưu cũ, giảm phần trăm hoặc số ti
 
 Kiểm tra hồi quy: node tests/voucher-reload.cjs (cần Playwright và Chromium). Kiểm tra ở 390/1360px gồm tạo mã → tải lại → áp dụng trước khi mở Admin, mã phần trăm/giảm tiền, bật/tắt/xóa, hết hạn, mã gốc, gói nhóm, PDF và tổng QR; có kiểm tra lưu trữ hỏng/bị chặn.
 
+## Danh sách PDF đủ 32 môn
+Ngân hàng PDF dùng chung tên của 32 môn Azota, mặc định 10.000đ/file. Có thể tìm tên môn có dấu hoặc không dấu và chọn nhiều file trong danh sách cuộn gọn. Giỏ, tổng tiền, QR và nội dung sao chép cập nhật theo các file đã chọn.
+
+Admin có đủ 32 PDF để chỉnh giá từng file. Giữ nguyên mã định danh, giá đã lưu và lựa chọn cũ của ba PDF ban đầu. Các file PDF tiếp tục được LuzV gửi sau khi xác nhận chuyển khoản; thay đổi này bổ sung danh sách đăng ký, không bổ sung tệp PDF nội dung.
+
+Kiểm tra: node tests/pdf-catalog.cjs (cần Playwright và Chromium). Đã thử ở 320/390/820/1360px, sáng/tối, tìm không dấu, chọn đủ 32 file, giá/QR/sao chép, tải lại, bỏ chọn, xóa hết và chỉnh giá trong Admin; không lặp dòng giỏ khi cập nhật nhiều lần.
+
 ## Kiểm tra
 Đã kiểm tra ở 320, 390, 820 và 1360px, sáng/tối: bố cục, danh sách môn, menu/tìm kiếm, đăng nhập demo, quản trị, đăng xuất, hướng dẫn 5 bước, giỏ, nhiều PDF, các ca giá, QR và sao chép. Không tràn ngang, trùng ID hoặc lỗi JavaScript trong các thao tác thử.
 
-SHA256 của index.html: c8518eae50e2ded7f9f44f8dada8e8cc7e96f62964c9f782d3c20590075f561f.
+SHA256 của index.html: 5616877e8338dea09a7c6cbd26b12bbbae9bab687cdc7584ad541cf2cdde5a71.
 
 Thư viện qrcode-generator dùng giấy phép MIT, giữ trong HTML và LICENSE-qrcode-generator.txt.
