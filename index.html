@@ -83,13 +83,13 @@ window.LuzVExtras = (() => {
 /* Shared pricing rules: discounts apply to Azota subjects only. */
 window.LuzVPricing = {
   coupon: '',
-  validCode(code) { return ['DN','VT','BN','TH','BH','VH','KD'].includes(code) || !!window.LuzVDemoVouchers?.find(code); },
+  validCode(code) { return ['DN','VT','BN','TH','BH','VH','KD'].includes(code) || !!window.LuzVLocalVouchers?.find(code); },
   calculate({count = 0, price = 0, people = 1, code = '', pdfPrice = 0, extraPrice = 0, subtotalOverride = null}) {
     const subtotal = Number.isFinite(subtotalOverride) && subtotalOverride >= 0 ? subtotalOverride : count * price;
     const rate = people === 1 ? 0 : count >= 5 ? .15 : count >= 3 ? .10 : 0;
     const discountAmount = Math.round(subtotal * rate);
     const finalTotal = subtotal - discountAmount;
-    const customCoupon = window.LuzVDemoVouchers?.find(code);
+    const customCoupon = window.LuzVLocalVouchers?.find(code);
     const couponRate = customCoupon ? (customCoupon.kind==='percent' ? customCoupon.value/100 : 0) : (this.validCode(code) ? ({1:.05, 2:.03, 5:.01}[people] || 0) : 0);
     const saved = Math.min(finalTotal,customCoupon && customCoupon.kind==='fixed' ? customCoupon.value : Math.round(finalTotal * couponRate));
     return {count, subtotal, rate, percent: Math.round(rate * 100), discountAmount,
@@ -99,7 +99,7 @@ window.LuzVPricing = {
   },
   current() {
     return this.calculate({count: selected.size, price: PRICE, people: activePlan.people,
-      subtotalOverride: [...selected].reduce((sum,index)=>sum+(window.LuzVDemoPrices?.coursePrice(index,activePlan.id) ?? PRICE),0),
+      subtotalOverride: [...selected].reduce((sum,index)=>sum+(window.LuzVLocalPrices?.coursePrice(index,activePlan.id) ?? PRICE),0),
       code: this.coupon, pdfPrice: (window.luzvGetFileSelections?.() || []).reduce((sum, file) => sum + file.price, 0),
       extraPrice: window.LuzVExtras?.price() || 0});
   }
@@ -2864,7 +2864,7 @@ body.night-owl-mode .subject.selected .subject-choice {background:var(--luzv-acc
 body.night-owl-mode .subject.selected {border-color:var(--luzv-accent);}
 
 @media (hover:none) and (pointer:coarse) {
-  /* Tránh 32 bìa sách cùng chuyển động liên tục trên điện thoại. */
+  /* Tránh 35 bìa sách cùng chuyển động liên tục trên điện thoại. */
   .subject .studio-book,.subject .studio-cover,.subject .studio-spark,
   .subject .studio-float,.subject .studio-book-ring {animation:none!important;}
   .subject.press-pop .studio-book {transform:rotate(-12deg) translateY(-7px) scale(1.04);}
@@ -4084,7 +4084,7 @@ html[data-luzv-theme="dark"] #luzv-quick-nav{--btt-bg:#101920f5;--btt-border:#2f
 }
 @media(prefers-reduced-motion:reduce){#luzv-quick-nav .btt-quick-menu{animation:none}#luzv-quick-nav .btt-arrow-btn{transition:none}#luzv-quick-nav .btt-arrow-btn:hover{transform:none}}
 
-/* Compact the full 32-subject catalogue into four columns on phones/tablets. */
+/* Compact the full 35-subject catalogue into four columns on phones/tablets. */
 @media(max-width:1024px){
  #subjects{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:8px!important;align-items:stretch}
  #subjects .subject{min-width:0;border-radius:12px!important}
@@ -4816,7 +4816,7 @@ body:has(#lv-tour[open]) .luzv-toc-bar{visibility:hidden;pointer-events:none}
  .luzv-toc-item{transition:none;transform:none}
 }
 
-/* Compact treatment for all 32 catalog cards, using the existing native selection. */
+/* Compact treatment for all 35 catalog cards, using the existing native selection. */
 #subjects .subject{
  --compact-ink:#1e293b;--compact-price:#0f4c81;
  --compact-line:#cbdfee;--compact-muted:#557087;
@@ -5456,7 +5456,7 @@ html[data-luzv-theme="dark"] .luzv-reference-mode .luzv-bottom-tabs button.is-ac
 }
 
 
-/* Chỉ gộp Gói & ưu đãi vào 32 môn Azota — giữ màu và bố cục ảnh mẫu. */
+/* Chỉ gộp Gói & ưu đãi vào 35 môn Azota — giữ màu và bố cục ảnh mẫu. */
 @media (min-width: 1025px) {
   .luzv-reference-mode .luzv-tabs-grid {grid-template-columns:repeat(7,minmax(0,1fr));}
 }
@@ -5564,7 +5564,7 @@ html[data-luzv-theme="dark"] #luzv-pdf-dropdown .luzv-pdf-option.is-selected,bod
 </style>
 
 <style id="luzv-rail-compact-v2">
-/* Compact quick course carousel: retain all 32 data items and existing cart events. */
+/* Compact quick course carousel: retain all 35 data items and existing cart events. */
 #luzv-exam-countdown-box,
 html[data-luzv-theme="dark"] body #luzv-exam-countdown-box {
   padding:15px 18px 13px;
@@ -7918,7 +7918,7 @@ body.night-owl-mode #payment-dialog #payment-copy-status[data-tone="success"]{co
 <div class="az-phone-3d">
 <div class="az-phone-header">LUZV · AZOTA</div>
 <div class="az-phone-search">🔎 Tìm môn trong kho đề...</div>
-<div class="az-phone-content">📚 32 MÔN AZOTA<br/>CHỌN MÔN THEO NHU CẦU</div>
+<div class="az-phone-content">📚 35 MÔN AZOTA<br/>CHỌN MÔN THEO NHU CẦU</div>
 <div class="az-phone-icons">
 <span class="az-phone-dot">A+</span>
 <span class="az-phone-dot">⚡</span>
@@ -7929,7 +7929,7 @@ body.night-owl-mode #payment-dialog #payment-copy-status[data-tone="success"]{co
 <div class="az-pop-road"></div>
 <div class="az-pop-card">
 <span class="az-pop-icon">🚀</span>
-<strong>32 MÔN ÔN TẬP</strong>
+<strong>35 MÔN ÔN TẬP</strong>
 <small>Chọn và thanh toán trực tuyến</small>
 </div>
 </div>
@@ -7937,7 +7937,7 @@ body.night-owl-mode #payment-dialog #payment-copy-status[data-tone="success"]{co
 <p class="az-sub-text">Kho đề ôn tập LuzV · Chọn môn bạn cần</p>
 <h2 class="az-main-title">ÔN TẬP DỄ DÀNG</h2>
 <div class="az-button-stack">
-<a class="az-button" href="#mon-hoc">XEM 32 MÔN AZOTA</a>
+<a class="az-button" href="#mon-hoc">XEM 35 MÔN AZOTA</a>
 <a class="az-button" href="#luzv-file-store">NGÂN HÀNG PDF</a>
 </div>
 <span class="az-note">Solo 15.000đ/môn · PDF 10.000đ/file</span>
@@ -8101,7 +8101,7 @@ body.night-owl-mode #payment-dialog #payment-copy-status[data-tone="success"]{co
             <button type="button" class="filter-tab active" data-filter="all" aria-pressed="true">
               <span class="luzv-category-pic" aria-hidden="true">
                 <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13h17l7 5 7-5h17v35H39l-7 5-7-5H8V13Z" stroke-width="3"/><path d="M32 18v35M15 24h10M15 31h10M39 24h10M39 31h10" stroke-width="2.5"/><path d="m19 7 3 6M45 7l-3 6" stroke-width="2.5"/></svg>
-              </span><span class="luzv-category-label">Tất cả (32)</span>
+              </span><span class="luzv-category-label">Tất cả (35)</span>
             </button>
             <button type="button" class="filter-tab" data-filter="selected" id="tab-selected" aria-pressed="false">
               <span class="luzv-category-pic" aria-hidden="true">
@@ -8127,7 +8127,7 @@ body.night-owl-mode #payment-dialog #payment-copy-status[data-tone="success"]{co
         </section>
 
         <p class="search-info" id="search-info" aria-live="polite">
-          Hiển thị 32 môn học
+          Hiển thị 35 môn học
         </p>
 
         <div class="subjects" id="subjects"></div>
@@ -8167,7 +8167,7 @@ body.night-owl-mode #payment-dialog #payment-copy-status[data-tone="success"]{co
                     <summary class="luzv-pdf-dropdown-trigger" aria-controls="luzv-pdf-options" aria-label="Mở danh sách chọn tài liệu PDF">
                       <span id="luzv-pdf-trigger-text">— Không chọn file PDF —</span>
                     </summary>
-                    <label class="luzv-pdf-search-field"><input id="luzv-pdf-search" type="search" autocomplete="off" placeholder="Tìm PDF theo tên môn..." aria-label="Tìm tài liệu PDF trong 32 môn"></label>
+                    <label class="luzv-pdf-search-field"><input id="luzv-pdf-search" type="search" autocomplete="off" placeholder="Tìm PDF theo tên môn..." aria-label="Tìm tài liệu PDF trong 35 môn"></label>
                     <div id="luzv-pdf-options" class="luzv-pdf-options" role="group" aria-labelledby="luzv-pdf-choose-label">
                       <button type="button" class="luzv-pdf-option luzv-pdf-option-clear" id="luzv-pdf-clear-option">
                         <span class="luzv-pdf-checkmark" aria-hidden="true">✓</span><span>— Không chọn file PDF —</span>
@@ -8503,7 +8503,7 @@ body.night-owl-mode #payment-dialog #payment-copy-status[data-tone="success"]{co
   </dialog>
 
 <script>
-// Danh sách 32 môn học
+// Danh sách 35 môn học
     const COURSE_DATA = [
       { name: "CN XHKH", code: "XHKH", bought: 2, cat: "chinhtri" },
       { name: "CSLT Mạch Điện 1", code: "MĐ 1", bought: 2, cat: "dien" },
@@ -8536,7 +8536,12 @@ body.night-owl-mode #payment-dialog #payment-copy-status[data-tone="success"]{co
       { name: "Vật Lí 2", code: "VL 2", bought: 2, cat: "daicuong" },
       { name: "Vật Lí Đại Cương", code: "VLĐC", bought: 0, cat: "daicuong" },
       { name: "Vật Liệu Điện", code: "VLĐ", bought: 1, cat: "dien" },
-      { name: "Vi Xử Lý - Vi Điều Khiển", code: "VXL", bought: 4, cat: "dien" }
+      { name: "Vi Xử Lý - Vi Điều Khiển", code: "VXL", bought: 4, cat: "dien" },
+      // LUZV-CATALOGUE-35-ADDITIONS:BEGIN — append only; legacy indices 0–31 stay stable.
+      { name: "Luật Kinh Doanh", code: "LKD", bought: 0, cat: "chinhtri", visual: "law" },
+      { name: "Hóa Học Đại Cương", code: "HHĐC", bought: 0, cat: "daicuong", visual: "chemistry" },
+      { name: "Năng Lực Số và Ứng Dụng Trí Tuệ Nhân Tạo", code: "NLS-AI", bought: 0, cat: "daicuong", visual: "computing" }
+      // LUZV-CATALOGUE-35-ADDITIONS:END
     ];
 
     // Cấu hình 3 gói ôn tập
@@ -8545,7 +8550,7 @@ body.night-owl-mode #payment-dialog #payment-copy-status[data-tone="success"]{co
       { id: "duo", name: "Đôi bạn cùng tiến", people: 2, price: 25000, badge: "-17%" },
       { id: "team", name: "Hội nhóm cùng vui", people: 5, price: 50000, badge: "Chỉ 10k/người" }
     ];
-    // One PDF catalogue follows the 32 original subject names; legacy IDs stay stable.
+    // One PDF catalogue follows all 35 subject names; legacy IDs stay stable.
     window.LuzVPDFCatalog = Object.freeze(COURSE_DATA.map(course => Object.freeze({
       id: 'nhch-' + course.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''),
       name: course.name,
@@ -8554,7 +8559,7 @@ body.night-owl-mode #payment-dialog #payment-copy-status[data-tone="success"]{co
     })));
     // DEMO ONLY: locally editable prices for the standalone Admin preview.
     // Production must load prices from an authenticated server API.
-    window.LuzVDemoPrices = (() => {
+    window.LuzVLocalPrices = (() => {
       const KEY = 'luzv_admin_demo_pricing_v1';
       const defaults = {
         plans: Object.fromEntries(PLANS.map(p => [p.id, p.price])),
@@ -8575,7 +8580,7 @@ body.night-owl-mode #payment-dialog #payment-copy-status[data-tone="success"]{co
           if (valid(v)) prices[group][id] = v;
         }
       }
-      // Optional per-course overrides are indexed by the 32 original subjects and the plan id.
+      // Optional per-course overrides use stable append-only subject indices and the plan id.
       for (const plan of PLANS) {
         const saved = stored?.courses?.[plan.id];
         if(!saved || typeof saved !== 'object') continue;
@@ -8633,6 +8638,8 @@ body.night-owl-mode #payment-dialog #payment-copy-status[data-tone="success"]{co
 <script>
 /* Art/theme metadata is independent from prices, filters and saved selections. */
 const COURSE_VISUALS = {
+  // LUZV-CATALOGUE-35-VISUALS — chemistry reuses existing art 5.
+  chemistry:{id:'chemistry',label:'HÓA HỌC',tag:'ĐẠI CƯƠNG',art:5,tone:'#82d9ff',dark:'#156d9c',soft:'#d3f1ff',pale:'#edfaff'},
   electrical:{id:'electrical',label:'KỸ THUẬT',tag:'CÔNG NGHỆ',art:0,tone:'#31dfea',dark:'#067789',soft:'#b8fbff',pale:'#e9fbff'},
   machines:{id:'machines',label:'ĐIỆN MÁY',tag:'KỸ THUẬT',art:1,tone:'#599dff',dark:'#235ca7',soft:'#c6ddff',pale:'#edf4ff'},
   electronics:{id:'electronics',label:'ĐIỆN TỬ',tag:'CÔNG NGHỆ',art:2,tone:'#ffa36c',dark:'#99501e',soft:'#ffe0c7',pale:'#fff3e9'},
@@ -8647,6 +8654,8 @@ const COURSE_VISUALS = {
   society:{id:'society',label:'XÃ HỘI',tag:'CHÍNH TRỊ',art:11,tone:'#f6a58b',dark:'#9d4c39',soft:'#ffddd0',pale:'#fff3ec'}
 };
 function getCourseVisualTheme(course) {
+  // LUZV-CATALOGUE-35-VISUAL-METADATA: prefer the stable subject metadata.
+  if (course.visual && Object.hasOwn(COURSE_VISUALS, course.visual)) return COURSE_VISUALS[course.visual];
   const name=course.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').trim();
   if (/phap luat|luat hoc/.test(name)) return COURSE_VISUALS.law;
   if (/kinh te|ke toan|qtdn|quan tri/.test(name)) return COURSE_VISUALS.economics;
@@ -8770,7 +8779,7 @@ function getCourseVisualTheme(course) {
       planGrid.append(btn);
     });
 
-    // 2. Tạo 32 thẻ môn học
+    // 2. Tạo 35 thẻ môn học
     COURSE_DATA.forEach((course, index) => {
       const card = document.createElement("label");
       card.className = "subject";
@@ -8931,7 +8940,7 @@ function getCourseVisualTheme(course) {
       clearBuyerError();
 
       cards.forEach((c,index) => {
-        c.priceEl.textContent = money(window.LuzVDemoPrices.coursePrice(index, activePlan.id)) + (activePlan.people > 1 ? " / nhóm" : "");
+        c.priceEl.textContent = money(window.LuzVLocalPrices.coursePrice(index, activePlan.id)) + (activePlan.people > 1 ? " / nhóm" : "");
       });
     }
 
@@ -8956,7 +8965,7 @@ function getCourseVisualTheme(course) {
         title.textContent = course.name;
 
         const price = document.createElement("strong");
-        price.textContent = money(window.LuzVDemoPrices.coursePrice(index,activePlan.id));
+        price.textContent = money(window.LuzVLocalPrices.coursePrice(index,activePlan.id));
 
         const remove = document.createElement("button");
         remove.className = "remove";
@@ -9646,7 +9655,7 @@ function getCourseVisualTheme(course) {
     carouselBox.innerHTML = `
       <div class="luzv-rail-head">
         <div class="luzv-rail-copy">
-          <span class="luzv-rail-eyebrow">✦ KHO BỘ ĐỀ AZOTA · 32 MÔN</span>
+          <span class="luzv-rail-eyebrow">✦ KHO BỘ ĐỀ AZOTA · 35 MÔN</span>
           <h2>Chọn nhanh môn bạn cần</h2>
           <p>Vuốt ngang để khám phá bộ đề. Chọn một môn là thêm ngay vào túi ôn tập.</p>
         </div>
@@ -9655,10 +9664,10 @@ function getCourseVisualTheme(course) {
           <button type="button" id="luzv-rail-next" aria-label="Xem các môn tiếp theo">›</button>
         </div>
       </div>
-      <div class="luzv-rail-track" id="luzv-rail-track" tabindex="0" role="region" aria-label="Danh sách 32 môn Azota, vuốt ngang để xem"></div>
+      <div class="luzv-rail-track" id="luzv-rail-track" tabindex="0" role="region" aria-label="Danh sách 35 môn Azota, vuốt ngang để xem"></div>
       <div class="luzv-rail-foot">
         <span id="luzv-rail-count" aria-live="polite">Chưa chọn môn nào</span>
-        <a href="#subjects">Xem toàn bộ 32 môn ↓</a>
+        <a href="#subjects">Xem toàn bộ 35 môn ↓</a>
         <input class="luzv-rail-position" id="luzv-rail-position" type="range" min="0" max="1000" value="0" aria-label="Vị trí cuộn danh sách môn học">
       </div>`;
     const hero = document.querySelector('main.container > .hero');
@@ -9729,10 +9738,10 @@ function getCourseVisualTheme(course) {
         select.setAttribute('aria-label', (checked ? 'Bỏ chọn ' : 'Chọn ') + course.name);
         select.textContent = checked ? '✓ Đã thêm' : '+ Chọn môn';
         const amount = document.createElement('strong');
-        amount.textContent = money(window.LuzVDemoPrices.coursePrice(idx,activePlan.id));
+        amount.textContent = money(window.LuzVLocalPrices.coursePrice(idx,activePlan.id));
         price.replaceChildren(amount, document.createTextNode(' / môn'));
       });
-      status.textContent = selected.size ? `✓ Đã chọn ${selected.size} môn · ${activePlan.name}` : '← Vuốt ngang để xem 32 môn →';
+      status.textContent = selected.size ? `✓ Đã chọn ${selected.size} môn · ${activePlan.name}` : '← Vuốt ngang để xem 35 môn →';
     }
 
     const position = carouselBox.querySelector('#luzv-rail-position');
@@ -10171,7 +10180,7 @@ function getCourseVisualTheme(course) {
 
     if (typeof COURSE_DATA !== "undefined") {
       const allGroup = document.createElement("optgroup");
-      allGroup.label = "📚 Tất cả 32 môn trong kho";
+      allGroup.label = "📚 Tất cả 35 môn trong kho";
       COURSE_DATA.forEach(c => {
         const opt = document.createElement("option");
         opt.value = c.name;
@@ -10465,7 +10474,7 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
   const FILE_PRICE = 10000;
   const FILES = Object.freeze(Object.fromEntries(catalogue.map(pdf => [pdf.id,pdf.name])));
   const moneyVN = n => Number(n).toLocaleString('vi-VN') + 'đ';
-  const getProduct = id => Object.hasOwn(FILES,id) ? {id, name: FILES[id],price:window.LuzVDemoPrices?.pdfPrice(id) ?? FILE_PRICE} : null;
+  const getProduct = id => Object.hasOwn(FILES,id) ? {id, name: FILES[id],price:window.LuzVLocalPrices?.pdfPrice(id) ?? FILE_PRICE} : null;
   const getPDFs = () => [...select.selectedOptions].map(option=>getProduct(option.value)).filter(Boolean);
   const setPDFs = (ids) => {
     const wanted = new Set(Array.isArray(ids) ? ids : []);
@@ -10827,7 +10836,7 @@ const LUZV_API_BASE = ""; // Same-origin API supplied by server.py; no secret in
     el('luzv-coupon-summary').hidden = !LuzVPricing.coupon;
     if (LuzVPricing.coupon) {
       status.dataset.error = 'false';
-      const voucher=window.LuzVDemoVouchers?.find(LuzVPricing.coupon);
+      const voucher=window.LuzVLocalVouchers?.find(LuzVPricing.coupon);
       status.textContent = selected.size
         ? (voucher ? `Đã áp dụng ${LuzVPricing.coupon} · giảm ${voucher.kind==='percent' ? voucher.value+'%' : format(voucher.value)} trên tiền môn Azota (bản dùng thử).` : `Đã áp dụng ${LuzVPricing.coupon} · giảm thêm ${Math.round(info.couponRate*100)}% cho gói ${activePlan.people} người.`)
         : `Đã lưu mã ${LuzVPricing.coupon}. Chọn môn Azota để nhận ưu đãi nhé!`;
@@ -11588,7 +11597,7 @@ html[data-luzv-theme="dark"] .luzv-extra-bag,body.night-owl-mode .luzv-extra-bag
   const stage = document.createElement('div');stage.id = 'luzv-tab-content';stage.className = 'luzv-tabs-stage';
   hero.after(nav,stage);
   const definitions = [
-    {id:'courses',label:'32 môn Azota & Ưu đãi',icon:'📚',anchor:'mon-hoc'},
+    {id:'courses',label:'35 môn Azota & Ưu đãi',icon:'📚',anchor:'mon-hoc'},
     {id:'pdf',label:'Ngân hàng PDF',icon:'📄',anchor:'luzv-file-store'},
     {id:'cart',label:'Túi ôn tập',icon:'👜',anchor:'don-hang'},
     {id:'gpa',label:'Tính điểm',icon:'🧮',anchor:'luzv-gpa-calculator'},
@@ -11631,7 +11640,7 @@ html[data-luzv-theme="dark"] .luzv-extra-bag,body.night-owl-mode .luzv-extra-bag
   // Keep packages in a compact disclosure; the existing offers links open it.
   offersDetails.open = false;
   const offersSummary = document.createElement('summary');
-  offersSummary.innerHTML = '<span class="luzv-offer-symbol" aria-hidden="true">🎁</span><span class="luzv-offer-label"><strong>Gói & ưu đãi dành cho 32 môn Azota</strong><small>Gói 1, 2 hoặc 5 người · Nhóm từ 3 môn giảm 10%, từ 5 môn giảm 15%</small></span><span class="luzv-offer-expand" aria-hidden="true">⌄</span>';
+  offersSummary.innerHTML = '<span class="luzv-offer-symbol" aria-hidden="true">🎁</span><span class="luzv-offer-label"><strong>Gói & ưu đãi dành cho 35 môn Azota</strong><small>Gói 1, 2 hoặc 5 người · Nhóm từ 3 môn giảm 10%, từ 5 môn giảm 15%</small></span><span class="luzv-offer-expand" aria-hidden="true">⌄</span>';
   offersDetails.append(offersSummary,plans);
   // Keep package cards visible, but show the detailed discount explanation only on request.
   const rules = document.createElement('details');rules.className = 'luzv-tab-rules luzv-rules-mini';
@@ -11643,7 +11652,7 @@ html[data-luzv-theme="dark"] .luzv-extra-bag,body.night-owl-mode .luzv-extra-bag
   if (quickDetails) {
     quickDetails.id = 'luzv-course-quick';
     const quickSummary = document.createElement('summary');
-    quickSummary.textContent = '⚡ Chọn nhanh 32 môn';
+    quickSummary.textContent = '⚡ Chọn nhanh 35 môn';
     quickDetails.append(quickSummary,rail);coursePanel.append(quickDetails);
   }
   coursePanel.append(layout);
@@ -11883,10 +11892,10 @@ html[data-luzv-theme="dark"] .luzv-extra-bag,body.night-owl-mode .luzv-extra-bag
   // Visitors see random examples on every load, with a gentle 45-second
   // refresh if they remain on the home page and are not interacting.
   window.setInterval(rotateFeatured, 45000);
-  // The same plan selector appears on the landing page and in 32 môn Azota;
+  // The same plan selector appears on the landing page and in 35 môn Azota;
   // move its one DOM instance between tabs, preserving all existing listeners and pricing.
   const feedback = document.createElement('p');feedback.id = 'luzv-quick-feedback';feedback.className = 'luzv-home-feedback';feedback.setAttribute('role','status');feedback.hidden=true;
-  // Featured subjects remain on the home screen; discount rules stay in the 32 môn section.
+  // Featured subjects remain on the home screen; discount rules stay in the 35 môn section.
   home.append(featured,feedback);
   definitions.unshift(homeDefinition);
   for (const def of definitions) {
@@ -11894,7 +11903,7 @@ html[data-luzv-theme="dark"] .luzv-extra-bag,body.night-owl-mode .luzv-extra-bag
     button.className = 'luzv-section-tab'+(def.id==='home'?' luzv-section-home':'');button.dataset.luzvOpenTab = def.id;button.setAttribute('role','tab');
     button.setAttribute('aria-controls',def.panel.id);button.setAttribute('aria-selected','false');button.tabIndex = -1;
     const glyph = document.createElement('span');glyph.className = 'luzv-section-tab-icon';glyph.setAttribute('aria-hidden','true');
-    glyph.innerHTML = def.id==='courses'?'<strong>32</strong>':icon(def.id);
+    glyph.innerHTML = def.id==='courses'?'<strong>35</strong>':icon(def.id);
     const label = document.createElement('span');label.textContent = def.label;button.append(glyph,label);
     if (def.id === 'cart') {
       const badge = document.createElement('span');badge.className = 'luzv-section-tab-badge';badge.dataset.luzvCartCount = '';badge.hidden = true;button.append(badge);
@@ -12120,7 +12129,7 @@ html[data-luzv-theme="dark"] .luzv-extra-bag,body.night-owl-mode .luzv-extra-bag
     if(!count){feedback.textContent='';feedback.hidden=true;}
     for (const badge of document.querySelectorAll('[data-luzv-cart-count]')) {badge.textContent=String(count);badge.hidden=!count;}
     for(const item of featuredItems){
-      item.price.textContent=money(item.type==='pdf'?window.luzvGetFileProduct(item.file).price:window.LuzVDemoPrices.coursePrice(item.index,activePlan.id));
+      item.price.textContent=money(item.type==='pdf'?window.luzvGetFileProduct(item.file).price:window.LuzVLocalPrices.coursePrice(item.index,activePlan.id));
       item.unit.textContent=item.type==='pdf'?'/ file':activePlan.people===1?'/ môn':'/ nhóm '+activePlan.people+' người';
       item.badge.textContent=item.type==='pdf'?'TÀI LIỆU PDF':item===featuredItems[0]?'GỢI Ý HÔM NAY':'KHO ĐỀ NỔI BẬT';
       item.tagline.textContent=item.type==='pdf'?'Tài liệu ôn tập theo môn':'Gợi ý bộ đề ôn tập';
@@ -14563,7 +14572,7 @@ var qrcode = function() {
     const sortItems = items => items.map(item => [item.id,item.price]).sort((a,b) => a[0].localeCompare(b[0]));
     return JSON.stringify([indices, activePlan.id, LuzVPricing.coupon,
       pdfs.map(pdf=>pdf.id).sort(), extras.map(item=>item.id).sort(), info.total, bank.bin, bank.accountNumber,
-      indices.map(index=>[index,window.LuzVDemoPrices.coursePrice(index,activePlan.id)]),
+      indices.map(index=>[index,window.LuzVLocalPrices.coursePrice(index,activePlan.id)]),
       sortItems(pdfs), sortItems(extras), info.discountAmount, info.saved]);
   }
   function saveIntent(next, reference) {
@@ -14962,17 +14971,58 @@ html[data-luzv-theme="dark"] #luzv-admin-preview-dialog .lvap-history-empty p,bo
     const entries=get();
     const row=entries.find(r=>r.id===record.id);
     if(!row)return;
-    row.visitor=username.slice(0,100);row.role=role==='admin'?'Quản trị viên thử nghiệm':'Người dùng';
+    row.visitor=username.slice(0,100);row.role=role==='admin'?'Quản trị viên':'Người dùng';
     memory=entries;
     setStore(memory);
-    document.dispatchEvent(new Event('luzv-demo-visits-change'));
+    document.dispatchEvent(new Event('luzv-local-visits-change'));
   }
-  window.LuzVDemoVisits=Object.freeze({get, setCurrentIdentity});
+  window.LuzVLocalVisits=Object.freeze({get, setCurrentIdentity});
 })();
 </script>
-<script id="luzv-admin-local-preview">
-/* Admin UI adapted from the supplied reference; no hardcoded admin PIN or fake payment confirmation.
-   PREVIEW ONLY: Records stay in THIS browser, never sent to Vercel. */
+<script id="luzv-admin-local-preview">/* Same-origin Vercel authentication only; no database or shared settings store. */
+(() => {
+  'use strict';
+  async function request(path, options = {}) {
+    if (location.protocol === 'file:') {
+      const error = new Error('Hãy mở website trực tuyến để đăng nhập quản trị.');
+      error.status = 0;error.code = 'ONLINE_REQUIRED';throw error;
+    }
+    if (typeof path !== 'string' || !/^\/(?:auth\/session|admin\/session|health)$/.test(path))
+      throw new Error('Đường dẫn đăng nhập không hợp lệ.');
+    const method = options.method || 'GET';
+    if (!['GET','POST','DELETE'].includes(method)) throw new Error('Phương thức không hợp lệ.');
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(),15000);
+    try {
+      const response = await fetch('/api' + path,{
+        method,credentials:'same-origin',cache:'no-store',signal:controller.signal,
+        headers:method === 'GET' ? {Accept:'application/json'} : {Accept:'application/json','Content-Type':'application/json'},
+        body:method === 'GET' ? undefined : JSON.stringify(options.body || {})
+      });
+      let data;
+      try { data = await response.json(); }
+      catch {
+        const error = new Error('Chưa cấu hình dịch vụ đăng nhập quản trị trên Vercel.');
+        error.status = 503;error.code = 'NOT_CONFIGURED';throw error;
+      }
+      if (!response.ok) {
+        const error = new Error(typeof data?.error === 'string' ? data.error : 'Không thể kết nối dịch vụ đăng nhập.');
+        error.status = response.status;error.code = data?.code;error.data = data;throw error;
+      }
+      return data;
+    } catch (error) {
+      if (error?.name === 'AbortError') {
+        const timeout = new Error('Kết nối đăng nhập quá lâu. Vui lòng thử lại.');
+        timeout.status = 503;throw timeout;
+      }
+      throw error;
+    } finally {clearTimeout(timer);}
+  }
+  window.LuzVService = Object.freeze({request});
+})();
+
+
+/* Vercel-authenticated administrator view; settings remain local to this device. */
 (() => {
   'use strict';
   // Load saved vouchers during page startup; admin UI remains mounted only on request.
@@ -15003,7 +15053,7 @@ html[data-luzv-theme="dark"] #luzv-admin-preview-dialog .lvap-history-empty p,bo
     if(v.expires && new Date(v.expires+'T23:59:59').getTime()<Date.now())return null;
     return v;
   }
-  window.LuzVDemoVouchers={find:findVoucher};
+  window.LuzVLocalVouchers={find:findVoucher};
   function refreshCoupon(){
     if(window.LuzVPricing?.coupon && !window.LuzVPricing.validCode(window.LuzVPricing.coupon)){
       window.LuzVPricing.coupon='';
@@ -15011,9 +15061,13 @@ html[data-luzv-theme="dark"] #luzv-admin-preview-dialog .lvap-history-empty p,bo
     }
     window.updateOrder?.();window.LuzVOrder?.render();
   }
-  window.luzvAdminMount = () => {
+  let epoch = 0;
+  let openCurrent = null;
+  let destroyCurrent = null;
+  const mountLocal = () => {
   if (window.__luzvAdminMounted) return;
   window.__luzvAdminMounted = true;
+  const controller = new AbortController();
   const el=(tag,props={})=>{
     const n=document.createElement(tag);
     for(const [k,v] of Object.entries(props)) {if (k==='text') n.textContent=v; else if (k==='className') n.className=v;else n.setAttribute(k,v);}
@@ -15034,12 +15088,10 @@ html[data-luzv-theme="dark"] #luzv-admin-preview-dialog .lvap-history-empty p,bo
       const row=el('tr');cells.forEach(c=>{const td=el('td');if(c instanceof Node)td.append(c);else td.textContent=String(c??'');row.append(td);});body.append(row);
     });tbl.append(body);wrap.append(tbl);target.append(wrap);
   }
-  const preview=el('button',{type:'button',id:'luzv-admin-preview-open',text:'⚙ Quản trị (cục bộ)'});
-  preview.title='Chỉ dùng thử trên trình duyệt này; không quản lý đơn hàng thật của tất cả khách';
   const dialog=el('dialog',{id:'luzv-admin-preview-dialog','aria-labelledby':'lvap-title'});
   dialog.innerHTML=`
-    <div class="lvap-head"><div class="lvap-title-group"><h2 id="lvap-title">Quản trị LuzV</h2><span class="lvap-preview-badge"><span class="lvap-preview-dot" aria-hidden="true"></span>Bản xem thử · dữ liệu cục bộ</span></div><button type="button" class="lvap-close" data-lvap-close aria-label="Đóng bảng quản trị">✕</button></div>
-    <details class="lvap-note"><summary>Thông tin bản dùng thử</summary><p>Đây là giao diện quản trị mẫu. Đơn hàng chỉ được tính là đã thanh toán khi có xác minh giao dịch ngân hàng qua máy chủ. Việc tạo QR, nhấn đặt hàng hoặc gửi ảnh chuyển khoản chưa phải xác nhận đã nhận tiền. Giá thay đổi ở bản này chỉ lưu trên thiết bị và chưa cập nhật website Vercel thật.</p></details>
+    <div class="lvap-head"><div class="lvap-title-group"><h2 id="lvap-title">Quản trị LuzV</h2><span class="lvap-preview-badge"><span class="lvap-preview-dot" aria-hidden="true"></span>Trên thiết bị này</span></div><button type="button" class="lvap-close" data-lvap-close aria-label="Đóng bảng quản trị">✕</button></div>
+    <details class="lvap-note"><summary>Phạm vi quản trị</summary><p>Đăng nhập quản trị được xác thực trên Vercel. Giá, mã ưu đãi và các ghi nhận ở đây được lưu trên thiết bị/trình duyệt hiện tại, chưa đồng bộ sang máy của khách. Việc tạo QR hoặc gửi ảnh chuyển khoản chưa phải xác nhận đã nhận tiền.</p></details>
     <div class="lvap-tabs" role="tablist" aria-label="Chọn chức năng quản trị">
       <button type="button" class="lvap-tab" role="tab" id="lvap-tab-orders" aria-controls="lvap-pane-orders" aria-selected="true" data-lvap-tab="orders">📦 Đơn hàng</button>
       <button type="button" class="lvap-tab" role="tab" id="lvap-tab-contributions" aria-controls="lvap-pane-contributions" aria-selected="false" data-lvap-tab="contributions">📝 Đóng góp đề</button>
@@ -15048,24 +15100,10 @@ html[data-luzv-theme="dark"] #luzv-admin-preview-dialog .lvap-history-empty p,bo
       <button type="button" class="lvap-tab" role="tab" id="lvap-tab-visits" aria-controls="lvap-pane-visits" aria-selected="false" data-lvap-tab="visits">👥 Lượt truy cập</button>
     </div>
     <section class="lvap-pane" id="lvap-pane-orders" role="tabpanel" aria-labelledby="lvap-tab-orders">
-      <h3>Lịch sử đơn đã thanh toán</h3>
-      <p class="lvap-muted lvap-history-desc">Chỉ tính đơn được xác nhận đã nhận tiền. Mở dữ liệu mẫu để xem bố cục.</p>
-      <div class="lvap-grid3">
-        <div class="lvap-stat"><span>Đơn đã thanh toán</span><b id="lvap-order-count">0</b></div>
-        <div class="lvap-stat"><span>Doanh thu hôm nay</span><b id="lvap-paid-count">0đ</b></div>
-        <div class="lvap-stat"><span>Tổng doanh thu đã xác nhận</span><b id="lvap-revenue">0đ</b></div>
-      </div>
-      <div class="lvap-history-tools">
-        <label class="lvap-field">Tìm đơn hàng<input id="lvap-order-search" type="search" placeholder="Mã đơn, tên khách hoặc môn học" autocomplete="off"></label>
-        <label class="lvap-field">Thời gian<select id="lvap-order-period"><option value="all">Tất cả</option><option value="today">Hôm nay</option><option value="7">7 ngày gần đây</option><option value="30">30 ngày gần đây</option></select></label>
-        <button type="button" class="lvap-secondary" id="lvap-export-csv">Xuất CSV</button>
-      </div>
-      <div class="lvap-history-demo-banner" id="lvap-history-demo-banner" hidden><strong>DỮ LIỆU MINH HỌA</strong> — Không phải đơn thật, không dùng để tính doanh thu thực tế.</div>
-      <div id="lvap-order-table"></div>
-      <div class="lvap-actions lvap-history-foot">
-        <span class="lvap-muted">Lịch sử thực tế chỉ được cập nhật sau xác minh giao dịch ngân hàng qua máy chủ.</span>
-        <button type="button" class="lvap-secondary" id="lvap-history-demo-toggle" aria-pressed="false">Xem dữ liệu mẫu</button>
-      </div>
+      <h3>Đăng ký qua Zalo</h3>
+      <p class="lvap-muted">Nội dung đăng ký và ảnh chuyển khoản được gửi trực tiếp qua Zalo. LuzV đối chiếu giao dịch rồi cấp Azota hoặc gửi PDF.</p>
+      <p class="lvap-muted">Chế độ lưu trên thiết bị không tự tổng hợp đơn, doanh thu hoặc xác nhận đã nhận tiền từ khách trên máy khác.</p>
+      <a class="lvap-secondary" href="https://zalo.me/0377300076" target="_blank" rel="noopener noreferrer">Mở Zalo ↗</a>
     </section>
     <section class="lvap-pane" id="lvap-pane-visits" role="tabpanel" aria-labelledby="lvap-tab-visits" hidden>
       <h3>👥 Lịch sử truy cập website</h3>
@@ -15081,7 +15119,7 @@ html[data-luzv-theme="dark"] #luzv-admin-preview-dialog .lvap-history-empty p,bo
         <button type="button" class="lvap-secondary" id="lvap-visits-export">Xuất CSV</button>
       </div>
       <div id="lvap-visits-table"></div>
-      <p class="lvap-muted lvap-visit-note">Bản demo chỉ lưu tối đa 500 lượt truy cập của <strong>chính thiết bị/trình duyệt đang mở</strong>, tự xóa bản ghi quá 30 ngày. Không thể xem ai truy cập từ điện thoại/máy tính khác. Muốn quản lý lượt truy cập thật trên Vercel cần API, cơ sở dữ liệu và thông báo quyền riêng tư.</p>
+      <p class="lvap-muted lvap-visit-note">Lưu tối đa 500 lượt mở trang của <strong>thiết bị/trình duyệt hiện tại</strong> trong 30 ngày. Đây không phải tổng lượt truy cập của toàn website.</p>
     </section>
     <section class="lvap-pane" id="lvap-pane-contributions" role="tabpanel" aria-labelledby="lvap-tab-contributions" hidden>
       <h3>Lịch sử giới thiệu & đóng góp đề</h3>
@@ -15107,21 +15145,21 @@ html[data-luzv-theme="dark"] #luzv-admin-preview-dialog .lvap-history-empty p,bo
             <label class="lvap-field">Link hoặc mô tả đề<input name="link" maxlength="600" required placeholder="Link Drive hoặc ghi chú"></label>
             <button class="lvap-primary" type="submit">Ghi nhận</button>
           </form>
-          <p class="lvap-muted">Danh sách những người đã gửi đề cho LuzV. Nút duyệt chỉ đổi trạng thái trong bản xem thử.</p>
+          <p class="lvap-muted">Các ghi nhận bạn nhập trên thiết bị này. Nút duyệt cập nhật trạng thái lưu cục bộ.</p>
           <div id="lvap-contribution-table"></div>
         </section>
       </div>
     </section>
     <section class="lvap-pane" id="lvap-pane-catalog" role="tabpanel" aria-labelledby="lvap-tab-catalog" hidden>
       <h3>Chỉnh sửa giá gói Azota và PDF</h3>
-      <p class="lvap-pricing-tip"><strong>Bản Admin dùng thử:</strong> Sửa giá bằng ô nhập rồi bấm <strong>Lưu giá</strong>. Phần PDF đã được thu gọn: chỉ cần chọn môn/file PDF, nhập giá ở ô bên cạnh rồi lưu. Giá mới được áp dụng ngay trên website mẫu và lưu trên trình duyệt này.</p>
-      <div class="lvap-actions lvap-pricing-tools"><span class="lvap-muted">32 môn Azota dùng giá theo gói; 32 PDF có giá riêng và chỉnh nhanh bằng danh sách chọn.</span><button class="lvap-secondary" id="lvap-reset-prices" type="button">Khôi phục giá gốc</button></div>
+      <p class="lvap-pricing-tip"><strong>Quản trị trên thiết bị này:</strong> Sửa giá bằng ô nhập rồi bấm <strong>Lưu giá</strong>. Phần PDF đã được thu gọn: chỉ cần chọn môn/file PDF, nhập giá ở ô bên cạnh rồi lưu. Giá mới được áp dụng trong trình duyệt này, chưa thay đổi giá trên máy của khách.</p>
+      <div class="lvap-actions lvap-pricing-tools"><span class="lvap-muted">35 môn Azota dùng giá theo gói; 35 PDF có giá riêng và chỉnh nhanh bằng danh sách chọn.</span><button class="lvap-secondary" id="lvap-reset-prices" type="button">Khôi phục giá gốc</button></div>
       <div class="lvap-catalog" id="lvap-catalog-stats"></div>
       <div id="lvap-catalog-table"></div>
     </section>
     <section class="lvap-pane" id="lvap-pane-vouchers" role="tabpanel" aria-labelledby="lvap-tab-vouchers" hidden>
       <h3>🎟️ Tạo mã ưu đãi</h3>
-      <p class="lvap-muted lvap-pricing-tip">Tạo mã thử cho <strong>môn Azota</strong>, giảm trên tiền môn sau ưu đãi gói nhóm; <strong>PDF không giảm</strong>. Các mã chỉ dùng trong bản HTML trên thiết bị này, chưa hoạt động trên Vercel.</p>
+      <p class="lvap-muted lvap-pricing-tip">Tạo mã cho <strong>môn Azota</strong>, giảm trên tiền môn sau ưu đãi gói nhóm; <strong>PDF không giảm</strong>. Các mã chỉ có hiệu lực trên trình duyệt/thiết bị đã lưu.</p>
       <div class="lvap-voucher-form-card">
         <form id="lvap-voucher-form" class="lvap-voucher-form">
           <label class="lvap-field">Mã ưu đãi<input name="code" id="lvap-voucher-code" maxlength="12" minlength="4" pattern="[A-Za-z0-9]{4,12}" autocomplete="off" required placeholder="VD: LUZV2026"></label>
@@ -15134,14 +15172,23 @@ html[data-luzv-theme="dark"] #luzv-admin-preview-dialog .lvap-history-empty p,bo
       </div>
       <div class="lvap-voucher-heading"><h4>Danh sách mã đã tạo <span id="lvap-voucher-count">(0)</span></h4><span class="lvap-muted">Có thể sao chép, tắt hoặc xóa</span></div>
       <div id="lvap-voucher-table"></div>
-      <p class="lvap-muted lvap-voucher-footnote">Mã tạo ở đây không được đồng bộ giữa các khách hàng và không có cơ chế giới hạn lượt sử dụng. Để dùng thực tế, cần lưu và xác thực mã bằng API Vercel.</p>
+      <p class="lvap-muted lvap-voucher-footnote">Mã được lưu trên thiết bị này, chưa đồng bộ giữa các khách và chưa giới hạn số lượt sử dụng.</p>
     </section>
     <div class="lvap-pane" style="border-top:1px solid #d3e3ee;padding-top:13px"><div class="lvap-actions"><span class="lvap-muted">Sao lưu dữ liệu quản trị cục bộ trên thiết bị này</span><button type="button" class="lvap-secondary" id="lvap-backup-json">Tải bản sao lưu JSON</button></div><p class="lvap-feedback" id="lvap-feedback" role="status" aria-live="polite"></p></div>
   `;
-  document.body.append(preview,dialog);
+  document.body.append(dialog);
+  const openView = () => { render(); if (!dialog.open) dialog.showModal(); };
+  openCurrent = openView;
+  destroyCurrent = () => {
+    controller.abort();
+    if (dialog.open) dialog.close();
+    dialog.replaceChildren();dialog.remove();
+  };
+  dialog.addEventListener('close', () => {
+    if (openCurrent === openView) window.luzvAdminClose();
+  }, {signal:controller.signal});
   const $=id=>dialog.querySelector('#'+id);
-  const feedback=msg=>{$('lvap-feedback').textContent=msg;};
-  preview.addEventListener('click',()=>{render();dialog.showModal();});
+  const feedback=msg=>{const field=$('lvap-feedback');if(field&&!controller.signal.aborted)field.textContent=msg;};
   dialog.querySelector('[data-lvap-close]').addEventListener('click',()=>dialog.close());
   dialog.addEventListener('click',ev=>{if(ev.target===dialog)dialog.close();});
   dialog.querySelectorAll('[data-lvap-tab]').forEach(button=>button.addEventListener('click',()=>{
@@ -15186,7 +15233,7 @@ html[data-luzv-theme="dark"] #luzv-admin-preview-dialog .lvap-history-empty p,bo
     function savePrice(group,id,field){
       const value=Number(field.value);
       if(!Number.isInteger(value)||value<1000||value>10000000){feedback('Giá phải là số nguyên từ 1.000đ đến 10.000.000đ.');field.focus();return false;}
-      if(!window.LuzVDemoPrices?.set(group,id,value)){
+      if(!window.LuzVLocalPrices?.set(group,id,value)){
         feedback('Không thể lưu giá trên thiết bị này. Hãy kiểm tra chế độ riêng tư hoặc dung lượng lưu trữ.');
         return false;
       }
@@ -15197,7 +15244,7 @@ html[data-luzv-theme="dark"] #luzv-admin-preview-dialog .lvap-history-empty p,bo
       window.updateOrder?.();
       window.luzvRefreshPdfPrices?.();
       window.LuzVOrder?.render();
-      feedback('✓ Đã lưu '+vnd(value)+' trong bản Admin dùng thử; giá giỏ hàng đã cập nhật.');
+      feedback('✓ Đã lưu '+vnd(value)+' trên thiết bị này; giá giỏ hàng đã cập nhật.');
       return true;
     }
     function priceEditor(group,id,price){
@@ -15285,7 +15332,7 @@ html[data-luzv-theme="dark"] #luzv-admin-preview-dialog .lvap-history-empty p,bo
     const subjectCard=el('section',{className:'lvap-card'});
     subjectCard.classList.add('lvap-subject-compact-card');
     subjectCard.style.marginTop='14px';
-    subjectCard.append(el('h4',{text:'📘 Chỉnh giá 32 môn Azota'}));
+    subjectCard.append(el('h4',{text:'📘 Chỉnh giá 35 môn Azota'}));
     subjectCard.append(el('p',{className:'lvap-muted',text:'Chọn môn và gói áp dụng, thay giá bên cạnh rồi bấm Lưu giá. Giá mặc định của 3 gói không bị thay đổi.'}));
     const subjectLine=el('div',{className:'lvap-actions'});
     subjectLine.classList.add('lvap-subject-compact-line');
@@ -15301,15 +15348,15 @@ html[data-luzv-theme="dark"] #luzv-admin-preview-dialog .lvap-history-empty p,bo
     const courseInfo=el('span',{className:'lvap-muted'});
     const refreshCourse=()=>{
       const index=Number(subjectSelect.value);
-      const price=window.LuzVDemoPrices.coursePrice(index,planSelect.value);
+      const price=window.LuzVLocalPrices.coursePrice(index,planSelect.value);
       courseField.value=String(price);
-      const isCustom=Object.hasOwn(window.LuzVDemoPrices.prices.courses[planSelect.value],String(index));
+      const isCustom=Object.hasOwn(window.LuzVLocalPrices.prices.courses[planSelect.value],String(index));
       courseInfo.textContent='Giá đang áp dụng: '+vnd(price)+(isCustom?' (giá riêng)':' (theo gói)')+'.';
     };
     courseSave.addEventListener('click',()=>{
       const index=Number(subjectSelect.value),value=Number(courseField.value);
       if(!Number.isInteger(value)||value<1000||value>10000000){feedback('Giá phải từ 1.000đ đến 10.000.000đ.');courseField.focus();return;}
-      if(!window.LuzVDemoPrices.setCourse(planSelect.value,index,value)){
+      if(!window.LuzVLocalPrices.setCourse(planSelect.value,index,value)){
         feedback('Không lưu được giá riêng. Hãy kiểm tra bộ nhớ của trình duyệt.');return;
       }
       // Update all prices and calculations without changing selected courses or the active package.
@@ -15332,50 +15379,12 @@ html[data-luzv-theme="dark"] #luzv-admin-preview-dialog .lvap-history-empty p,bo
     host.append(planCard,pdfCard,subjectCard);
   };
   $('lvap-reset-prices').addEventListener('click',()=>{
-    if(!confirm('Khôi phục giá gốc 3 gói và 32 PDF trong bản dùng thử?'))return;
-    if(!window.LuzVDemoPrices?.reset()){feedback('Không thể khôi phục giá trên thiết bị này.');return;}
+    if(!confirm('Khôi phục giá gốc 3 gói và 35 PDF trên thiết bị này?'))return;
+    if(!window.LuzVLocalPrices?.reset()){feedback('Không thể khôi phục giá trên thiết bị này.');return;}
     PRICE=activePlan.price;
     window.refreshPlanDisplay?.();window.updateOrder?.();window.luzvRefreshPdfPrices?.();window.LuzVOrder?.render();
     catalogs();feedback('✓ Đã khôi phục toàn bộ giá gốc.');
   });
-  // Demo orders are entirely in-memory; never stored as verified transactions.
-  // Production must read settled orders from a secure API backed by real payment confirmation.
-  let showSampleOrders=false;
-  const sampleOrders=Object.freeze([
-    {id:'MINH-HOA-002',verifiedAt:Date.now()-1000*60*60*2,buyer:'Khách hàng B (mẫu)',items:'Máy Điện 1 · Kỹ Thuật Đo Lường',pkg:'Đôi bạn cùng tiến',amount:50000,reference:'LUZV SAMPLE02'},
-    {id:'MINH-HOA-001',verifiedAt:Date.now()-1000*60*60*30,buyer:'Khách hàng A (mẫu)',items:'Giải Tích 2',pkg:'Solo một mình',amount:15000,reference:'LUZV SAMPLE01'}
-  ]);
-  const verifiedServerOrders=[]; // Placeholder: get only verified paid orders through authenticated server API.
-  function filteredPaidOrders(){
-    const source=showSampleOrders?sampleOrders:verifiedServerOrders;
-    const q=$('lvap-order-search').value.trim().toLocaleLowerCase('vi');
-    const period=$('lvap-order-period').value;
-    const now=Date.now();
-    return source.filter(o=>{
-      if(period==='today' && new Date(o.verifiedAt).toDateString()!==new Date(now).toDateString())return false;
-      if(['7','30'].includes(period) && now-o.verifiedAt>Number(period)*86400000)return false;
-      return !q || [o.id,o.buyer,o.items,o.pkg,o.reference].join(' ').toLocaleLowerCase('vi').includes(q);
-    });
-  }
-  function renderPaidHistory(){
-    const orders=filteredPaidOrders();
-    $('lvap-order-count').textContent=String(orders.length);
-    $('lvap-paid-count').textContent=vnd(orders.filter(o=>new Date(o.verifiedAt).toDateString()===new Date().toDateString()).reduce((s,o)=>s+o.amount,0));
-    $('lvap-revenue').textContent=vnd(orders.reduce((s,o)=>s+o.amount,0));
-    $('lvap-history-demo-banner').hidden=!showSampleOrders;
-    $('lvap-history-demo-toggle').textContent=showSampleOrders?'Ẩn dữ liệu mẫu':'Xem dữ liệu mẫu';
-    $('lvap-history-demo-toggle').setAttribute('aria-pressed',String(showSampleOrders));
-    if(!orders.length){
-      const wrap=$('lvap-order-table');wrap.replaceChildren();
-      const empty=el('div',{className:'lvap-history-empty'});
-      empty.append(el('span',{className:'lvap-empty-icon',text:'📦'}));
-      empty.append(el('strong',{text:showSampleOrders?'Không có đơn mẫu phù hợp bộ lọc':'Chưa có lịch sử thanh toán đã xác nhận'}));
-      empty.append(el('p',{text:showSampleOrders?'Thử đổi bộ lọc thời gian hoặc tìm kiếm.':'Khi Vercel được kết nối với cơ sở dữ liệu và xác nhận giao dịch ngân hàng, các đơn đã thanh toán sẽ xuất hiện tại đây.'}));
-      wrap.append(empty);return;
-    }
-    table($('lvap-order-table'),['Mã đơn / thời gian','Khách hàng','Môn / PDF','Gói','Số tiền','Xác nhận'],
-      orders.map(o=>[o.id+' · '+new Date(o.verifiedAt).toLocaleString('vi-VN'),o.buyer,o.items,o.pkg,vnd(o.amount),'✓ Đã thanh toán'+(showSampleOrders?' (mẫu)':'')]));
-  }
   function renderVouchers(){
     const active=data.vouchers.filter(v=>!!findVoucher(v.code)).length;
     $('lvap-voucher-count').textContent='('+data.vouchers.length+' mã, '+active+' đang hiệu lực)';
@@ -15393,7 +15402,7 @@ html[data-luzv-theme="dark"] #luzv-admin-preview-dialog .lvap-history-empty p,bo
       });
       const remove=el('button',{type:'button',className:'lvap-danger',text:'Xóa'});
       remove.addEventListener('click',()=>{
-        if(!confirm('Xóa mã '+v.code+' trong bản dùng thử?'))return;
+        if(!confirm('Xóa mã '+v.code+' trên thiết bị này?'))return;
         data.vouchers=data.vouchers.filter(x=>x.id!==v.id);persist();refreshCoupon();renderVouchers();feedback('Đã xóa mã '+v.code+'.');
       });
       actions.append(copy,toggle,remove);
@@ -15420,12 +15429,12 @@ html[data-luzv-theme="dark"] #luzv-admin-preview-dialog .lvap-history-empty p,bo
     if(!Number.isSafeInteger(value)||value<=0||(kind==='percent'?value>100:value>10000000)){feedback('Mức giảm không hợp lệ.');return;}
     if(!['percent','fixed'].includes(kind)){feedback('Loại giảm giá không hợp lệ.');return;}
     if(expires && new Date(expires+'T23:59:59').getTime()<Date.now()){feedback('Ngày hết hạn không được ở trong quá khứ.');return;}
-    if(data.vouchers.length>=500){feedback('Bản thử chỉ lưu tối đa 500 mã.');return;}
+    if(data.vouchers.length>=500){feedback('Thiết bị này lưu tối đa 500 mã.');return;}
     data.vouchers.unshift({id:makeId(),code,kind,value,expires,active:true,created:Date.now()});
-    persist();f.reset();renderVouchers();feedback('✓ Đã tạo mã '+code+'. Bạn có thể vào Túi ôn tập để áp dụng thử.');
+    persist();f.reset();renderVouchers();feedback('✓ Đã tạo mã '+code+'. Bạn có thể áp dụng trong Túi ôn tập trên thiết bị này.');
   });
   function filteredVisits(){
-    const records=window.LuzVDemoVisits?.get?.()||[];
+    const records=window.LuzVLocalVisits?.get?.()||[];
     const query=$('lvap-visit-search').value.trim().toLocaleLowerCase('vi');
     const period=$('lvap-visit-period').value;
     const now=Date.now();
@@ -15437,7 +15446,7 @@ html[data-luzv-theme="dark"] #luzv-admin-preview-dialog .lvap-history-empty p,bo
   }
   const formatVisitTime=ts=>new Intl.DateTimeFormat('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date(ts));
   function renderVisits(){
-    const all=window.LuzVDemoVisits?.get?.()||[];
+    const all=window.LuzVLocalVisits?.get?.()||[];
     const now=Date.now();
     $('lvap-visit-total').textContent=String(all.length);
     $('lvap-visit-today').textContent=String(all.filter(v=>new Date(v.at).toDateString()===new Date(now).toDateString()).length);
@@ -15457,17 +15466,16 @@ html[data-luzv-theme="dark"] #luzv-admin-preview-dialog .lvap-history-empty p,bo
   }
   $('lvap-visit-search').addEventListener('input',renderVisits);
   $('lvap-visit-period').addEventListener('change',renderVisits);
-  document.addEventListener('luzv-demo-visits-change',renderVisits);
+  document.addEventListener('luzv-local-visits-change',renderVisits,{signal:controller.signal});
   $('lvap-visits-export').addEventListener('click',()=>{
     const header=['Ngày giờ','Khách truy cập','Loại','Mã phiên','Hoạt động'];
     const rows=filteredVisits().map(v=>[formatVisitTime(v.at),v.visitor,v.role,v.session,v.event||'Mở trang']);
     const csv='\ufeff'+[header,...rows].map(row=>row.map(safeCSVCell).join(',')).join('\r\n');
-    download('luzv-lich-su-truy-cap-demo.csv','text/csv;charset=utf-8',csv);
+    download('luzv-lich-su-truy-cap-thiet-bi.csv','text/csv;charset=utf-8',csv);
     feedback('Đã xuất '+rows.length+' lượt truy cập cục bộ.');
   });
   function render(){
     renderVisits();
-    renderPaidHistory();
     renderVouchers();
     table($('lvap-referral-table'),['Ngày','Người tạo link','Link / mã','Đã mời được','Người đã đăng ký','Thao tác'],
       data.referrals.map(x=>[today(x.created),x.owner,x.code,String(x.count||0)+' người',x.invitees||'—',referralActions(x.id)]));
@@ -15475,9 +15483,6 @@ html[data-luzv-theme="dark"] #luzv-admin-preview-dialog .lvap-history-empty p,bo
       data.contributions.map(x=>[today(x.created),x.student,x.subject,x.link,x.status==='approved'?'Đã duyệt (cục bộ)':'Chờ duyệt',contributionActions(x.id)]));
     catalogs();
   }
-  $('lvap-order-search').addEventListener('input',renderPaidHistory);
-  $('lvap-order-period').addEventListener('change',renderPaidHistory);
-  $('lvap-history-demo-toggle').addEventListener('click',()=>{showSampleOrders=!showSampleOrders;renderPaidHistory();feedback(showSampleOrders?'Đang xem 2 giao dịch minh họa (không phải đơn thật).':'Đã ẩn dữ liệu minh họa.');});
   $('lvap-referral-form').addEventListener('submit',e=>{
     e.preventDefault();const form=e.currentTarget;
     const owner=form.elements.owner.value.trim(),code=form.elements.code.value.trim(),count=Math.max(0,Number(form.elements.count.value||0)),invitees=form.elements.invitees.value.trim();
@@ -15493,20 +15498,35 @@ html[data-luzv-theme="dark"] #luzv-admin-preview-dialog .lvap-history-empty p,bo
     data.contributions.unshift({id:makeId(),created:Date.now(),student,subject,link,status:'pending'});data.contributions=data.contributions.slice(0,1000);
     persist();form.reset();render();feedback('Đã ghi nhận đóng góp cục bộ.');
   });
-  $('lvap-export-csv').addEventListener('click',()=>{
-    if(showSampleOrders){feedback('Dữ liệu minh họa không được xuất dưới dạng lịch sử thanh toán thật. Hãy ẩn mẫu trước khi xuất.');return;}
-    const header=['Mã đơn','Ngày đã thanh toán','Khách hàng','Môn / tài liệu','Gói','Số tiền','Mã tham chiếu'];
-    const rows=filteredPaidOrders().map(x=>[x.id,new Date(x.verifiedAt).toLocaleString('vi-VN'),x.buyer,x.items,x.pkg,x.amount,x.reference]);
-    const csv='\ufeff'+[header,...rows].map(row=>row.map(safeCSVCell).join(',')).join('\r\n');
-    download('luzv-lich-su-don-da-thanh-toan.csv','text/csv;charset=utf-8',csv);
-    feedback('Đã xuất '+rows.length+' đơn đã xác nhận từ nguồn dữ liệu đang kết nối.');
-  });
   $('lvap-backup-json').addEventListener('click',()=>{
-    download('luzv-admin-cuc-bo-'+new Date().toISOString().slice(0,10)+'.json','application/json;charset=utf-8',JSON.stringify({version:4,exportedAt:new Date().toISOString(),note:'Dữ liệu quản trị cục bộ. Không có xác nhận thanh toán.',data:{referrals:data.referrals,contributions:data.contributions,vouchers:data.vouchers,prices:window.LuzVDemoPrices?.prices,visits:window.LuzVDemoVisits?.get?.()||[]}},null,2));
+    download('luzv-admin-cuc-bo-'+new Date().toISOString().slice(0,10)+'.json','application/json;charset=utf-8',JSON.stringify({version:4,exportedAt:new Date().toISOString(),note:'Dữ liệu quản trị cục bộ. Không có xác nhận thanh toán.',data:{referrals:data.referrals,contributions:data.contributions,vouchers:data.vouchers,prices:window.LuzVLocalPrices?.prices,visits:window.LuzVLocalVisits?.get?.()||[]}},null,2));
     feedback('Đã tải bản sao lưu JSON.');
   });
   render();
   };
+  window.luzvAdminClose = () => {
+    epoch += 1;
+    const destroy = destroyCurrent;
+    destroyCurrent = null;openCurrent = null;
+    window.__luzvAdminMounted = false;
+    if (destroy) destroy();
+  };
+  window.luzvAdminMount = async () => {
+    const requested = epoch;
+    const session = await window.LuzVService.request('/admin/session');
+    if (requested !== epoch) return false;
+    if (!session?.authenticated || session.role !== 'admin') {
+      window.luzvAdminClose();
+      const error = new Error('Vui lòng đăng nhập quản trị.');error.status = 401;throw error;
+    }
+    try {
+      if (!window.__luzvAdminMounted) {data = readState();mountLocal();}
+      openCurrent?.();return true;
+    } catch (error) {window.luzvAdminClose();throw error;}
+  };
+  document.addEventListener('luzv:sessionchange', event => {
+    if (!event.detail?.authenticated || event.detail.role !== 'admin') window.luzvAdminClose();
+  });
 })();
 </script>
 
@@ -15594,274 +15614,281 @@ html[data-luzv-theme="dark"] #luzv-account-dropdown .lvdd-signout,body.night-owl
 @media(prefers-reduced-motion:reduce){#luzv-account-dropdown{animation:none}}
 </style>
 
-<script id="luzv-admin-account-client">
+<script id="luzv-admin-account-client">/* Admin sign-in uses the private Vercel endpoint and its HttpOnly session cookie. */
 (() => {
   'use strict';
-  // The SAME username/password form is used for all roles. The server decides the role.
-  let session=null, busy=false;
-  const dialog=document.createElement('dialog');dialog.id='luzv-admin-auth-dialog';
-  dialog.setAttribute('aria-labelledby','luzv-auth-title');
-  dialog.innerHTML=`
-    <div class="luzv-auth-head"><h2 id="luzv-auth-title">Đăng nhập</h2><button type="button" class="luzv-auth-close" id="luzv-auth-close" aria-label="Đóng">✕</button></div>
-    <p class="luzv-auth-description" id="luzv-auth-description">Đăng nhập để xem trang cá nhân. Không có tài khoản vẫn sử dụng website bình thường.</p>
-    <div class="luzv-demo-login-hint" id="luzv-demo-login-hint">Tài khoản Admin thử: <strong>admin_demo</strong><br>Mật khẩu thử: <strong>LuzV@2026</strong></div>
+
+  let session = null;
+  let busy = false;
+  let sessionRequest = 0;
+  let authView = 0;
+  const get = id => document.getElementById(id);
+
+  // These hooks are created before the existing mobile menu observes them.
+  const dialog = document.createElement('dialog');
+  dialog.id = 'luzv-admin-auth-dialog';
+  dialog.setAttribute('aria-labelledby', 'luzv-auth-title');
+  dialog.innerHTML = `
+    <div class="luzv-auth-head"><h2 id="luzv-auth-title">Đăng nhập quản trị</h2><button type="button" class="luzv-auth-close" id="luzv-auth-close" aria-label="Đóng">✕</button></div>
+    <p class="luzv-auth-description" id="luzv-auth-description">Đăng nhập để mở công cụ quản trị. Khách vẫn có thể xem website và chọn môn học bình thường.</p>
     <form id="luzv-auth-login-form" autocomplete="on">
-      <label for="luzv-auth-username">Số điện thoại hoặc tài khoản<input required id="luzv-auth-username" name="username" maxlength="100" autocomplete="username" placeholder="SĐT đã đăng ký hoặc tên tài khoản"></label>
+      <label for="luzv-auth-username">Tài khoản quản trị<input required id="luzv-auth-username" name="username" maxlength="100" autocomplete="username" placeholder="Nhập tài khoản quản trị"></label>
       <label for="luzv-auth-password">Mật khẩu<input required id="luzv-auth-password" name="password" type="password" autocomplete="current-password" maxlength="256" placeholder="Nhập mật khẩu"></label>
-      <button type="submit" class="luzv-auth-main" id="luzv-auth-submit">Đăng nhập</button>
+      <button type="submit" class="luzv-auth-main" id="luzv-auth-submit">Đăng nhập quản trị</button>
     </form>
-    <div class="luzv-auth-switch" id="luzv-auth-login-switch">Chưa có tài khoản? <button type="button" id="luzv-show-register"><u>Đăng ký</u></button></div>
-    <form id="luzv-auth-register-form" autocomplete="on" hidden>
-      <label for="luzv-register-name">Họ và tên<input required id="luzv-register-name" name="name" minlength="2" maxlength="80" autocomplete="name" placeholder="Nhập họ và tên"></label>
-      <label for="luzv-register-phone">Số điện thoại<input required id="luzv-register-phone" name="phone" type="tel" inputmode="numeric" maxlength="10" autocomplete="tel-national" placeholder="VD: 0987XXX..." pattern="0[35789][0-9]{8}"></label>
-      <label for="luzv-register-password">Mật khẩu<input required id="luzv-register-password" name="password" type="password" minlength="8" maxlength="72" autocomplete="new-password" placeholder="Ít nhất 8 ký tự"></label>
-      <button type="submit" class="luzv-auth-main" id="luzv-register-submit">Tạo tài khoản (không cần OTP)</button>
-    </form>
-    <div class="luzv-auth-switch" id="luzv-auth-register-switch" hidden>Đã có tài khoản? <button type="button" id="luzv-show-login"><u>Đăng nhập</u></button></div>
-    <button type="button" id="luzv-demo-direct-open" style="display:block;width:100%;margin:12px 0 2px;border:1px solid #a4cdea;background:#eaf5ff;color:#0a588a;padding:12px;border-radius:10px;font:650 14px/1.5 'Segoe UI',Arial,sans-serif;cursor:pointer">Xem bảng quản trị thử ngay</button>
-    <button type="button" class="luzv-auth-guest" id="luzv-continue-guest">Tiếp tục xem web không cần tài khoản</button>
-    <p class="luzv-auth-helper" id="luzv-register-notice" hidden>Không cần OTP. Tài khoản thử được lưu trên thiết bị này; SĐT chưa được xác minh quyền sở hữu. Không dùng mật khẩu thật.</p>
+    <p class="luzv-auth-helper" id="luzv-auth-storage-notice">Thay đổi quản trị được lưu trên thiết bị này.</p>
+    <button type="button" class="luzv-auth-guest" id="luzv-continue-guest">Tiếp tục xem website</button>
     <p class="luzv-auth-msg" id="luzv-auth-message" role="status" aria-live="polite"></p>`;
-  const userPage=document.createElement('dialog');userPage.id='luzv-user-page';
-  userPage.setAttribute('aria-labelledby','lv-user-title');
-  userPage.innerHTML=`<div class="lv-user-head"><h2 id="lv-user-title">Trang của tôi</h2><button type="button" class="lv-user-close" id="lv-user-close">Đóng ✕</button></div>
-    <p class="lv-user-desc" id="lv-user-greeting"></p>
-    <div class="lv-user-grid">
-      <button type="button" class="lv-user-link" data-lv-user-tab="courses">📚 32 môn Azota</button>
-      <button type="button" class="lv-user-link" data-lv-user-tab="pdf">📄 Ngân hàng PDF</button>
-      <button type="button" class="lv-user-link" data-lv-user-tab="cart">🛒 Túi ôn tập</button>
-      <button type="button" class="lv-user-link" data-lv-user-tab="support">💬 Hỗ trợ</button>
-    </div>
-    <p class="lv-user-desc" style="margin:18px 0 0">Tài khoản dùng thử chỉ lưu trên trình duyệt này; SĐT chưa được xác minh. Giỏ hàng vẫn dùng bình thường khi chưa đăng nhập.</p>
-    <button type="button" class="lv-user-exit" id="lv-user-logout">Đăng xuất</button>`;
-  document.body.append(dialog,userPage);
-  const get=id=>document.getElementById(id);
-  const button=document.createElement('button');button.id='luzv-admin-account';button.type='button';
-  button.innerHTML='<span id="luzv-login-word">Đăng nhập</span><span class="luzv-trigger-chevron" aria-hidden="true">▼</span>';
-  button.setAttribute('aria-expanded','false');button.setAttribute('aria-controls','luzv-account-dropdown');
-  const anchor=document.createElement('div');anchor.className='luzv-account-anchor';
-  const dropdown=document.createElement('div');dropdown.id='luzv-account-dropdown';dropdown.hidden=true;
-  anchor.append(button,dropdown);
-  const target=document.querySelector('.luzv-header-search-row') || document.querySelector('.topbar nav') || document.querySelector('.topbar .navigation');
-  if(target)target.append(anchor);else document.body.prepend(anchor);
-  const feedback=(text,ok=false)=>{let el=get('luzv-auth-message');el.textContent=text;el.dataset.status=ok?'ok':'error';};
-  function renderMenu(){
-    const wrap=document.createElement('div');wrap.className='lvdd-top';
-    const login=document.createElement('button');login.type='button';login.className='lvdd-login';
-    login.dataset.action=session?'dashboard':'login';
-    login.textContent=session?'Trang của tôi':'Đăng nhập';
+  document.body.append(dialog);
+
+  const button = document.createElement('button');
+  button.id = 'luzv-admin-account';
+  button.type = 'button';
+  button.innerHTML = '<span id="luzv-login-word">Đăng nhập quản trị</span><span class="luzv-trigger-chevron" aria-hidden="true">▼</span>';
+  button.setAttribute('aria-expanded', 'false');
+  button.setAttribute('aria-controls', 'luzv-account-dropdown');
+  const anchor = document.createElement('div');
+  anchor.className = 'luzv-account-anchor';
+  const dropdown = document.createElement('div');
+  dropdown.id = 'luzv-account-dropdown';
+  dropdown.hidden = true;
+  anchor.append(button, dropdown);
+  const target = document.querySelector('.luzv-header-search-row') || document.querySelector('.topbar nav') || document.querySelector('.topbar .navigation');
+  if (target) target.append(anchor);
+  else document.body.prepend(anchor);
+
+  function feedback(text, ok = false) {
+    get('luzv-auth-message').textContent = text;
+    get('luzv-auth-message').dataset.status = ok ? 'ok' : 'error';
+  }
+
+  function renderMenu() {
+    const wrap = document.createElement('div');
+    wrap.className = 'lvdd-top';
+    const login = document.createElement('button');
+    login.type = 'button';
+    login.className = 'lvdd-login';
+    login.dataset.action = session ? 'dashboard' : 'login';
+    login.textContent = session ? 'Quản trị' : 'Đăng nhập quản trị';
+    login.disabled = busy;
     wrap.append(login);
-    if(session){
-      const logout=document.createElement('button');logout.type='button';logout.dataset.action='logout';
-      logout.textContent='Đăng xuất';logout.className='lvdd-item';
-      logout.style.cssText='justify-content:center;min-height:36px;margin-top:7px;border-radius:8px';
-      wrap.append(logout);
+    if (session) {
+      const logoutButton = document.createElement('button');
+      logoutButton.type = 'button';
+      logoutButton.dataset.action = 'logout';
+      logoutButton.className = 'lvdd-item';
+      logoutButton.textContent = 'Đăng xuất';
+      logoutButton.disabled = busy;
+      logoutButton.style.cssText = 'justify-content:center;min-height:36px;margin-top:7px;border-radius:8px';
+      wrap.append(logoutButton);
     }
     dropdown.replaceChildren(wrap);
   }
-  function update(){
-    get('luzv-login-word').textContent=session?'Tài khoản':'Đăng nhập';
-    button.title=session?'Trang của tôi':'Đăng nhập';
-    button.setAttribute('aria-label',session?'Tài khoản - mở menu':'Đăng nhập - mở menu');
+
+  function update() {
+    get('luzv-login-word').textContent = session ? 'Quản trị' : 'Đăng nhập quản trị';
+    button.title = session ? 'Mở quản trị' : 'Đăng nhập quản trị';
+    button.setAttribute('aria-label', session ? 'Quản trị - mở menu' : 'Đăng nhập quản trị - mở menu');
     renderMenu();
   }
-  function setMenu(open){dropdown.hidden=!open;button.setAttribute('aria-expanded',String(open));if(open)renderMenu();}
-  // LOCAL UI PREVIEW ONLY: account data on this device is NOT a secure sign-in system.
-  // Production requires server-side authentication, account ownership recovery and anti-abuse checks. No SMS OTP in the user-requested registration flow.
-  const DEMO_USERS_KEY='luzv_demo_registered_users_v1';
-  const enc=new TextEncoder();
-  const b64=bytes=>btoa(String.fromCharCode(...bytes));
-  const fromB64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
-  function loadUsers(){
-    try {const a=JSON.parse(localStorage.getItem(DEMO_USERS_KEY)||'[]');return Array.isArray(a)?a.filter(x=>x&&typeof x.phone==='string'&&typeof x.hash==='string'&&typeof x.salt==='string').slice(0,100):[];}
-    catch {return [];}
+
+  function setMenu(open) {
+    dropdown.hidden = !open;
+    button.setAttribute('aria-expanded', String(open));
+    if (open) renderMenu();
   }
-  async function derivePassword(password,salt){
-    if(!window.crypto?.subtle)throw Error('Trình duyệt không hỗ trợ lưu mật khẩu thử. Hãy mở bằng Chrome.');
-    const key=await crypto.subtle.importKey('raw',enc.encode(password),'PBKDF2',false,['deriveBits']);
-    const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt,iterations:200000,hash:'SHA-256'},key,256);
-    return b64(new Uint8Array(bits));
+
+  function setBusy(value) {
+    busy = value;
+    get('luzv-auth-submit').disabled = value;
+    get('luzv-auth-login-form').setAttribute('aria-busy', String(value));
+    renderMenu();
   }
-  let demoSession=null;
-  async function registerDemo({name,phone,password}){
-    name=String(name||'').trim().replace(/\s+/g,' ');
-    phone=String(phone||'').trim();
-    if(name.length<2||name.length>80)return {ok:false,data:{error:'Họ tên cần từ 2 đến 80 ký tự.'}};
-    if(!/^0[35789][0-9]{8}$/.test(phone))return {ok:false,data:{error:'Nhập SĐT Việt Nam gồm 10 số (VD: 0987...).'}};
-    if(typeof password!=='string'||password.length<8||password.length>72)return {ok:false,data:{error:'Mật khẩu cần từ 8 ký tự trở lên.'}};
-    const users=loadUsers();
-    if(users.some(x=>x.phone===phone))return {ok:false,data:{error:'SĐT đã được đăng ký trên thiết bị này. Hãy đăng nhập.'}};
-    if(users.length>=100)return {ok:false,data:{error:'Bản dùng thử đã đạt giới hạn 100 tài khoản.'}};
-    try{
-      const salt=crypto.getRandomValues(new Uint8Array(16));
-      const hash=await derivePassword(password,salt);
-      const next=[...users,{name,phone,salt:b64(salt),hash,createdAt:new Date().toISOString()}];
-      localStorage.setItem(DEMO_USERS_KEY,JSON.stringify(next));
-      demoSession={role:'user',username:name,phone};
-      return {ok:true,data:{authenticated:true,...demoSession}};
-    }catch(err){return {ok:false,data:{error:err?.message||'Không lưu được tài khoản thử trong trình duyệt này.'}};}
-  }
-  // One account per phone on this browser. Registration does NOT require SMS OTP; phone ownership is NOT verified.
-  async function loginDemo(body){
-    if(body?.username==='admin_demo'&&body?.password==='LuzV@2026'){
-      demoSession={role:'admin',username:'admin_demo'};
-      return {ok:true,status:200,data:{authenticated:true,...demoSession}};
-    }
-    const phone=String(body?.username||'').trim();
-    const users=loadUsers();
-    const found=users.find(x=>x.phone===phone);
-    if(!found||!body?.password)return {ok:false,status:401,data:{error:'SĐT/tài khoản hoặc mật khẩu chưa đúng.'}};
+
+  function closeAdmin() {
     try {
-      const actual=await derivePassword(String(body.password),fromB64(found.salt));
-      if(actual!==found.hash)return {ok:false,status:401,data:{error:'SĐT/tài khoản hoặc mật khẩu chưa đúng.'}};
-      demoSession={role:'user',username:found.name,phone};
-      return {ok:true,status:200,data:{authenticated:true,...demoSession}};
-    }catch{return {ok:false,status:400,data:{error:'Không xác thực được tài khoản thử trên trình duyệt này.'}};}
+      const result = window.luzvAdminClose?.();
+      if (result && typeof result.catch === 'function') result.catch(() => {});
+    } catch {}
   }
-  async function api(method='GET',body){
-    // DEMO ONLY. No real API or privileges; mock login works in Chrome locally or a preview server.
-    // Never publish this demo HTML as the production storefront.
-    if(method==='DELETE'){demoSession=null;return {ok:true,status:200,data:{authenticated:false}};}
-    if(method==='POST')return loginDemo(body);
-    return {ok:true,status:200,data:demoSession
-      ? {authenticated:true,...demoSession}
-      : {authenticated:false,role:null,username:null}};
+
+  function notifySession() {
+    document.dispatchEvent(new CustomEvent('luzv:sessionchange', {
+      detail: {authenticated: !!session, role: session ? 'admin' : null}
+    }));
   }
-  async function checkSession(){
-    try{const result=await api();session=result.ok&&result.data.authenticated&&['admin','user'].includes(result.data.role)
-      ? {role:result.data.role,username:result.data.username}:null;}
-    catch{session=null;}
-    update();return session;
+
+  function sessionFromServer(data) {
+    if (!data || data.authenticated !== true) return null;
+    if (data.role !== 'admin' || typeof data.username !== 'string' || !data.username.trim()) {
+      const error = new Error('Invalid admin session response');
+      error.code = 'INVALID_SESSION';
+      throw error;
+    }
+    // This cached role controls menu text only. The admin mount checks the
+    // Vercel session again before opening its controls.
+    return {role: data.role, username: data.username};
   }
-  function setAuthMode(mode){
-    const registering=mode==='register';
-    get('luzv-auth-title').textContent=registering?'Đăng ký':'Đăng nhập';
-    get('luzv-auth-description').textContent=registering
-      ? 'Chỉ cần họ tên, số điện thoại và mật khẩu. Không bắt buộc đăng ký để xem web.'
-      : 'Đăng nhập để xem trang cá nhân. Không có tài khoản vẫn dùng website bình thường.';
-    get('luzv-auth-login-form').hidden=registering;
-    get('luzv-auth-register-form').hidden=!registering;
-    get('luzv-auth-login-switch').hidden=registering;
-    get('luzv-auth-register-switch').hidden=!registering;
-    get('luzv-demo-login-hint').hidden=registering;
-    get('luzv-demo-direct-open').hidden=registering;
-    get('luzv-register-notice').hidden=!registering;
-    feedback('');
-    (registering?get('luzv-register-name'):get('luzv-auth-username')).focus();
+
+  async function requestSession(method = 'GET', body) {
+    if (location.protocol === 'file:') {
+      const error = new Error('Online website required');
+      error.code = 'ONLINE_REQUIRED';
+      throw error;
+    }
+    const options = {method};
+    if (body !== undefined) options.body = body;
+    if (typeof window.LuzVService?.request !== 'function') {
+      const error = new Error('Admin sign-in service unavailable');
+      error.status = 503;
+      throw error;
+    }
+    return window.LuzVService.request('/auth/session', options);
   }
-  async function loginOpen(){
-    setMenu(false);get('luzv-auth-password').value='';
-    if(!dialog.open)dialog.showModal();
-    setAuthMode('login');
-  }
-  window.luzvOpenAdminLogin=loginOpen;
-  async function adminPage(){
-    const verified=await checkSession();
-    if(!verified||verified.role!=='admin'){await loginOpen();feedback('Vui lòng đăng nhập lại.');return;}
-    window.luzvAdminMount?.();
-    const show=get('luzv-admin-preview-open');
-    if(!show){feedback('Không tìm thấy bảng quản trị. Vui lòng tải lại trang.');await loginOpen();return;}
-    if(dialog.open)dialog.close();if(userPage.open)userPage.close();
-    show.click();
-  }
-  async function userDashboard(){
-    const verified=await checkSession();
-    if(!verified){await loginOpen();feedback('Phiên đăng nhập đã hết hạn.');return;}
-    if(verified.role==='admin')return adminPage();
-    get('lv-user-greeting').textContent='Xin chào, '+verified.username+'.';
-    if(dialog.open)dialog.close();
-    if(!userPage.open)userPage.showModal();
-  }
-  async function route(){
-    setMenu(false);
-    if(!session)return loginOpen();
-    return session.role==='admin'?adminPage():userDashboard();
-  }
-  async function logout(){
-    if(busy)return;busy=true;
-    try{const result=await api('DELETE');if(!result.ok)throw Error('Cannot logout');
-      session=null;update();setMenu(false);if(userPage.open)userPage.close();
-      const panel=get('luzv-admin-preview-dialog');if(panel?.open)panel.close();
-      panel?.remove();get('luzv-admin-preview-open')?.remove();window.__luzvAdminMounted=false;
-      if(dialog.open)dialog.close();
-    }catch{feedback('Chưa đăng xuất được do lỗi kết nối. Hãy thử lại.');if(!dialog.open)dialog.showModal();}
-    finally{busy=false;}
-  }
-  button.addEventListener('click',e=>{e.stopPropagation();setMenu(dropdown.hidden);});
-  document.addEventListener('pointerdown',e=>{if(!dropdown.hidden&&!anchor.contains(e.target))setMenu(false);});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!dropdown.hidden){setMenu(false);button.focus();}});
-  dropdown.addEventListener('click',e=>{
-    const action=e.target.closest('[data-action]')?.dataset.action;
-    if(action==='login')loginOpen();
-    else if(action==='dashboard')route();
-    else if(action==='logout')logout();
-  });
-  get('luzv-auth-close').addEventListener('click',()=>dialog.close());
-  get('lv-user-close').addEventListener('click',()=>userPage.close());
-  get('lv-user-logout').addEventListener('click',logout);
-  dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close();});
-  userPage.addEventListener('click',e=>{if(e.target===userPage)userPage.close();});
-  userPage.querySelectorAll('[data-lv-user-tab]').forEach(item=>item.addEventListener('click',()=>{
-    const tab=item.dataset.lvUserTab;
-    userPage.close();document.querySelector('.luzv-tabs-grid [data-luzv-open-tab="'+tab+'"]')?.click();
-  }));
-  get('luzv-demo-direct-open').addEventListener('click',async()=>{
-    demoSession={role:'admin',username:'admin_demo'};
-    session={...demoSession};update();
-    window.LuzVDemoVisits?.setCurrentIdentity('admin_demo','admin');
-    try{await adminPage();}catch(err){feedback('Không mở được bản quản trị: '+(err?.message||String(err)));}
-  });
-  get('luzv-show-register').addEventListener('click',()=>setAuthMode('register'));
-  get('luzv-show-login').addEventListener('click',()=>setAuthMode('login'));
-  get('luzv-continue-guest').addEventListener('click',()=>dialog.close());
-  get('luzv-register-phone').addEventListener('input',e=>{
-    e.target.value=e.target.value.replace(/\D/g,'').slice(0,10);
-  });
-  get('luzv-auth-register-form').addEventListener('submit',async e=>{
-    e.preventDefault();if(busy)return;
-    busy=true;
-    const submit=get('luzv-register-submit');submit.disabled=true;feedback('Đang tạo tài khoản thử...');
-    try{
-      const result=await registerDemo({
-        name:get('luzv-register-name').value,
-        phone:get('luzv-register-phone').value,
-        password:get('luzv-register-password').value
-      });
-      if(!result.ok){feedback(result.data?.error||'Không đăng ký được.');return;}
-      session={role:'user',username:result.data.username,phone:result.data.phone};
-      get('luzv-register-password').value='';
-      window.LuzVDemoVisits?.setCurrentIdentity(session.username,'user');
+
+  async function checkSession({throwOnError = false} = {}) {
+    const currentRequest = ++sessionRequest;
+    try {
+      const data = await requestSession();
+      if (currentRequest !== sessionRequest) return session;
+      session = sessionFromServer(data);
+      if (!session) closeAdmin();
       update();
-      if(dialog.open)dialog.close();
-      await userDashboard();
-    }catch(err){feedback('Không tạo được tài khoản: '+(err?.message||'Có lỗi xảy ra.'));}
-    finally{busy=false;submit.disabled=false;}
+      notifySession();
+      return session;
+    } catch (error) {
+      if (currentRequest !== sessionRequest) return session;
+      session = null;
+      closeAdmin();
+      update();
+      notifySession();
+      if (throwOnError) throw error;
+      return null;
+    }
+  }
+
+  function errorMessage(error, context = 'login') {
+    const status = Number(error?.status || 0);
+    const code = error?.code || error?.data?.code;
+    if (code === 'ONLINE_REQUIRED') return 'Mở website trực tuyến để đăng nhập.';
+    if (status === 503) return 'Chưa cấu hình tài khoản quản trị trên Vercel. Bạn vẫn có thể xem website bình thường.';
+    if (status === 404 || status === 405) return 'Đăng nhập quản trị chưa sẵn sàng. Vui lòng thử lại sau.';
+    if (status === 429) return 'Bạn thao tác quá nhanh. Vui lòng chờ ít phút rồi thử lại.';
+    if (status === 401) return context === 'login' ? 'Tài khoản hoặc mật khẩu quản trị chưa đúng.' : 'Phiên quản trị đã hết hạn. Vui lòng đăng nhập lại.';
+    if (status === 403) return 'Chưa xác nhận được quyền quản trị. Vui lòng tải lại website rồi đăng nhập lại.';
+    if (code === 'INVALID_SESSION') return 'Chưa xác nhận được phiên quản trị. Vui lòng đăng nhập lại.';
+    if (status >= 500) return 'Đăng nhập quản trị đang gặp lỗi. Vui lòng thử lại sau.';
+    return context === 'logout' ? 'Chưa đăng xuất được do lỗi kết nối. Vui lòng thử lại.' : 'Không kết nối được hệ thống đăng nhập. Vui lòng kiểm tra mạng và thử lại.';
+  }
+
+  function loginOpen() {
+    authView++;
+    setMenu(false);
+    closeAdmin();
+    get('luzv-auth-password').value = '';
+    feedback('');
+    if (!dialog.open) dialog.showModal();
+    get('luzv-auth-username').focus();
+  }
+  window.luzvOpenAdminLogin = loginOpen;
+
+  function closeAuth() {
+    authView++;
+    if (dialog.open) dialog.close();
+    get('luzv-auth-password').value = '';
+  }
+
+  function showError(error, context) {
+    if (!dialog.open) loginOpen();
+    feedback(errorMessage(error, context));
+  }
+
+  async function adminPage(verified) {
+    if (!verified || verified.role !== 'admin') {
+      loginOpen();
+      feedback('Phiên quản trị đã hết hạn. Vui lòng đăng nhập lại.');
+      return;
+    }
+    if (typeof window.luzvAdminMount !== 'function') {
+      const error = new Error('Admin controls unavailable');
+      error.status = 404;
+      throw error;
+    }
+    if (dialog.open) dialog.close();
+    await window.luzvAdminMount();
+  }
+
+  async function route() {
+    if (busy) return;
+    setMenu(false);
+    setBusy(true);
+    try {
+      await adminPage(await checkSession({throwOnError: true}));
+    } catch (error) {
+      showError(error, 'session');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function logout() {
+    if (busy) return;
+    ++sessionRequest;
+    setBusy(true);
+    try {
+      await requestSession('DELETE', {});
+      ++sessionRequest;
+      session = null;
+      closeAdmin();
+      update();
+      notifySession();
+      setMenu(false);
+      closeAuth();
+    } catch (error) {
+      showError(error, 'logout');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  button.addEventListener('click', event => {event.stopPropagation(); setMenu(dropdown.hidden);});
+  document.addEventListener('pointerdown', event => {if (!dropdown.hidden && !anchor.contains(event.target)) setMenu(false);});
+  document.addEventListener('keydown', event => {if (event.key === 'Escape' && !dropdown.hidden) {setMenu(false); button.focus();}});
+  dropdown.addEventListener('click', event => {
+    const action = event.target.closest('[data-action]')?.dataset.action;
+    if (action === 'login') loginOpen();
+    else if (action === 'dashboard') route();
+    else if (action === 'logout') logout();
   });
-  get('luzv-auth-login-form').addEventListener('submit',async e=>{
-    e.preventDefault();if(busy)return;
-    busy=true;const submit=get('luzv-auth-submit');submit.disabled=true;feedback('Đang xác thực...');
-    try{
-      const result=await api('POST',{username:get('luzv-auth-username').value.trim(),password:get('luzv-auth-password').value});
-      if(!result.ok){feedback(result.data.error||'Không đăng nhập được. Kiểm tra tài khoản và mật khẩu.');return;}
-      if(!result.data.authenticated||!['admin','user'].includes(result.data.role)){
-        feedback('Máy chủ trả về phiên đăng nhập không hợp lệ.');return;}
-      session={role:result.data.role,username:result.data.username};
-      window.LuzVDemoVisits?.setCurrentIdentity(session.username,session.role);
-      get('luzv-auth-password').value='';update();feedback('Đăng nhập thành công.',true);
-      if(session.role==='admin')await adminPage();else await userDashboard();
-    }catch{feedback('Không kết nối được API đăng nhập trên Vercel.');}
-    finally{submit.disabled=false;busy=false;}
+  get('luzv-auth-close').addEventListener('click', closeAuth);
+  get('luzv-continue-guest').addEventListener('click', closeAuth);
+  dialog.addEventListener('click', event => {if (event.target === dialog) closeAuth();});
+  dialog.addEventListener('cancel', () => {authView++; get('luzv-auth-password').value = '';});
+  get('luzv-auth-login-form').addEventListener('submit', async event => {
+    event.preventDefault();
+    if (busy || !event.currentTarget.reportValidity()) return;
+    const currentView = authView;
+    const payload = {username: get('luzv-auth-username').value.trim(), password: get('luzv-auth-password').value};
+    ++sessionRequest;
+    setBusy(true);
+    feedback('Đang xác thực quản trị...', true);
+    try {
+      await requestSession('POST', payload);
+      get('luzv-auth-password').value = '';
+      const verified = await checkSession({throwOnError: true});
+      if (currentView === authView) await adminPage(verified);
+    } catch (error) {
+      if (currentView === authView) showError(error, 'login');
+    } finally {
+      setBusy(false);
+    }
   });
-  checkSession(); // Khách được sử dụng website ngay, không ép đăng nhập/đăng ký.
+
+  update();
+  checkSession(); // A failed check leaves all public browsing available.
 })();
 </script>
-<script id="luzv-demo-only-warning">
-(function(){
- const box=document.createElement('div');box.id='luzv-local-demo-strip';
- box.textContent='BẢN XEM THỬ ADMIN — KHÔNG CÓ DỮ LIỆU KHÁCH HÀNG THẬT • KHÔNG TRIỂN KHAI LÊN VERCEL';
- document.body.append(box);
-})();
-</script>
+<script id="luzv-demo-only-warning">/* Administrator authentication is configured privately on Vercel. */</script>
 <style id="luzv-four-fixes-style">
 /* UI fixes 1–4. Keep the existing products, pricing, accounts and payment flows. */
 #luzv-course-quick {
